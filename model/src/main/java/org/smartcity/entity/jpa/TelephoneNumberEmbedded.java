@@ -31,6 +31,9 @@ public class TelephoneNumberEmbedded
 	private Formatter     formatter;
 	private StringBuilder messageBuilder;
 
+	public TelephoneNumberEmbedded() {
+	}
+
 	public TelephoneNumberEmbedded( short stateCode, short cityCode, int number, String pattern ) {
 		this.formatter = new Formatter();
 		this.messageBuilder = new StringBuilder();

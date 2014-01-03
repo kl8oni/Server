@@ -24,6 +24,9 @@ public class AddressEmbedded
 	@Embedded
 	private TelephoneNumberEmbedded telephoneNumber;
 
+	public AddressEmbedded() {
+	}
+
 	public AddressEmbedded(
 			String state, String city, String street, short buildingNumber,
 			TelephoneNumberEmbedded telephoneNumber ) {

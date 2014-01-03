@@ -2,7 +2,6 @@ package org.smartcity.entity.jpa;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
 import org.smartcity.entity.Document;
 import org.smartcity.entity.Email;
 import org.smartcity.entity.User;
-import org.smartcity.entity.jpa.converters.LongToBigIntegerConverter;
 
 @Entity
 @Table(
@@ -53,9 +51,6 @@ public class UserEntity
 			nullable = false,
 			precision = 20,
 			scale = 0
-	)
-	@Convert(
-			converter = LongToBigIntegerConverter.class
 	)
 	private BigInteger       ID;
 	@Column(
@@ -106,6 +101,7 @@ public class UserEntity
 					),
 					@JoinColumn(
 							name = Email.IS_MAIN_EMAIL_COLUMN,
+							nullable = false,
 							columnDefinition = Email.IS_MAIN_EMAIL_COLUMN + " = true"
 					)
 			}

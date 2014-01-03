@@ -2,7 +2,6 @@ package org.smartcity.entity.jpa;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,8 +27,6 @@ import org.smartcity.entity.Bank;
 import org.smartcity.entity.BankAccount;
 import org.smartcity.entity.BankBranch;
 
-import org.smartcity.entity.jpa.converters.LongToBigIntegerConverter;
-
 @Entity
 @Table(
 		name = BankBranch.TABLE_NAME
@@ -54,9 +51,6 @@ public class BankBranchEntity
 			nullable = false,
 			precision = 20,
 			scale = 0
-	)
-	@Convert(
-			converter = LongToBigIntegerConverter.class
 	)
 	private BigInteger             ID;
 	@Column(

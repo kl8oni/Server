@@ -2,7 +2,6 @@ package org.smartcity.entity.jpa;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,8 +24,6 @@ import org.apache.commons.logging.LogFactory;
 import org.smartcity.entity.Document;
 import org.smartcity.entity.DocumentTemplate;
 import org.smartcity.entity.GovernmentOfficeType;
-
-import org.smartcity.entity.jpa.converters.LongToBigIntegerConverter;
 
 @Entity
 @Table(
@@ -52,9 +49,6 @@ public class DocumentTemplateEntity
 			nullable = false,
 			precision = 20,
 			scale = 0
-	)
-	@Convert(
-			converter = LongToBigIntegerConverter.class
 	)
 	private BigInteger                 ID;
 	@Column(
