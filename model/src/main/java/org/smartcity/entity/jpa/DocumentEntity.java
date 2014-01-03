@@ -109,8 +109,9 @@ public class DocumentEntity
 	public DocumentEntity() {
 	}
 
-	public DocumentEntity( String name, String series, long number, Date deliveryDate, UserEntity owner,
-						   GovernmentOfficeEntity office, DocumentTemplateEntity template ) {
+	public DocumentEntity(
+			String name, String series, long number, Date deliveryDate, UserEntity owner,
+			GovernmentOfficeEntity office, DocumentTemplateEntity template ) {
 		setName( name )
 				.setSeries( series )
 				.setNumber( number )
