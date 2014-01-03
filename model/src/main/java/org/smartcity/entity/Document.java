@@ -6,10 +6,10 @@ import java.math.BigInteger;
 
 import java.util.Date;
 
-public interface Document <D extends Document,
-								U extends User,
-								DT extends DocumentTemplate,
-								O extends GovernmentOffice>
+public interface Document<D extends Document,
+						  U extends User,
+						  DT extends DocumentTemplate,
+						  O extends GovernmentOffice>
 		extends		Serializable {
 
 	String TABLE_NAME                       = "DOCUMENTS";
