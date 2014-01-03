@@ -7,6 +7,17 @@
 	<persistence-unit name="smart-city" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:comp/SmartCityDataSource</jta-data-source>
+		<class>org.smartcity.entity.jpa.AddressEmbedded</class>
+		<class>org.smartcity.entity.jpa.BankAccountEntity</class>
+		<class>org.smartcity.entity.jpa.BankBranchEntity</class>
+		<class>org.smartcity.entity.jpa.BankEntity</class>
+		<class>org.smartcity.entity.jpa.DocumentEntity</class>
+		<class>org.smartcity.entity.jpa.DocumentTemplateEntity</class>
+		<class>org.smartcity.entity.jpa.EmailEntity</class>
+		<class>org.smartcity.entity.jpa.GovernmentOfficeEntity</class>
+		<class>org.smartcity.entity.jpa.GovernmentOfficeTypeEntity</class>
+		<class>org.smartcity.entity.jpa.TelephoneNumberEmbedded</class>
+		<class>org.smartcity.entity.jpa.UserEntity</class>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
