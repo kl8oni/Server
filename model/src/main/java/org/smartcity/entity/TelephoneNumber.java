@@ -3,7 +3,7 @@ package org.smartcity.entity;
 import java.io.Serializable;
 
 public interface TelephoneNumber<TN extends TelephoneNumber>
-		extends Serializable {
+		extends		Serializable {
 
 	public String getTelephoneNumberValue();
 

@@ -126,4 +126,32 @@ public class TelephoneNumberEmbedded
 	private void clearMessageBuilder() {
 		messageBuilder.delete( 0, messageBuilder.length() );
 	}
+
+	@Override
+	public boolean equals( Object object ) {
+		if ( object == this ) {
+			return true;
+		}
+		if ( object != null
+				&& object.getClass().equals( getClass() ) ) {
+			TelephoneNumberEmbedded telephoneNumber = (TelephoneNumberEmbedded)object;
+			return telephoneNumber.getTelephoneNumberValue().equals( getTelephoneNumberValue() );
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getTelephoneNumberValue().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append( "[ Telephone Number = " )
+				.append( getTelephoneNumberValue() )
+				.append( " ]" );
+		return sb.toString();
+	}
+
 }
