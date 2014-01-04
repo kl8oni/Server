@@ -24,7 +24,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.smartcity.entity.Bank;
-import org.smartcity.entity.BankAccount;
 import org.smartcity.entity.BankBranch;
 
 @Entity
@@ -35,6 +34,15 @@ public class BankBranchEntity
 		implements	BankBranch<BankBranchEntity, BankEntity, AddressEmbedded, BankAccountEntity> {
 
 	private static final Log LOG = LogFactory.getLog( BankBranchEntity.class );
+
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD            = "ID";
+	public static final String NAME_FIELD          = "name";
+	public static final String BANK_FIELD          = "bank";
+	public static final String ADDRESS_FIELD       = "address";
+	public static final String BANK_ACCOUNTS_FIELD = "bankAccounts";
 
 	@Id
 	@GeneratedValue(
@@ -65,7 +73,9 @@ public class BankBranchEntity
 	@JoinColumn(
 			name = BankBranch.BANK_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = Bank.ID_COLUMN_NAME
+			referencedColumnName = Bank.ID_COLUMN_NAME/*,
+			insertable = false,
+			updatable = false    */
 	)
 	private BankEntity             bank;
 	@Embedded
@@ -73,12 +83,8 @@ public class BankBranchEntity
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
-			targetEntity = BankAccountEntity.class
-	)
-	@JoinColumn(
-			name = BankBranch.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = BankAccount.BANK_BRANCH_ID_COLUMN_NAME
+			targetEntity = BankAccountEntity.class,
+			mappedBy = BankAccountEntity.BANK_BRANCH_FIELD
 	)
 	private Set<BankAccountEntity> bankAccounts;
 

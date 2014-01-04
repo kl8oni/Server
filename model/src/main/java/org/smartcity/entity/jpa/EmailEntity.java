@@ -29,6 +29,14 @@ public class EmailEntity
 
 	private static final Log LOG = LogFactory.getLog( EmailEntity.class );
 
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD            = "ID";
+	public static final String EMAIL_ADDRESS_FIELD = "emailAddress";
+	public static final String MAIN_EMAIL_FIELD    = "mainField";
+	public static final String OWNER_FIELD         = "owner";
+
 	@Id
 	@GeneratedValue(
 			generator = Email.GENERATOR_NAME,
@@ -52,7 +60,7 @@ public class EmailEntity
 	)
 	private String     emailAddress;
 	@Column(
-			name = Email.IS_MAIN_EMAIL_COLUMN,
+			name = Email.MAIN_EMAIL_COLUMN,
 			nullable = false
 	)
 	private boolean    mainEmail;

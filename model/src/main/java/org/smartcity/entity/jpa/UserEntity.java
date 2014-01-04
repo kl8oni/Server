@@ -8,11 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import java.math.BigInteger;
 
@@ -24,7 +24,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.smartcity.entity.Document;
-import org.smartcity.entity.Email;
 import org.smartcity.entity.User;
 
 @Entity
@@ -35,6 +34,19 @@ public class UserEntity
 		implements	User<UserEntity, EmailEntity, DocumentEntity> {
 
 	private static final Log LOG = LogFactory.getLog( UserEntity.class );
+
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD                = "ID";
+	public static final String LAST_NAME_FIELD         = "lastName";
+	public static final String FIRST_NAME_FIELD        = "firstName";
+	public static final String MIDDLE_NAME_FIELD       = "middleName";
+	public static final String NICK_NAME_FIELD         = "nickName";
+	public static final String PASSWORD_FIELD          = "password";
+	public static final String IDENTIFY_DOCUMENT_FIELD = "identifyDocument";
+	public static final String USER_EMAILS_FIELD       = "userEmails";
+	public static final String DOCUMENTS_FILED         = "documents";
 
 	@Id
 	@GeneratedValue(
@@ -88,35 +100,20 @@ public class UserEntity
 			referencedColumnName = Document.ID_COLUMN_NAME
 	)
 	private DocumentEntity   identifyDocument;
-	@OneToOne(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
-	@JoinColumns(
-			value = {
-					@JoinColumn(
-							name = User.ID_COLUMN_NAME,
-							nullable = false,
-							referencedColumnName = Email.USER_ID_COLUMN_NAME
-					),
-					@JoinColumn(
-							name = Email.IS_MAIN_EMAIL_COLUMN,
-							nullable = false,
-							columnDefinition = Email.IS_MAIN_EMAIL_COLUMN + " = true"
-					)
-			}
-	)
+	@Transient
 	private EmailEntity      mainEmail;
 	@OneToMany(
 			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
-	@JoinColumn(
-			name = User.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = Email.USER_ID_COLUMN_NAME
+			fetch = FetchType.LAZY,
+			mappedBy = EmailEntity.OWNER_FIELD
 	)
 	private Set<EmailEntity> userEmails;
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY,
+			mappedBy = DocumentEntity.OWNER_FIELD
+	)
+	private Set<DocumentEntity> documents;
 
 
 	public UserEntity() {
@@ -128,16 +125,16 @@ public class UserEntity
 			String middleName,
 			String nickName,
 			String password,
-			DocumentEntity identifyDocument,
-			EmailEntity mainEmail ) {
+			DocumentEntity identifyDocument ) {
 		setLastName( lastName )
 				.setFirstName( firstName )
 				.setMiddleName( middleName )
 				.setNickName( nickName )
 				.setPassword( password )
 				.setIdentifyDocument( identifyDocument )
-				.setMainEmail( mainEmail )
-				.setUserEmails( new HashSet<EmailEntity>() );
+				.setUserEmails( new HashSet<EmailEntity>() )
+				.setDocuments( new HashSet<DocumentEntity>() )
+				.setMainEmail( null );
 	}
 
 	@Override
@@ -207,7 +204,17 @@ public class UserEntity
 
 	@Override
 	public UserEntity setMainEmail( EmailEntity mainEmail ) {
-		this.mainEmail = mainEmail;
+		if ( mainEmail != null) {
+			this.mainEmail = mainEmail;
+		}
+		else {
+			for ( EmailEntity email : userEmails ) {
+				if ( email.isMainEmail() ) {
+					this.mainEmail = email;
+					break;
+				}
+			}
+		}
 		return this;
 	}
 
@@ -242,6 +249,29 @@ public class UserEntity
 	@Override
 	public UserEntity setIdentifyDocument( DocumentEntity identifyDocument ) {
 		this.identifyDocument = identifyDocument;
+		return this;
+	}
+
+	@Override
+	public Set<DocumentEntity> getDocuments() {
+		return documents;
+	}
+
+	@Override
+	public UserEntity setDocuments( Set<DocumentEntity> documents ) {
+		this.documents = documents;
+		return this;
+	}
+
+	@Override
+	public UserEntity addDocument( DocumentEntity document ) {
+		documents.add( document );
+		return this;
+	}
+
+	@Override
+	public UserEntity addDocuments( Collection<DocumentEntity> documents ) {
+		this.documents.addAll( documents );
 		return this;
 	}
 

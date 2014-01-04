@@ -33,6 +33,18 @@ public class DocumentEntity
 
 	private static final Log LOG = LogFactory.getLog( DocumentEntity.class );
 
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD            = "ID";
+	public static final String NAME_FIELD          = "name";
+	public static final String SERIES_FIELD        = "series";
+	public static final String NUMBER_FIELD        = "number";
+	public static final String DELIVERY_DATE_FIELD = "deliveryDate";
+	public static final String OWNER_FIELD         = "owner";
+	public static final String OFFICE_FIELD        = "office";
+	public static final String TEMPLATE_FIELD      = "template";
+
 	@Id
 	@GeneratedValue(
 			generator = Document.GENERATOR_NAME,
@@ -87,7 +99,9 @@ public class DocumentEntity
 	@JoinColumn(
 			name = Document.GOVERNMENT_OFFICE_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = GovernmentOffice.ID_COLUMN_NAME
+			referencedColumnName = GovernmentOffice.ID_COLUMN_NAME/*,
+			insertable = false,
+			updatable = false*/
 	)
 	private GovernmentOfficeEntity office;
 	@ManyToOne(
@@ -97,7 +111,9 @@ public class DocumentEntity
 	@JoinColumn(
 			name = Document.DOCUMENT_TEMPLATE_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = DocumentTemplate.ID_COLUMN_NAME
+			referencedColumnName = DocumentTemplate.ID_COLUMN_NAME/*,
+			insertable = false,
+			updatable = false */
 	)
 	private DocumentTemplateEntity template;
 

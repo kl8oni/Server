@@ -1,6 +1,5 @@
 package org.smartcity.entity.jpa;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +34,15 @@ public class BankEntity
 
 	private static final Log LOG = LogFactory.getLog( BankEntity.class );
 
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD            = "ID";
+	public static final String NAME_FIELD          = "name";
+	public static final String WEBSITE_FIELD       = "website";
+	public static final String BANK_BRANCHES_FIELD = "bankBranches";
+	public static final String BANK_ACCOUNTS_FIELD = "bankAccounts";
+
 	@Id
 	@GeneratedValue(
 			generator = Bank.GENERATOR_NAME,
@@ -64,23 +72,13 @@ public class BankEntity
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
-			targetEntity = BankBranchEntity.class
-	)
-	@JoinColumn(
-			name = Bank.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = BankBranch.BANK_ID_COLUMN_NAME
+			mappedBy = BankBranchEntity.BANK_FIELD
 	)
 	private Set<BankBranchEntity>  bankBranches;
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
-			targetEntity = BankAccountEntity.class
-	)
-	@JoinColumn(
-			name = Bank.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = BankAccount.BANK_ID_COLUMN_NAME
+			mappedBy = BankAccountEntity.BANK_FIELD
 	)
 	private Set<BankAccountEntity> bankAccounts;
 

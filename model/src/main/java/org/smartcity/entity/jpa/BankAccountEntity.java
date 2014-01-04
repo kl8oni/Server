@@ -31,6 +31,15 @@ public class BankAccountEntity
 
 	private static final Log LOG = LogFactory.getLog( BankAccountEntity.class );
 
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD                  = "ID";
+	public static final String BANK_ACCOUNT_NUMBER_FIELD = "bankAccountNumber";
+	public static final String OWNER_FIELD               = "owner";
+	public static final String BANK_FIELD                = "bank";
+	public static final String BANK_BRANCH_FIELD         = "bankBranch";
+
 	@Id
 	@GeneratedValue(
 			generator = BankAccount.GENERATOR_NAME,
@@ -64,7 +73,7 @@ public class BankAccountEntity
 			nullable = false,
 			referencedColumnName = User.ID_COLUMN_NAME
 	)
-	public  UserEntity       owner;
+	private UserEntity       owner;
 	@ManyToOne(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY
@@ -72,7 +81,9 @@ public class BankAccountEntity
 	@JoinColumn(
 			name = BankAccount.BANK_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = Bank.ID_COLUMN_NAME
+			referencedColumnName = Bank.ID_COLUMN_NAME/*,
+			insertable = false,
+			updatable = false   */
 	)
 	private BankEntity       bank;
 	@ManyToOne(
@@ -82,7 +93,9 @@ public class BankAccountEntity
 	@JoinColumn(
 			name = BankAccount.BANK_BRANCH_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = BankBranch.ID_COLUMN_NAME
+			referencedColumnName = BankBranch.ID_COLUMN_NAME,
+			insertable = false,
+			updatable = false
 	)
 	private BankBranchEntity bankBranch;
 

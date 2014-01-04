@@ -61,6 +61,14 @@ public interface User<U extends User,
 
 	public U setIdentifyDocument( D identifyDocument );
 
+	public Set<D> getDocuments();
+
+	public U setDocuments( Set<D> documents );
+
+	public U addDocument( D document );
+
+	public U addDocuments( Collection<D> documents );
+
 	public boolean equals( Object object );
 
 	public int hashCode();

@@ -37,6 +37,15 @@ public class GovernmentOfficeEntity
 
 	private static final Log LOG = LogFactory.getLog( GovernmentOfficeEntity.class );
 
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD                 = "ID";
+	public static final String NAME_FIELD               = "name";
+	public static final String ADDRESS_FIELD            = "address";
+	public static final String OFFICE_TYPE_FIELD        = "officeType";
+	public static final String RELEASED_DOCUMENTS_FIELD = "releasedDocuments";
+
 	@Id
 	@GeneratedValue(
 			generator = GovernmentOffice.GENERATOR_NAME,
@@ -68,18 +77,21 @@ public class GovernmentOfficeEntity
 	@JoinColumn(
 			name = GovernmentOffice.GOVERNMENT_OFFICE_TYPE_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = GovernmentOfficeType.ID_COLUMN_NAME
+			referencedColumnName = GovernmentOfficeType.ID_COLUMN_NAME,
+			insertable = false,
+			updatable = false
 	)
 	private GovernmentOfficeTypeEntity officeType;
 	@OneToMany(
 			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
+			fetch = FetchType.LAZY,
+			mappedBy = DocumentEntity.OFFICE_FIELD
+	)/*
 	@JoinColumn(
 			name = GovernmentOffice.ID_COLUMN_NAME,
 			nullable = false,
 			referencedColumnName = Document.GOVERNMENT_OFFICE_ID_COLUMN_NAME
-	)
+	) */
 	private Set<DocumentEntity>        releasedDocuments;
 
 	public GovernmentOfficeEntity() {

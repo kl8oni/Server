@@ -21,7 +21,6 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.smartcity.entity.Document;
 import org.smartcity.entity.DocumentTemplate;
 import org.smartcity.entity.GovernmentOfficeType;
 
@@ -33,6 +32,16 @@ public class DocumentTemplateEntity
 		implements DocumentTemplate<DocumentTemplateEntity, DocumentEntity, GovernmentOfficeTypeEntity> {
 
 	private static final Log LOG = LogFactory.getLog( DocumentTemplateEntity.class );
+
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD                     = "ID";
+	public static final String NAME_FIELD                   = "name";
+	public static final String SERIES_PATTERN_FIELD         = "seriesPattern";
+	public static final String NUMBER_PATTERN_FILED         = "numberPattern";
+	public static final String GOVERNMENT_OFFICE_TYPE_FIELD = "governmentOfficeType";
+	public static final String DOCUMENT_FIELD               = "document";
 
 	@Id
 	@GeneratedValue(
@@ -79,12 +88,7 @@ public class DocumentTemplateEntity
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
-			targetEntity = DocumentEntity.class
-	)
-	@JoinColumn(
-			name = DocumentTemplate.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = Document.DOCUMENT_TEMPLATE_ID_COLUMN_NAME
+			mappedBy = DocumentEntity.TEMPLATE_FIELD
 	)
 	private Set<DocumentEntity>        documents;
 

@@ -19,7 +19,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.smartcity.entity.DocumentTemplate;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
+
 import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.GovernmentOfficeType;
 
@@ -29,6 +31,18 @@ import org.smartcity.entity.GovernmentOfficeType;
 )
 public class GovernmentOfficeTypeEntity
 		implements	GovernmentOfficeType<GovernmentOfficeTypeEntity, DocumentTemplateEntity, GovernmentOfficeEntity> {
+
+	private static final Log LOG = LogFactory.getLog( GovernmentOfficeTypeEntity.class );
+
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String ID_FIELD                 = "ID";
+	public static final String NAME_FIELD               = "name";
+	public static final String PARENT_FIELD             = "parent";
+	public static final String CHILDREN_FIELD           = "children";
+	public static final String OFFICES_THIS_TYPE_FIELD  = "officesThisType";
+	public static final String DOCUMENT_TEMPLATES_FIELD = "documentTemplates";
 
 	@Id
 	@GeneratedValue(
@@ -64,12 +78,8 @@ public class GovernmentOfficeTypeEntity
 	private GovernmentOfficeTypeEntity      parent;
 	@OneToMany(
 			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
-	@JoinColumn(
-			name = GovernmentOfficeType.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = GovernmentOfficeType.PARENT_ID_COLUMN_NAME
+			fetch = FetchType.LAZY,
+			mappedBy = "parent"
 	)
 	private Set<GovernmentOfficeTypeEntity> children;
 	@OneToMany(
@@ -84,12 +94,8 @@ public class GovernmentOfficeTypeEntity
 	private Set<GovernmentOfficeEntity>     officesThisType;
 	@OneToMany(
 			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
-	@JoinColumn(
-			name = GovernmentOfficeType.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = DocumentTemplate.GOVERNMENT_OFFICE_TYPE_ID_COLUMN_NAME
+			fetch = FetchType.LAZY,
+			mappedBy = "governmentOfficeType"
 	)
 	private Set<DocumentTemplateEntity>     documentTemplates;
 

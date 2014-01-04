@@ -14,6 +14,15 @@ public class AddressEmbedded
 
 	private static final Log LOG = LogFactory.getLog( AddressEmbedded.class );
 
+	/*
+	 * Constants for fields embeddable class
+	 */
+	public static final String STATE_FILED            = "state";
+	public static final String CITY_FIELD             = "city";
+	public static final String STREET_FIELD           = "street";
+	public static final String BUILDING_NUMBER_FIELD  = "buildingNumber";
+	public static final String TELEPHONE_NUMBER_FIELD = "telephoneNumber";
+
 	private static final short MIN_BUILDING_NUMBER = 1;
 	private static final short MAX_BUILDING_NUMBER = 999;
 
