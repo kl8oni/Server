@@ -9,12 +9,12 @@ public interface Email<E extends Email,
 		extends		Serializable {
 
 	String TABLE_NAME                = "USER_EMAILS";
-	String GENERATOR_NAME            = "USER_EMAIL_ADDRESS_ID_GENERATOR";
-	String SEQUENCE_NAME             = "USER_EMAIL_ADDRESS_ID_SEQUENCE";
-	String ID_COLUMN_NAME            = "EMAIL_ADDRESS_ID";
+	String GENERATOR_NAME            = "USER_EMAIL_ID_GENERATOR";
+	String SEQUENCE_NAME             = "USER_EMAIL_ID_SEQUENCE";
+	String ID_COLUMN_NAME            = "USER_EMAIL_ID";
 	String EMAIL_ADDRESS_COLUMN_NAME = "EMAIL_ADDRESS";
 	String USER_ID_COLUMN_NAME       = "USER_ID";
-	String IS_MAIN_EMAIL_COLUMN      = "IS_MAIN_EMAIL";
+	String MAIN_EMAIL_COLUMN         = "MAIN_EMAIL";
 
 	public BigInteger getID();
 

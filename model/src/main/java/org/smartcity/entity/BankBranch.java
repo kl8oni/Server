@@ -13,7 +13,7 @@ public interface BankBranch<BB extends BankBranch,
 							BA extends BankAccount>
 		extends		Serializable {
 
-	String TABLE_NAME                   = "BANK_BRANCH";
+	String TABLE_NAME                   = "BANK_BRANCHES";
 	String GENERATOR_NAME               = "BANK_BRANCH_ID_GENERATOR";
 	String SEQUENCE_NAME                = "BANK_BRANCH_ID_SEQUENCE";
 	String ID_COLUMN_NAME               = "BANK_BRANCH_ID";
