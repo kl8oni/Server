@@ -70,12 +70,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.0.0.Final</version>
+			<version>4.2.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
-			<version>2.2.5</version>
+			<version>1.0.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>postgresql</groupId>
@@ -96,6 +96,11 @@
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-core</artifactId>
 			<version>5.1.2.FINAL</version>
+		</dependency>
+		<dependency>
+			<groupId>com.tilab.jade</groupId>
+			<artifactId>jade</artifactId>
+			<version>4.3.1</version>
 		</dependency>
 	</dependencies>
 

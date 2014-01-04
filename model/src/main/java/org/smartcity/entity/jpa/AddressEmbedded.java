@@ -28,7 +28,10 @@ public class AddressEmbedded
 	}
 
 	public AddressEmbedded(
-			String state, String city, String street, short buildingNumber,
+			String state,
+			String city,
+			String street,
+			short buildingNumber,
 			TelephoneNumberEmbedded telephoneNumber ) {
 		setTelephoneNumber( telephoneNumber )
 				.setState( state )

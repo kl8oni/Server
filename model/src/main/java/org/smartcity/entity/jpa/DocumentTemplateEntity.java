@@ -92,7 +92,9 @@ public class DocumentTemplateEntity
 	}
 
 	public DocumentTemplateEntity(
-			String name, String seriesPattern, String numberPattern,
+			String name,
+			String seriesPattern,
+			String numberPattern,
 			GovernmentOfficeTypeEntity governmentOfficeType ) {
 		setName( name )
 				.setSeriesPattern( seriesPattern )

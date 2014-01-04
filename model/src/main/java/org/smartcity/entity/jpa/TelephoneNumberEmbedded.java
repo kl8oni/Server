@@ -30,23 +30,41 @@ public class TelephoneNumberEmbedded
 	private String        pattern;
 	private Formatter     formatter;
 	private StringBuilder messageBuilder;
+	private boolean       regenerateTelephoneNumber;
+	private String        telephoneNumberValue;
 
 	public TelephoneNumberEmbedded() {
 	}
 
-	public TelephoneNumberEmbedded( short stateCode, short cityCode, int number, String pattern ) {
+	public TelephoneNumberEmbedded(
+			short stateCode,
+			short cityCode,
+			int number,
+			String pattern ) {
 		this.formatter = new Formatter();
 		this.messageBuilder = new StringBuilder();
+		this.regenerateTelephoneNumber = false;
 		setTelephonePattern( pattern )
 				.setStateCode( stateCode )
 				.setCityCode( cityCode )
 				.setNumber( number );
 	}
 
+	private void generateTelephoneNumberValue() {
+		formatter.format( Locale.getDefault(), pattern, stateCode, cityCode, number );
+		this.telephoneNumberValue = formatter.out().toString();
+	}
+
+	@Override
+	public TelephoneNumberEmbedded setTelephoneNumberValue( String telephoneNumberValue ) {
+		//TODO parse new telephone number with pattern
+		this.telephoneNumberValue = telephoneNumberValue;
+		return this;
+	}
+
 	@Override
 	public String getTelephoneNumberValue() {
-		formatter.format( Locale.getDefault(), pattern, stateCode, cityCode, number );
-		return formatter.out().toString();
+		return telephoneNumberValue;
 	}
 
 	@Override
@@ -66,6 +84,9 @@ public class TelephoneNumberEmbedded
 			throw new IllegalArgumentException( message );
 		}
 		this.stateCode = stateCode;
+		if ( regenerateTelephoneNumber ) {
+			generateTelephoneNumberValue();
+		}
 		return this;
 	}
 
@@ -84,6 +105,9 @@ public class TelephoneNumberEmbedded
 			String message = messageBuilder.toString();
 			LOG.debug( message );
 			throw new IllegalArgumentException( message );
+		}
+		if ( regenerateTelephoneNumber ) {
+			generateTelephoneNumberValue();
 		}
 		this.cityCode = cityCode;
 		return this;
@@ -105,18 +129,25 @@ public class TelephoneNumberEmbedded
 			LOG.debug( message );
 			throw new IllegalArgumentException( message );
 		}
+		if ( regenerateTelephoneNumber ) {
+			generateTelephoneNumberValue();
+		}
 		this.number = number;
 		return this;
 	}
 
 	@Override
 	public TelephoneNumberEmbedded setTelephonePattern( String pattern ) {
+		regenerateTelephoneNumber = true;
 		if ( pattern == null ) {
 			LOG.debug( "Set telephone pattern to default" );
 			this.pattern = DEFAULT_TELEPHONE_NUMBER_PATTERN;
 		}
 		else {
 			this.pattern = pattern;
+		}
+		if( regenerateTelephoneNumber ) {
+			generateTelephoneNumberValue();
 		}
 		return this;
 	}

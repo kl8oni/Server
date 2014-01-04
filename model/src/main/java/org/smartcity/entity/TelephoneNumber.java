@@ -5,6 +5,8 @@ import java.io.Serializable;
 public interface TelephoneNumber<TN extends TelephoneNumber>
 		extends		Serializable {
 
+	public TN setTelephoneNumberValue( String telephoneNumberValue );
+
 	public String getTelephoneNumberValue();
 
 	public TN setStateCode( short stateCode );

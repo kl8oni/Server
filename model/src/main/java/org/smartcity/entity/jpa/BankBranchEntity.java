@@ -85,7 +85,10 @@ public class BankBranchEntity
 	public BankBranchEntity() {
 	}
 
-	public BankBranchEntity( String name, AddressEmbedded address, BankEntity bank ) {
+	public BankBranchEntity(
+			String name,
+			AddressEmbedded address,
+			BankEntity bank ) {
 		setBank( bank )
 				.setName( name )
 				.setAddress( address )

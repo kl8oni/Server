@@ -70,7 +70,10 @@ public class EmailEntity
 	public EmailEntity() {
 	}
 
-	public EmailEntity( String emailAddress, boolean mainEmail, UserEntity owner ) {
+	public EmailEntity(
+			String emailAddress,
+			boolean mainEmail,
+			UserEntity owner ) {
 		setEmailAddress( emailAddress )
 				.setMainEmail( mainEmail )
 				.setOwner( owner );

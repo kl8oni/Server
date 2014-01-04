@@ -123,8 +123,13 @@ public class UserEntity
 	}
 
 	public UserEntity(
-			String lastName, String firstName, String middleName, String nickName, String password,
-			DocumentEntity identifyDocument, EmailEntity mainEmail ) {
+			String lastName,
+			String firstName,
+			String middleName,
+			String nickName,
+			String password,
+			DocumentEntity identifyDocument,
+			EmailEntity mainEmail ) {
 		setLastName( lastName )
 				.setFirstName( firstName )
 				.setMiddleName( middleName )

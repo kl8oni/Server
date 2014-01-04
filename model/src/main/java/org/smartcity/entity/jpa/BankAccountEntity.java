@@ -91,7 +91,9 @@ public class BankAccountEntity
 	}
 
 	public BankAccountEntity(
-			long bankAccountNumber, UserEntity owner, BankEntity bank,
+			long bankAccountNumber,
+			UserEntity owner,
+			BankEntity bank,
 			BankBranchEntity bankBranch ) {
 		setBankAccountNumber( bankAccountNumber )
 				.setBankAccountOwner( owner )

@@ -85,7 +85,10 @@ public class GovernmentOfficeEntity
 	public GovernmentOfficeEntity() {
 	}
 
-	public GovernmentOfficeEntity( String name, AddressEmbedded address, GovernmentOfficeTypeEntity officeType ) {
+	public GovernmentOfficeEntity(
+			String name,
+			AddressEmbedded address,
+			GovernmentOfficeTypeEntity officeType ) {
 		setName( name )
 				.setAddress( address )
 				.setOfficeType( officeType )
