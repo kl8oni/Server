@@ -73,9 +73,7 @@ public class BankBranchEntity
 	@JoinColumn(
 			name = BankBranch.BANK_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = Bank.ID_COLUMN_NAME/*,
-			insertable = false,
-			updatable = false    */
+			referencedColumnName = Bank.ID_COLUMN_NAME
 	)
 	private BankEntity             bank;
 	@Embedded
@@ -83,7 +81,6 @@ public class BankBranchEntity
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
-			targetEntity = BankAccountEntity.class,
 			mappedBy = BankAccountEntity.BANK_BRANCH_FIELD
 	)
 	private Set<BankAccountEntity> bankAccounts;

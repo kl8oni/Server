@@ -99,9 +99,7 @@ public class DocumentEntity
 	@JoinColumn(
 			name = Document.GOVERNMENT_OFFICE_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = GovernmentOffice.ID_COLUMN_NAME/*,
-			insertable = false,
-			updatable = false*/
+			referencedColumnName = GovernmentOffice.ID_COLUMN_NAME
 	)
 	private GovernmentOfficeEntity office;
 	@ManyToOne(
@@ -111,9 +109,7 @@ public class DocumentEntity
 	@JoinColumn(
 			name = Document.DOCUMENT_TEMPLATE_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = DocumentTemplate.ID_COLUMN_NAME/*,
-			insertable = false,
-			updatable = false */
+			referencedColumnName = DocumentTemplate.ID_COLUMN_NAME
 	)
 	private DocumentTemplateEntity template;
 

@@ -81,9 +81,7 @@ public class BankAccountEntity
 	@JoinColumn(
 			name = BankAccount.BANK_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = Bank.ID_COLUMN_NAME/*,
-			insertable = false,
-			updatable = false   */
+			referencedColumnName = Bank.ID_COLUMN_NAME
 	)
 	private BankEntity       bank;
 	@ManyToOne(
@@ -93,9 +91,7 @@ public class BankAccountEntity
 	@JoinColumn(
 			name = BankAccount.BANK_BRANCH_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = BankBranch.ID_COLUMN_NAME,
-			insertable = false,
-			updatable = false
+			referencedColumnName = BankBranch.ID_COLUMN_NAME
 	)
 	private BankBranchEntity bankBranch;
 

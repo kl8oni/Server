@@ -23,7 +23,6 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.smartcity.entity.Document;
 import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.GovernmentOfficeType;
 
@@ -86,12 +85,7 @@ public class GovernmentOfficeEntity
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
 			mappedBy = DocumentEntity.OFFICE_FIELD
-	)/*
-	@JoinColumn(
-			name = GovernmentOffice.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = Document.GOVERNMENT_OFFICE_ID_COLUMN_NAME
-	) */
+	)
 	private Set<DocumentEntity>        releasedDocuments;
 
 	public GovernmentOfficeEntity() {
