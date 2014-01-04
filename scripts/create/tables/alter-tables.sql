@@ -30,7 +30,7 @@ references USERS (USER_ID);
 
 alter table DOCUMENTS
 add constraint OFFICE_DOCUMENT_FK
-foreign key (OFFICE_ID)
+foreign key (GOVERNMENT_OFFICE_ID)
 references GOVERNMENT_OFFICES (GOVERNMENT_OFFICE_ID);
 
 alter table DOCUMENTS
