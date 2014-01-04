@@ -1,0 +1,10 @@
+\i ./create/bank-accounts-table.sql;
+\i ./create/bank-branches-table.sql;
+\i ./create/banks-table.sql;
+\i ./create/document-templates-table.sql;
+\i ./create/documents-table.sql;
+\i ./create/government-office-types-table.sql;
+\i ./create/government-offices-table.sql;
+\i ./create/user-emails-table.sql;
+\i ./create/users-table.sql;
+\i ./create/alter-tables.sql;
