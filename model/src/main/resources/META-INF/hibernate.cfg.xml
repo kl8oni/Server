@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<hibernate-configuration
+		xmlns="http://www.hibernate.org/xsd/hibernate-configuration"
+		xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-configuration hibernate-configuration-4.0.xsd"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<session-factory>
+		<property name="connection.pool_size">20</property>
+		<property name="dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+		<property name="cache.provider_class">org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider</property>
+		<property name="hibernate.proxool.existing_pool">true</property>
+	</session-factory>
+	
+</hibernate-configuration>
