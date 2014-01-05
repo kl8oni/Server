@@ -9,6 +9,7 @@
 		<hibernate.version>4.0.1.Final</hibernate.version>
 		<arquillian.version>1.1.2.Final</arquillian.version>
 		<shrinkwrap.version>1.2.0</shrinkwrap.version>
+		<jboss.version>7.1.1.Final</jboss.version>
 	</properties>
 
 	<groupId>Server</groupId>
@@ -62,12 +63,13 @@
 				<dependency>
 					<groupId>org.jboss.as</groupId>
 					<artifactId>jboss-as-arquillian-container-remote</artifactId>
-					<version>7.1.1.Final</version>
+					<version>${jboss.version}</version>
 					<scope>test</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.jboss.arquillian.protocol</groupId>
 					<artifactId>arquillian-protocol-servlet</artifactId>
+					<version>${arquillian.version}</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
