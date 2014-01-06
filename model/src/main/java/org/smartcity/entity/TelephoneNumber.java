@@ -5,6 +5,8 @@ import java.io.Serializable;
 public interface TelephoneNumber<TN extends TelephoneNumber>
 		extends		Serializable {
 
+	String TELEPHONE_NUMBER_COLUMN_NAME = "TELEPHONE_NUMBER";
+
 	public TN setTelephoneNumberValue( String telephoneNumberValue );
 
 	public String getTelephoneNumberValue();

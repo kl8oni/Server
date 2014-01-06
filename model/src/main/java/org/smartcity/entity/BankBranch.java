@@ -18,11 +18,6 @@ public interface BankBranch<BB extends BankBranch,
 	String SEQUENCE_NAME                = "BANK_BRANCH_ID_SEQUENCE";
 	String ID_COLUMN_NAME               = "BANK_BRANCH_ID";
 	String NAME_COLUMN_NAME             = "NAME";
-	String STATE_COLUMN_NAME            = "STATE";
-	String CITY_COLUMN_NAME             = "CITY";
-	String STREET_COLUMN_NAME           = "STREET";
-	String BUILDING_NUMBER_COLUMN_NAME  = "BUILDING_NUMBER";
-	String TELEPHONE_NUMBER_COLUMN_NAME = "TELEPHONE_NUMBER";
 	String BANK_ID_COLUMN_NAME          = "BANK_ID";
 
 	public BigInteger getID();

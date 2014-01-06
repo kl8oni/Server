@@ -28,11 +28,23 @@ public class AddressEmbedded
 	private static final short MIN_BUILDING_NUMBER = 1;
 	private static final short MAX_BUILDING_NUMBER = 999;
 
+	@Column(
+			name = Address.STATE_COLUMN_NAME,
+			nullable = false
+	)
 	private String                  state;
+	@Column(
+			name = Address.CITY_COLUMN_NAME,
+			nullable = false
+	)
 	private String                  city;
+	@Column(
+			name = Address.STREET_COLUMN_NAME,
+			nullable = false
+	)
 	private String                  street;
 	@Column(
-			name = GovernmentOffice.BUILDING_NUMBER_COLUMN_NAME,
+			name = Address.BUILDING_NUMBER_COLUMN_NAME,
 			nullable = false
 	)
 	private short                   buildingNumber;
