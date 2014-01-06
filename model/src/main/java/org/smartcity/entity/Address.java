@@ -6,6 +6,11 @@ public interface Address<A extends Address,
 						 TN extends TelephoneNumber>
 		extends		Serializable {
 
+	String STATE_COLUMN_NAME = "STATE";
+	String CITY_COLUMN_NAME = "CITY";
+	String STREET_COLUMN_NAME = "STREET";
+	String BUILDING_NUMBER_COLUMN_NAME = "BUILDING_NUMBER";
+
 	public String getState();
 
 	public A setState( String state );

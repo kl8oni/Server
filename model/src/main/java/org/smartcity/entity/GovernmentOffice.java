@@ -18,11 +18,6 @@ public interface GovernmentOffice<O extends GovernmentOffice,
 	String ID_COLUMN_NAME                        = "GOVERNMENT_OFFICE_ID";
 	String NAME_COLUMN_NAME                      = "NAME";
 	String GOVERNMENT_OFFICE_TYPE_ID_COLUMN_NAME = "GOVERNMENT_OFFICE_TYPE_ID";
-	String STATE_COLUMN_NAME                     = "STATE";
-	String CITY_COLUMN_NAME                      = "CITY";
-	String STREET_COLUMN_NAME                    = "STREET";
-	String BUILDING_NUMBER_COLUMN_NAME           = "BUILDING_NUMBER";
-	String TELEPHONE_NUMBER_COLUMN_NAME          = "TELEPHONE_NUMBER";
 
 	public abstract BigInteger getID();
 

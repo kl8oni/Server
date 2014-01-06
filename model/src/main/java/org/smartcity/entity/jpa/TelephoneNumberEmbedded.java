@@ -45,7 +45,7 @@ public class TelephoneNumberEmbedded
 	@Transient
 	private boolean       regenerateTelephoneNumber;
 	@Column(
-			name = GovernmentOffice.TELEPHONE_NUMBER_COLUMN_NAME,
+			name = TelephoneNumber.TELEPHONE_NUMBER_COLUMN_NAME,
 			nullable = false
 	)
 	private String        telephoneNumberValue;
