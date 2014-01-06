@@ -8,7 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.smartcity.entity.Address;
-import org.smartcity.entity.GovernmentOffice;
 
 @Embeddable
 public class AddressEmbedded

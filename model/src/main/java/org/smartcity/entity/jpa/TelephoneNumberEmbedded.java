@@ -10,7 +10,6 @@ import java.util.Locale;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.TelephoneNumber;
 
 @Embeddable
