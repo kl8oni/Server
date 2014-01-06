@@ -1,5 +1,6 @@
 package org.smartcity.entity.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 
@@ -9,6 +10,7 @@ import java.util.Locale;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.TelephoneNumber;
 
 @Embeddable
@@ -22,9 +24,9 @@ public class TelephoneNumberEmbedded
 	/*
 	 * Constant for fields embeddable class
 	 */
-	private static final String TELEPHONE_NUMBER_VALUE = "telephoneNumberValue";
+	private static final String TELEPHONE_NUMBER_VALUE_FIELD = "telephoneNumberValue";
 
-	private static final String DEFAULT_TELEPHONE_NUMBER_PATTERN = "(%d3)-%d3-%d7";
+	private static final String DEFAULT_TELEPHONE_NUMBER_PATTERN = "(%03d)-%03d-%07d";
 	private static final short  MIN_STATE_CODE                   = 1;
 	private static final short  MAX_STATE_CODE                   = 999;
 	private static final short  MIN_CITY_CODE                    = 1;
@@ -42,6 +44,10 @@ public class TelephoneNumberEmbedded
 	private String        pattern;
 	@Transient
 	private boolean       regenerateTelephoneNumber;
+	@Column(
+			name = GovernmentOffice.TELEPHONE_NUMBER_COLUMN_NAME,
+			nullable = false
+	)
 	private String        telephoneNumberValue;
 
 	public TelephoneNumberEmbedded() {
@@ -60,6 +66,8 @@ public class TelephoneNumberEmbedded
 	}
 
 	private void generateTelephoneNumberValue() {
+		StringBuilder sb = (StringBuilder)FORMATTER.out();
+		sb.delete( 0, sb.length() );
 		FORMATTER.format( Locale.getDefault(), pattern, stateCode, cityCode, number );
 		this.telephoneNumberValue = FORMATTER.out().toString();
 	}
@@ -73,6 +81,7 @@ public class TelephoneNumberEmbedded
 
 	@Override
 	public String getTelephoneNumberValue() {
+		generateTelephoneNumberValue();
 		return telephoneNumberValue;
 	}
 
@@ -93,9 +102,6 @@ public class TelephoneNumberEmbedded
 			throw new IllegalArgumentException( message );
 		}
 		this.stateCode = stateCode;
-		if ( regenerateTelephoneNumber ) {
-			generateTelephoneNumberValue();
-		}
 		return this;
 	}
 
@@ -114,9 +120,6 @@ public class TelephoneNumberEmbedded
 			String message = MESSAGE_BUILDER.toString();
 			LOG.debug( message );
 			throw new IllegalArgumentException( message );
-		}
-		if ( regenerateTelephoneNumber ) {
-			generateTelephoneNumberValue();
 		}
 		this.cityCode = cityCode;
 		return this;
@@ -137,9 +140,6 @@ public class TelephoneNumberEmbedded
 			String message = MESSAGE_BUILDER.toString();
 			LOG.debug( message );
 			throw new IllegalArgumentException( message );
-		}
-		if ( regenerateTelephoneNumber ) {
-			generateTelephoneNumberValue();
 		}
 		this.number = number;
 		return this;

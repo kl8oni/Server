@@ -1,5 +1,6 @@
 package org.smartcity.entity.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 
@@ -7,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.smartcity.entity.Address;
+import org.smartcity.entity.GovernmentOffice;
 
 @Embeddable
 public class AddressEmbedded
@@ -29,6 +31,10 @@ public class AddressEmbedded
 	private String                  state;
 	private String                  city;
 	private String                  street;
+	@Column(
+			name = GovernmentOffice.BUILDING_NUMBER_COLUMN_NAME,
+			nullable = false
+	)
 	private short                   buildingNumber;
 	@Embedded
 	private TelephoneNumberEmbedded telephoneNumber;

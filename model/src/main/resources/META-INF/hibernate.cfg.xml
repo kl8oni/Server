@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<hibernate-configuration
-		xmlns="http://www.hibernate.org/xsd/hibernate-configuration"
-		xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-configuration hibernate-configuration-4.0.xsd"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<!DOCTYPE hibernate-configuration SYSTEM
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
 
 	<session-factory>
 		<property name="connection.pool_size">20</property>

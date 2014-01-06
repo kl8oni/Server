@@ -76,9 +76,7 @@ public class GovernmentOfficeEntity
 	@JoinColumn(
 			name = GovernmentOffice.GOVERNMENT_OFFICE_TYPE_ID_COLUMN_NAME,
 			nullable = false,
-			referencedColumnName = GovernmentOfficeType.ID_COLUMN_NAME,
-			insertable = false,
-			updatable = false
+			referencedColumnName = GovernmentOfficeType.ID_COLUMN_NAME
 	)
 	private GovernmentOfficeTypeEntity officeType;
 	@OneToMany(

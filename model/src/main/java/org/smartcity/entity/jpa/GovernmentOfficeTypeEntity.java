@@ -72,30 +72,25 @@ public class GovernmentOfficeTypeEntity
 	)
 	@JoinColumn(
 			name = GovernmentOfficeType.PARENT_ID_COLUMN_NAME,
-			nullable = false,
 			referencedColumnName = GovernmentOfficeType.ID_COLUMN_NAME
 	)
 	private GovernmentOfficeTypeEntity      parent;
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
-			mappedBy = "parent"
+			mappedBy = GovernmentOfficeTypeEntity.PARENT_FIELD
 	)
 	private Set<GovernmentOfficeTypeEntity> children;
 	@OneToMany(
 			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
-	@JoinColumn(
-			name = GovernmentOfficeType.ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = GovernmentOffice.GOVERNMENT_OFFICE_TYPE_ID_COLUMN_NAME
+			fetch = FetchType.LAZY,
+			mappedBy = GovernmentOfficeEntity.OFFICE_TYPE_FIELD
 	)
 	private Set<GovernmentOfficeEntity>     officesThisType;
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
-			mappedBy = "governmentOfficeType"
+			mappedBy = DocumentTemplateEntity.GOVERNMENT_OFFICE_TYPE_FIELD
 	)
 	private Set<DocumentTemplateEntity>     documentTemplates;
 
