@@ -117,6 +117,7 @@ public class UserEntity
 
 
 	public UserEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public UserEntity(
@@ -126,6 +127,7 @@ public class UserEntity
 			String nickName,
 			String password,
 			DocumentEntity identifyDocument ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setLastName( lastName )
 				.setFirstName( firstName )
 				.setMiddleName( middleName )
@@ -149,6 +151,7 @@ public class UserEntity
 
 	@Override
 	public UserEntity setLastName( String lastName ) {
+		LOG.debug( "Last name is " + lastName );
 		this.lastName = lastName;
 		return this;
 	}
@@ -160,6 +163,7 @@ public class UserEntity
 
 	@Override
 	public UserEntity setFirstName( String firstName ) {
+		LOG.debug( "First name is " + firstName );
 		this.firstName = firstName;
 		return this;
 	}
@@ -171,6 +175,7 @@ public class UserEntity
 
 	@Override
 	public UserEntity setMiddleName( String middleName ) {
+		LOG.debug( "Middle name is " + middleName );
 		this.middleName = middleName;
 		return this;
 	}
@@ -182,6 +187,7 @@ public class UserEntity
 
 	@Override
 	public UserEntity setNickName( String nickName ) {
+		LOG.debug( "Nick name is " + nickName );
 		this.nickName = nickName;
 		return this;
 	}
@@ -193,6 +199,7 @@ public class UserEntity
 
 	@Override
 	public UserEntity setPassword( String password ) {
+		LOG.debug( "Password is " + password );
 		this.password = password;
 		return this;
 	}
@@ -204,6 +211,7 @@ public class UserEntity
 
 	@Override
 	public UserEntity setMainEmail( EmailEntity mainEmail ) {
+		LOG.debug( "Main email is " + mainEmail );
 		if ( mainEmail != null) {
 			this.mainEmail = mainEmail;
 		}
@@ -248,6 +256,7 @@ public class UserEntity
 
 	@Override
 	public UserEntity setIdentifyDocument( DocumentEntity identifyDocument ) {
+		LOG.debug( "Identify document is " + identifyDocument );
 		this.identifyDocument = identifyDocument;
 		return this;
 	}

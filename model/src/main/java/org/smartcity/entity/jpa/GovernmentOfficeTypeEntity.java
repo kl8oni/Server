@@ -22,7 +22,6 @@ import java.util.Set;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
 
-import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.GovernmentOfficeType;
 
 @Entity
@@ -95,9 +94,11 @@ public class GovernmentOfficeTypeEntity
 	private Set<DocumentTemplateEntity>     documentTemplates;
 
 	public GovernmentOfficeTypeEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public GovernmentOfficeTypeEntity( String name, GovernmentOfficeTypeEntity parent ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setName( name )
 				.setParent( parent )
 				.setChildren( new HashSet<GovernmentOfficeTypeEntity>() )
@@ -117,6 +118,7 @@ public class GovernmentOfficeTypeEntity
 
 	@Override
 	public GovernmentOfficeTypeEntity setName( String name ) {
+		LOG.debug( "Name is " + name );
 		this.name = name;
 		return this;
 	}
@@ -128,6 +130,7 @@ public class GovernmentOfficeTypeEntity
 
 	@Override
 	public GovernmentOfficeTypeEntity setParent( GovernmentOfficeTypeEntity parent ) {
+		LOG.debug( "Parent is " + parent );
 		this.parent = parent;
 		return this;
 	}

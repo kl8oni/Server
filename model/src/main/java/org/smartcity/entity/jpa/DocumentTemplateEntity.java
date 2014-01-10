@@ -93,6 +93,7 @@ public class DocumentTemplateEntity
 	private Set<DocumentEntity>        documents;
 
 	public DocumentTemplateEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public DocumentTemplateEntity(
@@ -100,6 +101,7 @@ public class DocumentTemplateEntity
 			String seriesPattern,
 			String numberPattern,
 			GovernmentOfficeTypeEntity governmentOfficeType ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setName( name )
 				.setSeriesPattern( seriesPattern )
 				.setNumberPattern( numberPattern )
@@ -119,6 +121,7 @@ public class DocumentTemplateEntity
 
 	@Override
 	public DocumentTemplateEntity setName( String name ) {
+		LOG.debug( "Name is " + name );
 		this.name = name;
 		return this;
 	}
@@ -130,6 +133,7 @@ public class DocumentTemplateEntity
 
 	@Override
 	public DocumentTemplateEntity setSeriesPattern( String seriesPattern ) {
+		LOG.debug( "Series pattern is " + seriesPattern );
 		this.seriesPattern = seriesPattern;
 		return this;
 	}
@@ -141,6 +145,7 @@ public class DocumentTemplateEntity
 
 	@Override
 	public DocumentTemplateEntity setNumberPattern( String numberPattern ) {
+		LOG.debug( "Number pattern is " + numberPattern );
 		this.numberPattern = numberPattern;
 		return this;
 	}
@@ -152,6 +157,7 @@ public class DocumentTemplateEntity
 
 	@Override
 	public DocumentTemplateEntity setGovernmentOfficeType( GovernmentOfficeTypeEntity governmentOfficeType ) {
+		LOG.debug( "Government office type is " + governmentOfficeType );
 		this.governmentOfficeType = governmentOfficeType;
 		return this;
 	}

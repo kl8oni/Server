@@ -10,7 +10,6 @@ import java.util.Locale;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.TelephoneNumber;
 
 @Embeddable
@@ -51,6 +50,7 @@ public class TelephoneNumberEmbedded
 	private String        telephoneNumberValue;
 
 	public TelephoneNumberEmbedded() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public TelephoneNumberEmbedded(
@@ -58,7 +58,7 @@ public class TelephoneNumberEmbedded
 			short cityCode,
 			int number,
 			String pattern ) {
-		this.regenerateTelephoneNumber = false;
+		LOG.debug( "Constructor with parameters is invoked" );
 		setTelephonePattern( pattern )
 				.setStateCode( stateCode )
 				.setCityCode( cityCode )
@@ -66,10 +66,12 @@ public class TelephoneNumberEmbedded
 	}
 
 	private void generateTelephoneNumberValue() {
-		StringBuilder sb = (StringBuilder)FORMATTER.out();
-		sb.delete( 0, sb.length() );
-		FORMATTER.format( Locale.getDefault(), pattern, stateCode, cityCode, number );
-		this.telephoneNumberValue = FORMATTER.out().toString();
+		if( regenerateTelephoneNumber ) {
+			StringBuilder sb = (StringBuilder)FORMATTER.out();
+			sb.delete( 0, sb.length() );
+			FORMATTER.format( Locale.getDefault(), pattern, stateCode, cityCode, number );
+			this.telephoneNumberValue = FORMATTER.out().toString();
+		}
 	}
 
 	@Override
@@ -87,9 +89,10 @@ public class TelephoneNumberEmbedded
 
 	@Override
 	public TelephoneNumberEmbedded setStateCode( short stateCode ) {
-		clearMessageBuilder();
+		LOG.debug( "State code is " + stateCode );
 		if ( stateCode < MIN_STATE_CODE
 				|| stateCode > MAX_STATE_CODE ) {
+			clearMessageBuilder();
 			MESSAGE_BUILDER.append( "State code is not in allowable bound. State code should be between " )
 					.append( MIN_STATE_CODE )
 					.append( " and " )
@@ -107,9 +110,10 @@ public class TelephoneNumberEmbedded
 
 	@Override
 	public TelephoneNumberEmbedded setCityCode( short cityCode ) {
-		clearMessageBuilder();
+		LOG.debug( "City code is " + cityCode );
 		if ( cityCode < MIN_CITY_CODE
 				|| cityCode > MAX_CITY_CODE ) {
+			clearMessageBuilder();
 			MESSAGE_BUILDER.append( "City code is not in allowable bound. State code should be between " )
 					.append( MIN_CITY_CODE )
 					.append( " and " )
@@ -127,9 +131,10 @@ public class TelephoneNumberEmbedded
 
 	@Override
 	public TelephoneNumberEmbedded setNumber( int number ) {
-		clearMessageBuilder();
+		LOG.debug( "Number is " + number );
 		if ( number < MIN_NUMBER
 			 || number > MAX_NUMBER ) {
+			clearMessageBuilder();
 			MESSAGE_BUILDER.append( "Number is not in allowable bound. State code should be between " )
 					.append( MIN_NUMBER )
 					.append( " and " )
@@ -147,6 +152,7 @@ public class TelephoneNumberEmbedded
 
 	@Override
 	public TelephoneNumberEmbedded setTelephonePattern( String pattern ) {
+		LOG.debug( "Telephone pattern is " + pattern );
 		regenerateTelephoneNumber = true;
 		if ( pattern == null ) {
 			LOG.debug( "Set telephone pattern to default" );
@@ -155,9 +161,7 @@ public class TelephoneNumberEmbedded
 		else {
 			this.pattern = pattern;
 		}
-		if( regenerateTelephoneNumber ) {
-			generateTelephoneNumberValue();
-		}
+		generateTelephoneNumberValue();
 		return this;
 	}
 

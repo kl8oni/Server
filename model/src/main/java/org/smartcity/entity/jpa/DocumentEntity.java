@@ -114,6 +114,7 @@ public class DocumentEntity
 	private DocumentTemplateEntity template;
 
 	public DocumentEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public DocumentEntity(
@@ -124,6 +125,7 @@ public class DocumentEntity
 			UserEntity owner,
 			GovernmentOfficeEntity office,
 			DocumentTemplateEntity template ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setName( name )
 				.setSeries( series )
 				.setNumber( number )
@@ -145,6 +147,7 @@ public class DocumentEntity
 
 	@Override
 	public DocumentEntity setName( String name ) {
+		LOG.debug( "Name is " + name );
 		this.name = name;
 		return this;
 	}
@@ -156,6 +159,7 @@ public class DocumentEntity
 
 	@Override
 	public DocumentEntity setSeries( String series ) {
+		LOG.debug( "Series is " + series );
 		this.series = series;
 		return this;
 	}
@@ -167,6 +171,7 @@ public class DocumentEntity
 
 	@Override
 	public DocumentEntity setNumber( long number ) {
+		LOG.debug( "Number is " + number );
 		this.number = number;
 		return this;
 	}
@@ -178,6 +183,7 @@ public class DocumentEntity
 
 	@Override
 	public DocumentEntity setDeliveryDate( Date deliveryDate ) {
+		LOG.debug( "Delivery date is " + deliveryDate );
 		this.deliveryDate = deliveryDate;
 		return this;
 	}
@@ -189,6 +195,7 @@ public class DocumentEntity
 
 	@Override
 	public DocumentEntity setOwner( UserEntity owner ) {
+		LOG.debug( "Owner is " + owner );
 		this.owner = owner;
 		return this;
 	}
@@ -200,6 +207,7 @@ public class DocumentEntity
 
 	@Override
 	public DocumentEntity setTemplate( DocumentTemplateEntity template ) {
+		LOG.debug( "Template is " + template );
 		this.template = template;
 		return this;
 	}
@@ -211,6 +219,7 @@ public class DocumentEntity
 
 	@Override
 	public DocumentEntity setOffice( GovernmentOfficeEntity office ) {
+		LOG.debug( "Office is " + office );
 		this.office = office;
 		return this;
 	}

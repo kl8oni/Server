@@ -76,12 +76,14 @@ public class EmailEntity
 	private UserEntity owner;
 
 	public EmailEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public EmailEntity(
 			String emailAddress,
 			boolean mainEmail,
 			UserEntity owner ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setEmailAddress( emailAddress )
 				.setMainEmail( mainEmail )
 				.setOwner( owner );
@@ -99,6 +101,7 @@ public class EmailEntity
 
 	@Override
 	public EmailEntity setEmailAddress( String emailAddress ) {
+		LOG.debug( "Email address is " + emailAddress );
 		this.emailAddress = emailAddress;
 		return this;
 	}
@@ -110,6 +113,7 @@ public class EmailEntity
 
 	@Override
 	public EmailEntity setOwner( UserEntity owner ) {
+		LOG.debug( "Owner is " + owner );
 		this.owner = owner;
 		return this;
 	}
@@ -121,6 +125,7 @@ public class EmailEntity
 
 	@Override
 	public EmailEntity setMainEmail( boolean mainEmail ) {
+		LOG.debug( "Main email is " + mainEmail );
 		this.mainEmail = mainEmail;
 		return this;
 	}

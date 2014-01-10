@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+			 xmlns="http://java.sun.com/xml/ns/persistence"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="SmartCity" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/SmartCityDataSourceTest</jta-data-source>
+		<class>org.smartcity.entity.jpa.AddressEmbedded</class>
+		<class>org.smartcity.entity.jpa.BankAccountEntity</class>
+		<class>org.smartcity.entity.jpa.BankBranchEntity</class>
+		<class>org.smartcity.entity.jpa.BankEntity</class>
+		<class>org.smartcity.entity.jpa.DocumentEntity</class>
+		<class>org.smartcity.entity.jpa.DocumentTemplateEntity</class>
+		<class>org.smartcity.entity.jpa.EmailEntity</class>
+		<class>org.smartcity.entity.jpa.GovernmentOfficeEntity</class>
+		<class>org.smartcity.entity.jpa.GovernmentOfficeTypeEntity</class>
+		<class>org.smartcity.entity.jpa.TelephoneNumberEmbedded</class>
+		<class>org.smartcity.entity.jpa.UserEntity</class>
+		<properties>
+			<property name="hibernate.ejb.cfgfile" value="/META-INF/hibernate.cfg.xml"/>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/smart-city-test"/>
+			<property name="javax.persistence.jdbc.user" value="postgres"/>
+			<property name="javax.persistence.jdbc.password" value="358962471"/>
+		</properties>
+	</persistence-unit>
+</persistence>
