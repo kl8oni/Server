@@ -80,9 +80,11 @@ public class BankEntity
 	private Set<BankAccountEntity> bankAccounts;
 
 	public BankEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public BankEntity( String name, String website ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setName( name )
 				.setWebsite( website )
 				.setBankBranches( new HashSet<BankBranchEntity>() )
@@ -101,6 +103,7 @@ public class BankEntity
 
 	@Override
 	public BankEntity setName( String name ) {
+		LOG.debug( "Name is " + name );
 		this.name = name;
 		return this;
 	}
@@ -112,6 +115,7 @@ public class BankEntity
 
 	@Override
 	public BankEntity setWebsite( String website ) {
+		LOG.debug( "Website is " + website );
 		this.website = website;
 		return this;
 	}

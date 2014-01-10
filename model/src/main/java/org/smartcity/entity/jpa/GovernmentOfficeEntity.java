@@ -87,12 +87,14 @@ public class GovernmentOfficeEntity
 	private Set<DocumentEntity>        releasedDocuments;
 
 	public GovernmentOfficeEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public GovernmentOfficeEntity(
 			String name,
 			AddressEmbedded address,
 			GovernmentOfficeTypeEntity officeType ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setName( name )
 				.setAddress( address )
 				.setOfficeType( officeType )
@@ -111,6 +113,7 @@ public class GovernmentOfficeEntity
 
 	@Override
 	public GovernmentOfficeEntity setName( String name ) {
+		LOG.debug( "Name is " + name );
 		this.name = name;
 		return this;
 	}
@@ -122,6 +125,7 @@ public class GovernmentOfficeEntity
 
 	@Override
 	public GovernmentOfficeEntity setAddress( AddressEmbedded address ) {
+		LOG.debug( "Address is " + address );
 		this.address = address;
 		return this;
 	}
@@ -144,6 +148,7 @@ public class GovernmentOfficeEntity
 
 	@Override
 	public GovernmentOfficeEntity setOfficeType( GovernmentOfficeTypeEntity officeType ) {
+		LOG.debug( "Office type is " + officeType );
 		this.officeType = officeType;
 		return this;
 	}

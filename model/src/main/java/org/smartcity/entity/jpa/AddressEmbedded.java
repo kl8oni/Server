@@ -51,6 +51,7 @@ public class AddressEmbedded
 	private TelephoneNumberEmbedded telephoneNumber;
 
 	public AddressEmbedded() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public AddressEmbedded(
@@ -59,6 +60,7 @@ public class AddressEmbedded
 			String street,
 			short buildingNumber,
 			TelephoneNumberEmbedded telephoneNumber ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setTelephoneNumber( telephoneNumber )
 				.setState( state )
 				.setCity( city )
@@ -73,6 +75,7 @@ public class AddressEmbedded
 
 	@Override
 	public AddressEmbedded setState( String state ) {
+		LOG.debug( "State is " + state );
 		this.state = state;
 		return this;
 	}
@@ -84,6 +87,7 @@ public class AddressEmbedded
 
 	@Override
 	public AddressEmbedded setCity( String city ) {
+		LOG.debug( "City is " + city );
 		this.city = city;
 		return this;
 	}
@@ -95,6 +99,7 @@ public class AddressEmbedded
 
 	@Override
 	public AddressEmbedded setStreet( String street ) {
+		LOG.debug( "Street is " + street );
 		this.street = street;
 		return this;
 	}
@@ -106,6 +111,7 @@ public class AddressEmbedded
 
 	@Override
 	public AddressEmbedded setBuildingNumber( short buildingNumber ) {
+		LOG.debug( "Building number is " + buildingNumber );
 		if ( buildingNumber < MIN_BUILDING_NUMBER
 				|| buildingNumber > MAX_BUILDING_NUMBER ) {
 			StringBuilder messageBuilder = new StringBuilder();
@@ -131,6 +137,7 @@ public class AddressEmbedded
 
 	@Override
 	public AddressEmbedded setTelephoneNumber( TelephoneNumberEmbedded telephoneNumber ) {
+		LOG.debug( "Telephone number is " + telephoneNumber );
 		this.telephoneNumber = telephoneNumber;
 		return this;
 	}

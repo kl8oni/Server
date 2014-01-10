@@ -97,6 +97,7 @@ public class BankAccountEntity
 
 
 	public BankAccountEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public BankAccountEntity(
@@ -104,6 +105,7 @@ public class BankAccountEntity
 			UserEntity owner,
 			BankEntity bank,
 			BankBranchEntity bankBranch ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setBankAccountNumber( bankAccountNumber )
 				.setBankAccountOwner( owner )
 				.setBank( bank )
@@ -122,6 +124,7 @@ public class BankAccountEntity
 
 	@Override
 	public BankAccountEntity setBankAccountNumber( long bankAccountNumber ) {
+		LOG.debug( "Bank account number is " + bankAccountNumber );
 		this.bankAccountNumber = bankAccountNumber;
 		return this;
 	}
@@ -133,6 +136,7 @@ public class BankAccountEntity
 
 	@Override
 	public BankAccountEntity setBankAccountOwner( UserEntity owner ) {
+		LOG.debug( "Bank account owner is " + owner );
 		this.owner = owner;
 		return this;
 	}
@@ -144,6 +148,7 @@ public class BankAccountEntity
 
 	@Override
 	public BankAccountEntity setBank( BankEntity bank ) {
+		LOG.debug( "Bank is " + bank );
 		this.bank = bank;
 		return this;
 	}
@@ -155,6 +160,7 @@ public class BankAccountEntity
 
 	@Override
 	public BankAccountEntity setBankBranch( BankBranchEntity bankBranch ) {
+		LOG.debug( "Bank branch is " + bankBranch );
 		this.bankBranch = bankBranch;
 		return this;
 	}

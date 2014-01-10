@@ -86,12 +86,14 @@ public class BankBranchEntity
 	private Set<BankAccountEntity> bankAccounts;
 
 	public BankBranchEntity() {
+		LOG.debug( "Empty constructor is invoked" );
 	}
 
 	public BankBranchEntity(
 			String name,
 			AddressEmbedded address,
 			BankEntity bank ) {
+		LOG.debug( "Constructor with parameters is invoked" );
 		setBank( bank )
 				.setName( name )
 				.setAddress( address )
@@ -110,6 +112,7 @@ public class BankBranchEntity
 
 	@Override
 	public BankBranchEntity setName( String name ) {
+		LOG.debug( "Name is " + name );
 		this.name = name;
 		return this;
 	}
@@ -121,6 +124,7 @@ public class BankBranchEntity
 
 	@Override
 	public BankBranchEntity setAddress( AddressEmbedded address ) {
+		LOG.debug( "Address is " + address );
 		this.address = address;
 		return this;
 	}
@@ -132,6 +136,7 @@ public class BankBranchEntity
 
 	@Override
 	public BankBranchEntity setBank( BankEntity bank ) {
+		LOG.debug( "Bank is " + bank );
 		this.bank = bank;
 		return this;
 	}
