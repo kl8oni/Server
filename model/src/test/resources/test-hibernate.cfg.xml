@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration SYSTEM
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<session-factory name="smart-city">
+		<property name="connection.pool_size">20</property>
+		<property name="dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+		<property name="cache.provider_class">org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider</property>
+		<property name="hibernate.proxool.existing_pool">true</property>
+		<property name="connection.autocommit">false</property>
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.datasource">java:jboss/datasources/SmartCityDataSourceTest</property>
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">358962471</property>
+	</session-factory>
+	
+</hibernate-configuration>
