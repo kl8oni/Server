@@ -30,7 +30,7 @@ How to install test environment
 
 		<subsystem xmlns="urn:jboss:domain:datasources:1.0">
 			<datasources>
-			<...>
+				<...>
 				<datasource jndi-name="java:jboss/datasources/SmartCityDataSourceTest" pool-name="smart-city-db-pool-test" enabled="true" use-java-context="true">
 					<connection-url>jdbc:postgresql://localhost/smart-city-test</connection-url>
 					<driver>postgresql</driver>
@@ -39,14 +39,15 @@ How to install test environment
 						<password>${password}</password>
 					</security>
 				</datasource>
-			<...>
+				<...>
 			<drivers>
-			<...>
-			<driver name="postgresql" module="org.postgresql">
-			<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
-			</driver>
+				<...>
+				<driver name="postgresql" module="org.postgresql">
+					<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
+				</driver>
+				<...>
 			</drivers>
-			<...>
+				<...>
 			</datasources>
 		</subsystem>
 
@@ -62,7 +63,7 @@ How to install test environment
 				<suffix value=".yyyy-MM-dd"/>
 				<append value="true"/>
 			</periodic-rotating-file-handler>
-		<...>
+			<...>
 			<logger category="org.smartcity" use-parent-handlers="false">
 				<level name="DEBUG"/>
 				<handlers>
@@ -85,7 +86,7 @@ How to install test environment
 				<suffix value=".yyyy-MM-dd"/>
 				<append value="true"/>
 			</periodic-rotating-file-handler>
-		<...>
+			<...>
 			<logger category="org.hibernate" use-parent-handlers="false">
 				<level name="INFO"/>
 				<handlers>
@@ -97,6 +98,6 @@ How to install test environment
 
 10. Create PostgreSQL database with commands
 
-		<createdb -u {user-name} smart-city-test>
-		<plsql -u {user-name} -d smart-city-test>
-		<\i path/to/smart-city-project/scripts/create.sql>
+		createdb -u {user-name} smart-city-test
+		plsql -u {user-name} -d smart-city-test
+		\i path/to/smart-city-project/scripts/create.sql
