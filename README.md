@@ -13,38 +13,38 @@ How to install test environment
 4. Create dir `$JBOSS_HOME/modules/org/postgresql/main`
 5. Copy `postgresql-9.1-901.jdbc4.jar` to `$JBOSS_HOME/modules/org/postgresql/main`
 6. Create `module.xml` with contents:
-<?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
-	<resources>
-		<resource-root path="postgresql-9.1-901.jdbc4.jar"/>
-	</resources>
-	<dependencies>
-		<module name="javax.api"/>
-		<module name="javax.transaction.api"/>
-		<module name="javax.servlet.api" optional="true"/>
-	</dependencies>
-</module>
-7. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
-<subsystem xmlns="urn:jboss:domain:datasources:1.0">
-<datasources>
-<...>
-<datasource jndi-name="java:jboss/datasources/SmartCityDataSourceTest" pool-name="smart-city-db-pool-test" enabled="true" use-java-context="true">
-<connection-url>jdbc:postgresql://localhost/smart-city-test</connection-url>
-<driver>postgresql</driver>
-<security>
-<user-name>${user-name}</user-name>
-<password>${password}</password>
-</security>
-</datasource>
-<drivers>
-<...>
-<driver name="postgresql" module="org.postgresql">
-<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
-</driver>
-</drivers>
-<...>
-</datasources>
-</subsystem>
+		<?xml version="1.0" encoding="UTF-8"?>
+		<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
+			<resources>
+				<resource-root path="postgresql-9.1-901.jdbc4.jar"/>
+			</resources>
+			<dependencies>
+				<module name="javax.api"/>
+				<module name="javax.transaction.api"/>
+				<module name="javax.servlet.api" optional="true"/>
+			</dependencies>
+		</module>
+		7. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+		<subsystem xmlns="urn:jboss:domain:datasources:1.0">
+		<datasources>
+		<...>
+		<datasource jndi-name="java:jboss/datasources/SmartCityDataSourceTest" pool-name="smart-city-db-pool-test" enabled="true" use-java-context="true">
+		<connection-url>jdbc:postgresql://localhost/smart-city-test</connection-url>
+		<driver>postgresql</driver>
+		<security>
+		<user-name>${user-name}</user-name>
+		<password>${password}</password>
+		</security>
+		</datasource>
+		<drivers>
+		<...>
+		<driver name="postgresql" module="org.postgresql">
+		<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
+		</driver>
+		</drivers>
+		<...>
+		</datasources>
+		</subsystem>
 8. For configure logging add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 <subsystem xmlns="urn:jboss:domain:logging:1.1">
 <...>
