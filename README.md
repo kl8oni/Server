@@ -13,6 +13,7 @@ How to install test environment
 4. Create dir `$JBOSS_HOME/modules/org/postgresql/main`
 5. Copy `postgresql-9.1-901.jdbc4.jar` to `$JBOSS_HOME/modules/org/postgresql/main`
 6. Create `module.xml` with contents:
+
 		<?xml version="1.0" encoding="UTF-8"?>
 		<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
 			<resources>
@@ -24,69 +25,78 @@ How to install test environment
 				<module name="javax.servlet.api" optional="true"/>
 			</dependencies>
 		</module>
-		7. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+
+7. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+
 		<subsystem xmlns="urn:jboss:domain:datasources:1.0">
-		<datasources>
-		<...>
-		<datasource jndi-name="java:jboss/datasources/SmartCityDataSourceTest" pool-name="smart-city-db-pool-test" enabled="true" use-java-context="true">
-		<connection-url>jdbc:postgresql://localhost/smart-city-test</connection-url>
-		<driver>postgresql</driver>
-		<security>
-		<user-name>${user-name}</user-name>
-		<password>${password}</password>
-		</security>
-		</datasource>
-		<drivers>
-		<...>
-		<driver name="postgresql" module="org.postgresql">
-		<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
-		</driver>
-		</drivers>
-		<...>
-		</datasources>
+			<datasources>
+			<...>
+				<datasource jndi-name="java:jboss/datasources/SmartCityDataSourceTest" pool-name="smart-city-db-pool-test" enabled="true" use-java-context="true">
+					<connection-url>jdbc:postgresql://localhost/smart-city-test</connection-url>
+					<driver>postgresql</driver>
+					<security>
+						<user-name>${user-name}</user-name>
+						<password>${password}</password>
+					</security>
+				</datasource>
+			<...>
+			<drivers>
+			<...>
+			<driver name="postgresql" module="org.postgresql">
+			<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
+			</driver>
+			</drivers>
+			<...>
+			</datasources>
 		</subsystem>
+
 8. For configure logging add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
-<subsystem xmlns="urn:jboss:domain:logging:1.1">
-<...>
-<periodic-rotating-file-handler name="SMART-CITY-LOG">
-<formatter>
-<pattern-formatter pattern="%d{HH:mm:ss,SSS} [%c.%M] %s%E%n"/>
-</formatter>
-<file relative-to="jboss.server.log.dir" path="smart-city.log"/>
-<suffix value=".yyyy-MM-dd"/>
-<append value="true"/>
-</periodic-rotating-file-handler>
-<...>
-<logger category="org.smartcity" use-parent-handlers="false">
-<level name="DEBUG"/>
-<handlers>
-<handler name="SMART-CITY-LOG"/>
-</handlers>
-</logger>
-<...>
-</subsystem>
+
+		<subsystem xmlns="urn:jboss:domain:logging:1.1">
+		<...>
+			<periodic-rotating-file-handler name="SMART-CITY-LOG">
+				<formatter>
+					<pattern-formatter pattern="%d{HH:mm:ss,SSS} [%c.%M] %s%E%n"/>
+				</formatter>
+				<file relative-to="jboss.server.log.dir" path="smart-city.log"/>
+				<suffix value=".yyyy-MM-dd"/>
+				<append value="true"/>
+			</periodic-rotating-file-handler>
+		<...>
+			<logger category="org.smartcity" use-parent-handlers="false">
+				<level name="DEBUG"/>
+				<handlers>
+					<handler name="SMART-CITY-LOG"/>
+				</handlers>
+			</logger>
+		<...>
+		</subsystem>
+
 9. (Optional) For configure logging hibernate framework in file add to
 `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
-<subsystem xmlns="urn:jboss:domain:logging:1.1">
-<...>
-<periodic-rotating-file-handler name="HIBERNATE-LOG">
-<formatter>
-<pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] %s%E%n"/>
-</formatter>
-<file relative-to="jboss.server.log.dir" path="hibernate.log"/>
-<suffix value=".yyyy-MM-dd"/>
-<append value="true"/>
-</periodic-rotating-file-handler>
-<...>
-<logger category="org.hibernate" use-parent-handlers="false">
-<level name="INFO"/>
-<handlers>
-<handler name="HIBERNATE-LOG"/>
-</handlers>
-</logger>
-<...>
-</subsystem>
+
+		<subsystem xmlns="urn:jboss:domain:logging:1.1">
+		<...>
+			<periodic-rotating-file-handler name="HIBERNATE-LOG">
+				<formatter>
+					<pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] %s%E%n"/>
+				</formatter>
+				<file relative-to="jboss.server.log.dir" path="hibernate.log"/>
+				<suffix value=".yyyy-MM-dd"/>
+				<append value="true"/>
+			</periodic-rotating-file-handler>
+		<...>
+			<logger category="org.hibernate" use-parent-handlers="false">
+				<level name="INFO"/>
+				<handlers>
+					<handler name="HIBERNATE-LOG"/>
+				</handlers>
+			</logger>
+		<...>
+		</subsystem>
+
 10. Create PostgreSQL database with commands
-<createdb -u {user-name} smart-city-test>
-<plsql -u {user-name} -d smart-city-test>
-<\i path/to/smart-city-project/scripts/create.sql>
+
+		<createdb -u {user-name} smart-city-test>
+		<plsql -u {user-name} -d smart-city-test>
+		<\i path/to/smart-city-project/scripts/create.sql>
