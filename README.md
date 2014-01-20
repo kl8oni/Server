@@ -40,13 +40,13 @@ How to install test environment
 					</security>
 				</datasource>
 				<...>
-			<drivers>
-				<...>
-				<driver name="postgresql" module="org.postgresql">
-					<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
-				</driver>
-				<...>
-			</drivers>
+				<drivers>
+					<...>
+					<driver name="postgresql" module="org.postgresql">
+						<xa-datasource-class>org.postgresql.ds.PGPoolingDataSource</xa-datasource-class>
+					</driver>
+					<...>
+				</drivers>
 				<...>
 			</datasources>
 		</subsystem>
