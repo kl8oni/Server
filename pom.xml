@@ -9,7 +9,9 @@
 		<hibernate.version>4.0.1.Final</hibernate.version>
 		<arquillian.version>1.1.2.Final</arquillian.version>
 		<shrinkwrap.version>1.2.0</shrinkwrap.version>
+		<shrinkwrap-resolver.version>2.0.0</shrinkwrap-resolver.version>
 		<jboss.version>7.1.1.Final</jboss.version>
+		<ehcache.version>2.6.6</ehcache.version>
 	</properties>
 
 	<groupId>Server</groupId>
@@ -40,49 +42,10 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>glassfish-container-test</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.jboss.arquillian.container</groupId>
-					<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-					<version>1.0.0.CR4</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.glassfish.main.extras</groupId>
-					<artifactId>glassfish-embedded-all</artifactId>
-					<version>3.1.2</version>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>jboss-container-test</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.jboss.spec</groupId>
-					<artifactId>jboss-javaee-6.0</artifactId>
-					<version>1.0.0.Final</version>
-					<type>pom</type>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.jboss.as</groupId>
-					<artifactId>jboss-as-arquillian-container-remote</artifactId>
-					<version>${jboss.version}</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.jboss.arquillian.protocol</groupId>
-					<artifactId>arquillian-protocol-servlet</artifactId>
-					<version>${arquillian.version}</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+
+	<!--
+	 ~ Development dependencies
+	 -->
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -150,9 +113,9 @@
 			<version>0.8.3</version>
 		</dependency>
 		<dependency>
-			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-core</artifactId>
-			<version>5.1.2.FINAL</version>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.tilab.jade</groupId>
@@ -160,23 +123,49 @@
 			<version>4.3.1</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-6.0</artifactId>
-			<version>1.0.0.Final</version>
-			<type>pom</type>
-			<scope>provided</scope>
-		</dependency>
+		<!--
+		 ~ Test dependencies
+		-->
 		<dependency>
 			<groupId>org.jboss.arquillian</groupId>
 			<artifactId>arquillian-bom</artifactId>
 			<version>${arquillian.version}</version>
-			<scope>import</scope>
 			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap</groupId>
+			<artifactId>shrinkwrap-api</artifactId>
+			<version>${shrinkwrap.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xerces</artifactId>
+			<version>2.4.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.4.0</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
@@ -192,13 +181,26 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.shrinkwrap</groupId>
-			<artifactId>shrinkwrap-api</artifactId>
-			<version>${shrinkwrap.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap</groupId>
 			<artifactId>shrinkwrap-impl-base</artifactId>
 			<version>${shrinkwrap.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-api</artifactId>
+			<version>${shrinkwrap-resolver.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+			<version>${shrinkwrap-resolver.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-api-maven</artifactId>
+			<version>${shrinkwrap-resolver.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
