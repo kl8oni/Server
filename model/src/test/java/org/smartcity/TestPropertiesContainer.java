@@ -1,17 +1,21 @@
-package org.smartcity.entity.jpa;
+package org.smartcity;
 
 import org.apache.commons.collections4.keyvalue.DefaultMapEntry;
+import org.smartcity.entity.Address;
+import org.smartcity.entity.jpa.AddressEmbedded;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
-public final class TestPropertiesContainer
-		implements Iterable<Map.Entry<String, String>> {
+public final class TestPropertiesContainer {
 
 	public static final TestPropertiesContainer INSTANCE = new TestPropertiesContainer();
 
 	private Map<String, Map.Entry<String, String>> testProperties;
+	private List<Package> projectPackages;
 
 	private static final String TEST_HIBERNATE_CFG_XML_FILE_NAME          = "test-hibernate.cfg.xml";
 	private static final String TEST_PERSISTENCE_XML_FILE_NAME            = "test-persistence.xml";
@@ -28,9 +32,6 @@ public final class TestPropertiesContainer
 	public static final String PROXOOL_CONFIG_FILE                    = "proxool.config.file";
 	public static final String JBOSS_DEPLOYMENT_STRUCTURE_CONFIG_FILE = "jboss.deployment.config.file";
 
-	public static final String JPA_PACKAGE_NAME = "org.smartcity.entity.jpa";
-	public static final String ENTITY_PACKAGE_NAME = "org.smartcity.entity";
-
 	private TestPropertiesContainer() {
 		testProperties = new HashMap<>();
 		testProperties.put( HIBERNATE_CONFIG_FILE, new DefaultMapEntry<>( TEST_HIBERNATE_CFG_XML_FILE_NAME, DEPLOYED_HIBERNATE_CFG_XML_FILE_NAME ) );
@@ -38,6 +39,10 @@ public final class TestPropertiesContainer
 		testProperties.put( PROXOOL_CONFIG_FILE, new DefaultMapEntry<>( TEST_PROXOOL_PROPERTIES_FILE_NAME, DEPLOYED_PROXOOL_PROPERTIES_FILE_NAME ) );
 		testProperties.put( JBOSS_DEPLOYMENT_STRUCTURE_CONFIG_FILE, new DefaultMapEntry<>( TEST_JBOSS_DEPLOYMENT_STRUCTURE_FILE_NAME,
 																						 DEPLOYED_JBOSS_DEPLOYMENT_STRUCTURE_FILE_NAME ) );
+		projectPackages = new ArrayList<>();
+		projectPackages.add( getClass().getPackage() );
+		projectPackages.add( Address.class.getPackage() );
+		projectPackages.add( AddressEmbedded.class.getPackage() );
 	}
 
 	public Map.Entry<String, String> getFilesName( String property ) {
@@ -52,8 +57,12 @@ public final class TestPropertiesContainer
 		return testProperties.get( property ).getValue();
 	}
 
-	@Override
-	public Iterator<Map.Entry<String, String>> iterator() {
+	public Iterator<Map.Entry<String, String>> iteratorProperties() {
 		return testProperties.values().iterator();
 	}
+
+	public Iterator<Package> iteratorPackages() {
+		return projectPackages.iterator();
+	}
+
 }
