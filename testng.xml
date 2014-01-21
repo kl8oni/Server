@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="production" thread-count="5">
+	<packages>
+		<package name="org.smartcity">
+			<include name="org.smartcity.entity"/>
+		</package>
+	</packages>
+	<test name="functional" enabled="true">
+		<groups>
+			<define name="configuration"/>
+			<run>
+				<include name="configuration"/>
+			</run>
+		</groups>
+		<packages>
+			<package name="org.smartcity">
+				<include name="org.smartcity.entity"/>
+			</package>
+		</packages>
+	</test>
+</suite>
