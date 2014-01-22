@@ -21,8 +21,7 @@ import java.io.IOException;
 
 import java.util.Properties;
 
-public class ConfigurationTest
-		extends		BuildDeployment {
+public class ConfigurationTest {
 
 	private DocumentBuilder documentBuilder;
 
@@ -43,15 +42,15 @@ public class ConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testJpaConfiguration()
 			throws IOException, SAXException {
-		Document persistenceXML = documentBuilder.parse( "/META-INF/deploy-persistence.xml" );
-		Document testPersistenceXML = documentBuilder.parse( "/META-INF/deploy-test-persistence.xml" );
+		Document persistenceXML = documentBuilder.parse( "./src/main/resources/persistence.xml" );
+		Document testPersistenceXML = documentBuilder.parse( "./src/test/resources/test-persistence.xml" );
 		Diff diff = new Diff( testPersistenceXML, persistenceXML );
 		Assert.assertTrue( diff.similar() );
 	}
@@ -60,15 +59,15 @@ public class ConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testHibernateConfiguration()
 			throws IOException, SAXException {
-		Document hibernateXML = documentBuilder.parse( "/META-INF/deploy-hibernate.cfg.xml" );
-		Document testHibernateXML = documentBuilder.parse( "/META-INF/deploy-test-hibernate.cfg.xml" );
+		Document hibernateXML = documentBuilder.parse( "./src/main/resources/hibernate.cfg.xml" );
+		Document testHibernateXML = documentBuilder.parse( "./src/test/resources/test-hibernate.cfg.xml" );
 		Diff diff = new Diff( testHibernateXML, hibernateXML );
 		Assert.assertTrue( diff.similar() );
 	}
@@ -77,17 +76,17 @@ public class ConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testProxoolConfiguration()
 			throws IOException {
 		Properties proxool = new Properties();
-		proxool.load( new FileReader( "/META-INF/deploy-proxool.properties" ) );
+		proxool.load( new FileReader( "./src/main/resources/proxool.properties" ) );
 		Properties testProxool = new Properties();
-		testProxool.load( new FileReader( "/META-INF/deploy-test-proxool.properties" ) );
+		testProxool.load( new FileReader( "./src/test/resources/test-proxool.properties" ) );
 		Assert.assertTrue( testProxool.equals( proxool ) );
 	}
 
@@ -95,15 +94,15 @@ public class ConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testJbossDeploymentStructureConfiguration()
 			throws IOException, SAXException {
-		Document jbossDeploymentStructure = documentBuilder.parse( "/META-INF/deploy-jboss-deploy-structure.xml" );
-		Document testJbossDeploymentStructure = documentBuilder.parse( "/META-iNF/deploy-test-jboss-deploy-structure.xml" );
+		Document jbossDeploymentStructure = documentBuilder.parse( "./src/main/resources/jboss-deployment-structure.xml" );
+		Document testJbossDeploymentStructure = documentBuilder.parse( "./src/test/resources/test-jboss-deployment-structure.xml" );
 		Diff diff = new Diff( testJbossDeploymentStructure, jbossDeploymentStructure );
 		Assert.assertTrue( diff.similar() );
 	}
@@ -112,15 +111,15 @@ public class ConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testEhcacheConfiguration()
 			throws IOException, SAXException {
-		Document ehcache = documentBuilder.parse( "/META-INF/deploy-ehcache.xml" );
-		Document testEhcache = documentBuilder.parse( "/META-INF/deploy-test-ehcache.xml" );
+		Document ehcache = documentBuilder.parse( "./src/main/resources/ehcache.xml" );
+		Document testEhcache = documentBuilder.parse( "./src/test/resources/test-ehcache.xml" );
 		Diff diff = new Diff( testEhcache, ehcache );
 		Assert.assertTrue( diff.similar() );
 	}
