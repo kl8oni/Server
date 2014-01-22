@@ -1,8 +1,0 @@
-<ehcache>
-	<cache name="sampleCache1"
-		   maxElementsInMemory="10000"
-		   eternal="false"
-		   timeToIdleSeconds="300"
-		   timeToLiveSeconds="600"
-		   overflowToDisk="true"/>
-</ehcache>

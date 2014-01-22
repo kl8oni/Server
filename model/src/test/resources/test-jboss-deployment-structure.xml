@@ -1,8 +1,0 @@
-<jboss-deployment-structure>
-	<sub-deployment name="build.jar">
-		<dependencies>
-			<module name="org.hibernate"/>
-			<module name="javaee.api"/>
-		</dependencies>
-	</sub-deployment>
-</jboss-deployment-structure>

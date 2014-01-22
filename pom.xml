@@ -49,12 +49,12 @@
 					<version>${jboss.version}</version>
 					<scope>test</scope>
 				</dependency>
-				<dependency>
+				<!--dependency>
 					<groupId>org.jboss.arquillian.protocol</groupId>
 					<artifactId>arquillian-protocol-servlet</artifactId>
 					<version>${arquillian.version}</version>
 					<scope>test</scope>
-				</dependency>
+				</dependency-->
 			</dependencies>
 		</profile>
 	</profiles>
@@ -64,14 +64,6 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
-				<configuration>
-					<!--
-					 ~ when create new test groups
-					 ~ add those groups to group list
-					 ~ comma separated
-					-->
-					<groups>configuration, entities</groups>
-				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -214,8 +206,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.arquillian.testng</groupId>
-			<artifactId>arquillian-testng-container</artifactId>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
 			<version>${arquillian.version}</version>
 			<scope>test</scope>
 		</dependency>
@@ -256,15 +248,15 @@
 		 ~ Dependencies for TestNG project
 		-->
 		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>5.14.6</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		<!--
 		 ~ Dependencies for XMLUnit project
 		-->
-		<dependency>
+		<!--dependency>
 			<groupId>xmlunit</groupId>
 			<artifactId>xmlunit</artifactId>
 			<version>1.5</version>
@@ -287,7 +279,7 @@
 			<artifactId>xalan</artifactId>
 			<version>2.7.1</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency-->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>

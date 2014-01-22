@@ -6,7 +6,7 @@
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="SmartCity" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:jboss/datasources/SmartCityDataSource</jta-data-source>
+		<jta-data-source>java:jboss/datasources/SmartCityDataSourceTest</jta-data-source>
 		<class>org.smartcity.entity.jpa.AddressEmbedded</class>
 		<class>org.smartcity.entity.jpa.BankAccountEntity</class>
 		<class>org.smartcity.entity.jpa.BankBranchEntity</class>
@@ -21,7 +21,7 @@
 		<properties>
 			<property name="hibernate.ejb.cfgfile" value="/META-INF/hibernate.cfg.xml"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/smart-city"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/smart-city-test"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
 			<property name="javax.persistence.jdbc.password" value="358962471"/>
 		</properties>
