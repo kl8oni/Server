@@ -7,7 +7,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.junit.Arquillian;
 
-//import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 
 import org.smartcity.UtilTestClass;
@@ -52,12 +51,7 @@ public class EntitiesTest {
 		return UtilTestClass.INSTANCE.createDeploymentArchive();
 	}
 
-	@Test/*(
-			groups = "entities",
-			suiteName = "production",
-			testName = "functional",
-			timeOut = UtilTestClass.DEFAULT_TEST_TIMEOUT
-	)               */
+	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -67,12 +61,7 @@ public class EntitiesTest {
 		em.flush();
 	}
 
-	@Test/*(
-			groups = "entities",
-			suiteName = "production",
-			testName = "functional",
-			timeOut = UtilTestClass.DEFAULT_TEST_TIMEOUT
-	)     */
+	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)

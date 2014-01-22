@@ -25,7 +25,7 @@ public class UtilTestClass {
 	}
 
 	public EnterpriseArchive createDeploymentArchive() {
-		EnterpriseArchive ear = ShrinkWrap.create( EnterpriseArchive.class );
+		EnterpriseArchive ear = ShrinkWrap.create( EnterpriseArchive.class, "Smart-City.ear" );
 		File[] libs = Maven.resolver()
 				.loadPomFromFile( "pom.xml" )
 				.importCompileAndRuntimeDependencies()
@@ -43,8 +43,6 @@ public class UtilTestClass {
 			build.addPackage( packageEntity );
 		}
 		ear.addAsModule( build );
-//		System.out.println( build.toString( true ) );
-//		TODO: find way how to add application.xml to EAR
 		ear.addAsResource( "application.xml", "application.xml" );
 		return ear;
 	}
