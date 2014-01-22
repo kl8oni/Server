@@ -21,7 +21,7 @@
 		<properties>
 			<property name="hibernate.ejb.cfgfile" value="/META-INF/hibernate.cfg.xml"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/smart-city-test"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/smart-city"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
 			<property name="javax.persistence.jdbc.password" value="358962471"/>
 		</properties>

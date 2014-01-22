@@ -31,8 +31,8 @@ How to install test environment
 		<subsystem xmlns="urn:jboss:domain:datasources:1.0">
 			<datasources>
 				<...>
-				<datasource jndi-name="java:jboss/datasources/SmartCityDataSourceTest" pool-name="smart-city-db-pool-test" enabled="true" use-java-context="true">
-					<connection-url>jdbc:postgresql://localhost/smart-city-test</connection-url>
+				<datasource jndi-name="java:jboss/datasources/SmartCityDataSource" pool-name="smart-city-db-pool" enabled="true" use-java-context="true">
+					<connection-url>jdbc:postgresql://localhost/smart-city</connection-url>
 					<driver>postgresql</driver>
 					<security>
 						<user-name>${user-name}</user-name>
@@ -98,6 +98,6 @@ How to install test environment
 
 10. Create PostgreSQL database with commands
 
-		createdb -u {user-name} smart-city-test
-		plsql -u {user-name} -d smart-city-test
+		createdb -u {user-name} smart-city
+		plsql -u {user-name} -d smart-city
 		\i path/to/smart-city-project/scripts/create.sql
