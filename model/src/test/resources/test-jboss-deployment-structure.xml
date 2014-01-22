@@ -5,4 +5,4 @@
 			<module name="javaee.api"/>
 		</dependencies>
 	</sub-deployment>
-</jboss-deployment-structure>  
+</jboss-deployment-structure>
