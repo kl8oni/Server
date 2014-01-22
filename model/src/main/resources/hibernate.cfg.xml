@@ -3,11 +3,17 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 
-	<session-factory>
-		<property name="connection.pool_size">20</property>
-		<property name="dialect">org.hibernate.dialect.PostgresPlusDialect</property>
-		<property name="cache.provider_class">org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider</property>
+	<session-factory name="smart-city">
+		<property name="hibernate.proxool.properties">/META-INF/proxool.properties</property>
+		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider</property>
 		<property name="hibernate.proxool.existing_pool">true</property>
+		<property name="hibernate.connection.pool_size">20</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+		<property name="connection.autocommit">false</property>
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.datasource">java:jboss/datasources/SmartCityDataSourceTest</property>
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">358962471</property>
 	</session-factory>
 	
 </hibernate-configuration>

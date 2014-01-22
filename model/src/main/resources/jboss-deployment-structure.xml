@@ -1,2 +1,10 @@
-<jboss-deployment-structure>
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.1"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+							xsi:schemaLocation="urn:jboss:deployment-structure:1.1
+		http://www.jboss.org/schema/jbossas/jboss-deployment-structure-1_1.xsd">
+	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+	<module name="model">
+		<module-alias name="model"/>
+	</module>
 </jboss-deployment-structure>

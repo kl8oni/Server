@@ -1,20 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="production" thread-count="5">
 	<packages>
 		<package name="org.smartcity">
 			<include name="org.smartcity.entity"/>
+			<include name="org.smartcity.entity.jpa"/>
 		</package>
 	</packages>
 	<test name="functional" enabled="true">
 		<groups>
 			<define name="configuration"/>
+			<define name="entities"/>
 			<run>
 				<include name="configuration"/>
+				<include name="entities"/>
 			</run>
 		</groups>
 		<packages>
 			<package name="org.smartcity">
 				<include name="org.smartcity.entity"/>
+				<include name="org.smartcity.entity.jpa"/>
 			</package>
 		</packages>
 	</test>
