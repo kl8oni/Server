@@ -9,10 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-
-import org.jboss.arquillian.testng.Arquillian;
-
+import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
@@ -20,25 +17,19 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 import org.smartcity.entity.Address;
 import org.smartcity.entity.jpa.AddressEmbedded;
-import org.testng.annotations.BeforeSuite;
 
-public class BuildDeployment
-		extends Arquillian {
+public class UtilTestClass {
 
 	public static final String PRODUCTION_DEPLOYMENT = "Production";
 
-	private static final BuildDeployment INSTANCE = new BuildDeployment();
+	public static final int DEFAULT_TEST_TIME = 10000;
 
-	protected BuildDeployment(){
+	public static final UtilTestClass INSTANCE = new UtilTestClass();
+
+	private UtilTestClass() {
 	}
 
-	@Deployment(
-			name = PRODUCTION_DEPLOYMENT
-	)
-	@BeforeSuite(
-			groups = "configuration"
-	)
-	public static EnterpriseArchive createDeploymentArchive() {
+	public EnterpriseArchive createDeploymentArchive() {
 		EnterpriseArchive ear = ShrinkWrap.create( EnterpriseArchive.class );
 		File[] libs = Maven.resolver()
 				.loadPomFromFile( "pom.xml" )
@@ -46,26 +37,25 @@ public class BuildDeployment
 				.resolve()
 				.withTransitivity()
 				.asFile();
-		ear.addAsLibraries( libs );
-		JavaArchive build = ShrinkWrap.create( JavaArchive.class );
+		ear.addAsModules( libs );
 		for ( Map.Entry<String, String> configFile : INSTANCE.getConfigFiles().entrySet() ) {
-			build.addAsManifestResource( configFile.getKey(), configFile.getValue() );
+			ear.addAsManifestResource( configFile.getKey(), ArchivePaths.create( configFile.getValue() ) );
 		}
 		for ( Map.Entry<String, Collection<String>> deployFiles : INSTANCE.getConfigFilesForTest().entrySet() ) {
 			String fileType = deployFiles.getKey();
 			Collection<String> files = deployFiles.getValue();
 			for ( String file : files ) {
-				build.addAsManifestResource( INSTANCE.buildConfigurationFile( fileType, file ),
-											 DEPLOY_FILE_PREFIX + file );
+				ear.addAsManifestResource( INSTANCE.buildConfigurationFile( fileType, file ),
+										   ArchivePaths.create( DEPLOY_FILE_PREFIX + file ) );
 			}
 		}
 		Iterator<Package> iteratorPackages = INSTANCE.iteratorPackages();
+		JavaArchive build = ShrinkWrap.create( JavaArchive.class, "build.jar" );
 		while ( iteratorPackages.hasNext() ) {
 			Package packageEntity = iteratorPackages.next();
-			System.out.println( packageEntity );
 			build.addPackage( packageEntity );
 		}
-		System.out.println( ear.toString( true ) );
+		ear.addAsModule( build );
 		return ear;
 	}
 

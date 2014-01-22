@@ -1,14 +1,8 @@
 <jboss-deployment-structure>
-	<deployment>
-		<exclusions>
-			<module name="org.apache.log4j"/>
-			<module name="org.apache.commons.logging"/>
-		</exclusions>
-	</deployment>
-	<sub-deployment name="a.war">
-		<exclusions>
-			<module name="org.apache.log4j"/>
-			<module name="org.apache.commons.logging"/>
-		</exclusions>
+	<sub-deployment name="build.jar">
+		<dependencies>
+			<module name="org.hibernate"/>
+			<module name="javaee.api"/>
+		</dependencies>
 	</sub-deployment>
 </jboss-deployment-structure>

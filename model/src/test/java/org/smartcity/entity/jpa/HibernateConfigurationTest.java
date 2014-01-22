@@ -16,21 +16,31 @@ import org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider
 import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.service.spi.ServiceRegistryImplementor;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
+import org.jboss.arquillian.testng.Arquillian;
 
-import org.smartcity.BuildDeployment;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 
+import org.smartcity.UtilTestClass;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class HibernateConfigurationTest
-		extends		BuildDeployment {
+		extends Arquillian {
 
 	private Configuration   configuration;
 	private ServiceRegistry serviceRegistry;
 
-	@BeforeClass(
+	@Deployment(
+			name = UtilTestClass.PRODUCTION_DEPLOYMENT
+	)
+	public static EnterpriseArchive createDeploymentArchive() {
+		return UtilTestClass.INSTANCE.createDeploymentArchive();
+	}
+
+	@BeforeTest(
 			groups = "configuration"
 	)
 	public void beforeTest() {
@@ -44,10 +54,10 @@ public class HibernateConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testCreateHibernateSessionFactory() {
 		SessionFactory factory = configuration.buildSessionFactory( serviceRegistry );
@@ -58,10 +68,10 @@ public class HibernateConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testHibernateConnectionProvider() {
 		ConnectionProviderInitiator initiator = ConnectionProviderInitiator.INSTANCE;
@@ -75,10 +85,10 @@ public class HibernateConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testHibernateSecondLevelCacheProvider() {
 		SessionFactory factory = configuration.buildSessionFactory( serviceRegistry );
@@ -91,10 +101,10 @@ public class HibernateConfigurationTest
 			groups = "configuration",
 			suiteName = "production",
 			testName = "functional",
-			timeOut = 1000
+			timeOut = UtilTestClass.DEFAULT_TEST_TIME
 	)
 	@OperateOnDeployment(
-			value = BuildDeployment.PRODUCTION_DEPLOYMENT
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public void testHibernateDialect() {
 		SessionFactory factory = configuration.buildSessionFactory( serviceRegistry );
