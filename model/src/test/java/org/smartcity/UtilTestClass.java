@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.jboss.arquillian.junit.Arquillian;
+
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
@@ -18,11 +20,14 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.smartcity.entity.Address;
 import org.smartcity.entity.jpa.AddressEmbedded;
 
+import org.junit.runner.RunWith;
+
+@RunWith(
+		value = Arquillian.class
+)
 public class UtilTestClass {
 
 	public static final String PRODUCTION_DEPLOYMENT = "Production";
-
-	public static final int DEFAULT_TEST_TIME = 10000;
 
 	public static final UtilTestClass INSTANCE = new UtilTestClass();
 

@@ -7,8 +7,11 @@
 	<defaultProtocol type="Servlet 3.0"/>
 	<container qualifier="jbossas-remote" default="true">
 		<configuration>
+			<property name="jbossHome">${ENV.JBOSS_HOME}</property>
 			<property name="username">smartcity</property>
 			<property name="password">jbosssmartcity</property>
+			<property name="managementAddress">127.0.0.1</property>
+			<property name="managementPort">9999</property>
 		</configuration>
 	</container>
 

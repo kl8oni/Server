@@ -26,19 +26,41 @@
 		<module>view</module>
 	</modules>
 
+	<profiles>
+		<profile>
+			<id>jboss-container-test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.spec</groupId>
+					<artifactId>jboss-javaee-6.0</artifactId>
+					<version>1.0.0.Final</version>
+					<type>pom</type>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.as</groupId>
+					<artifactId>jboss-as-arquillian-container-remote</artifactId>
+					<version>${jboss.version}</version>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.arquillian.protocol</groupId>
+					<artifactId>arquillian-protocol-servlet</artifactId>
+					<version>${arquillian.version}</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
-				<configuration>
-					<!--
-					 ~ when create new test groups
-					 ~ add those groups to group list
-					 ~ comma separated
-					-->
-					<groups>configuration</groups>
-				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -55,6 +77,9 @@
 	 ~ Development dependencies
 	 -->
 	<dependencies>
+		<!--
+		 ~ Dependencies for apache projects start
+		-->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -80,6 +105,9 @@
 			<artifactId>commons-configuration</artifactId>
 			<version>1.6</version>
 		</dependency>
+		<!--
+		 ~ Dependencies for hibernate project
+		-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -105,11 +133,22 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
 		</dependency>
+		<!--
+		 ~ Dependencies for Java EE 6
+		-->
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
 			<version>1.1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+		</dependency>
+		<!--
+		 ~ Dependencies for JDBC
+		-->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -120,23 +159,27 @@
 			<artifactId>proxool</artifactId>
 			<version>0.8.3</version>
 		</dependency>
+		<!--
+		 ~ Dependencies for ehcache project
+		-->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
 			<version>${ehcache.version}</version>
 		</dependency>
+		<!--
+		 ~ Dependencies for multi-agents system
+		-->
 		<dependency>
 			<groupId>com.tilab.jade</groupId>
 			<artifactId>jade</artifactId>
 			<version>4.3.1</version>
 		</dependency>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>6.0</version>
-		</dependency>
 		<!--
 		 ~ Test dependencies
+		-->
+		<!--
+		 ~ Dependencies for arquillian project
 		-->
 		<dependency>
 			<groupId>org.jboss.arquillian</groupId>
@@ -146,17 +189,56 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<version>${arquillian.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!--
+		 ~ Dependencies for shrinkwrap project
+		-->
+		<dependency>
 			<groupId>org.jboss.shrinkwrap</groupId>
 			<artifactId>shrinkwrap-api</artifactId>
 			<version>${shrinkwrap.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>6.8.7</version>
+			<groupId>org.jboss.shrinkwrap</groupId>
+			<artifactId>shrinkwrap-impl-base</artifactId>
+			<version>${shrinkwrap.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-api</artifactId>
+			<version>${shrinkwrap-resolver.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+			<version>${shrinkwrap-resolver.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-api-maven</artifactId>
+			<version>${shrinkwrap-resolver.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!--
+		 ~ Dependencies for JUnit project
+		-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!--
+		 ~ Dependencies for XMLUnit project
+		-->
 		<dependency>
 			<groupId>xmlunit</groupId>
 			<artifactId>xmlunit</artifactId>
@@ -182,39 +264,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.arquillian.testng</groupId>
-			<artifactId>arquillian-testng-container</artifactId>
-			<version>${arquillian.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.6.4</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap</groupId>
-			<artifactId>shrinkwrap-impl-base</artifactId>
-			<version>${shrinkwrap.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap.resolver</groupId>
-			<artifactId>shrinkwrap-resolver-api</artifactId>
-			<version>${shrinkwrap-resolver.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap.resolver</groupId>
-			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-			<version>${shrinkwrap-resolver.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap.resolver</groupId>
-			<artifactId>shrinkwrap-resolver-api-maven</artifactId>
-			<version>${shrinkwrap-resolver.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

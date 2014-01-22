@@ -18,17 +18,21 @@ import org.hibernate.service.spi.ServiceRegistryImplementor;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
-import org.jboss.arquillian.testng.Arquillian;
+import org.jboss.arquillian.junit.Arquillian;
 
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 
 import org.smartcity.UtilTestClass;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
-public class HibernateConfigurationTest
-		extends Arquillian {
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(
+		value = Arquillian.class
+)
+public class HibernateConfigurationTest {
 
 	private Configuration   configuration;
 	private ServiceRegistry serviceRegistry;
@@ -40,9 +44,7 @@ public class HibernateConfigurationTest
 		return UtilTestClass.INSTANCE.createDeploymentArchive();
 	}
 
-	@BeforeTest(
-			groups = "configuration"
-	)
+	@Before
 	public void beforeTest() {
 		configuration = new Configuration().configure( "/hibernate.cfg.xml" );
 		serviceRegistry = new ServiceRegistryBuilder()
@@ -50,12 +52,7 @@ public class HibernateConfigurationTest
 				.buildServiceRegistry();
 	}
 
-	@Test(
-			groups = "configuration",
-			suiteName = "production",
-			testName = "functional",
-			timeOut = UtilTestClass.DEFAULT_TEST_TIME
-	)
+	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -64,12 +61,7 @@ public class HibernateConfigurationTest
 		Assert.assertNotNull( factory );
 	}
 
-	@Test(
-			groups = "configuration",
-			suiteName = "production",
-			testName = "functional",
-			timeOut = UtilTestClass.DEFAULT_TEST_TIME
-	)
+	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -81,12 +73,7 @@ public class HibernateConfigurationTest
 		Assert.assertEquals( ProxoolConnectionProvider.class, provider.getClass() );
 	}
 
-	@Test(
-			groups = "configuration",
-			suiteName = "production",
-			testName = "functional",
-			timeOut = UtilTestClass.DEFAULT_TEST_TIME
-	)
+	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -97,12 +84,7 @@ public class HibernateConfigurationTest
 		Assert.assertEquals( EhCacheRegionFactory.class, regionFactory.getClass() );
 	}
 
-	@Test(
-			groups = "configuration",
-			suiteName = "production",
-			testName = "functional",
-			timeOut = UtilTestClass.DEFAULT_TEST_TIME
-	)
+	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
