@@ -46,7 +46,7 @@ public class HibernateConfigurationTest {
 
 	@Before
 	public void beforeTest() {
-		configuration = new Configuration().configure( "/META-INF/hibernate.cfg.xml" );
+		configuration = new Configuration().configure( "/hibernate.cfg.xml" );
 		serviceRegistry = new ServiceRegistryBuilder()
 				.applySettings( configuration.getProperties() )
 				.buildServiceRegistry();
