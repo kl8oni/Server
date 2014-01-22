@@ -9,8 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.jboss.arquillian.junit.Arquillian;
-
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
@@ -20,14 +18,11 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.smartcity.entity.Address;
 import org.smartcity.entity.jpa.AddressEmbedded;
 
-import org.junit.runner.RunWith;
-
-@RunWith(
-		value = Arquillian.class
-)
 public class UtilTestClass {
 
 	public static final String PRODUCTION_DEPLOYMENT = "Production";
+
+	public static final int DEFAULT_TEST_TIMEOUT = 10000;
 
 	public static final UtilTestClass INSTANCE = new UtilTestClass();
 
@@ -42,19 +37,19 @@ public class UtilTestClass {
 				.resolve()
 				.withTransitivity()
 				.asFile();
-		ear.addAsModules( libs );
-		for ( Map.Entry<String, String> configFile : INSTANCE.getConfigFiles().entrySet() ) {
+		ear.addAsLibraries( libs );
+		for ( Map.Entry<String, String> configFile : getConfigFiles().entrySet() ) {
 			ear.addAsManifestResource( configFile.getKey(), ArchivePaths.create( configFile.getValue() ) );
 		}
-		for ( Map.Entry<String, Collection<String>> deployFiles : INSTANCE.getConfigFilesForTest().entrySet() ) {
+		for ( Map.Entry<String, Collection<String>> deployFiles : getConfigFilesForTest().entrySet() ) {
 			String fileType = deployFiles.getKey();
 			Collection<String> files = deployFiles.getValue();
 			for ( String file : files ) {
-				ear.addAsManifestResource( INSTANCE.buildConfigurationFile( fileType, file ),
+				ear.addAsManifestResource( buildConfigurationFile( fileType, file ),
 										   ArchivePaths.create( DEPLOY_FILE_PREFIX + file ) );
 			}
 		}
-		Iterator<Package> iteratorPackages = INSTANCE.iteratorPackages();
+		Iterator<Package> iteratorPackages = iteratorPackages();
 		JavaArchive build = ShrinkWrap.create( JavaArchive.class, "build.jar" );
 		while ( iteratorPackages.hasNext() ) {
 			Package packageEntity = iteratorPackages.next();

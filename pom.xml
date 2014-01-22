@@ -12,6 +12,9 @@
 		<shrinkwrap-resolver.version>2.0.0</shrinkwrap-resolver.version>
 		<jboss.version>7.1.1.Final</jboss.version>
 		<ehcache.version>2.6.6</ehcache.version>
+		<version.ear.plugin>2.8</version.ear.plugin>
+		<version.ejb.plugin>2.3</version.ejb.plugin>
+		<version.war.plugin>2.1.1</version.war.plugin>
 	</properties>
 
 	<groupId>Server</groupId>
@@ -61,13 +64,35 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
+				<configuration>
+					<!--
+					 ~ when create new test groups
+					 ~ add those groups to group list
+					 ~ comma separated
+					-->
+					<groups>configuration, entities</groups>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${version.ear.plugin}</version>
+				<configuration>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<module>model</module>
+						<module>view</module>
+						<module>controller</module>
+					</modules>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -189,8 +214,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-container</artifactId>
+			<groupId>org.jboss.arquillian.testng</groupId>
+			<artifactId>arquillian-testng-container</artifactId>
 			<version>${arquillian.version}</version>
 			<scope>test</scope>
 		</dependency>
@@ -228,12 +253,12 @@
 			<scope>test</scope>
 		</dependency>
 		<!--
-		 ~ Dependencies for JUnit project
+		 ~ Dependencies for TestNG project
 		-->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>5.14.6</version>
 			<scope>test</scope>
 		</dependency>
 		<!--

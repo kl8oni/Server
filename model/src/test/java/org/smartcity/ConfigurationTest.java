@@ -9,14 +9,13 @@ import org.custommonkey.xmlunit.XMLUnit;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.testng.Arquillian;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.Assert;
-import org.junit.runner.RunWith;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.Archive;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -26,21 +25,21 @@ import java.io.IOException;
 
 import java.util.Properties;
 
-@RunWith(
-		value = Arquillian.class
-)
-public class ConfigurationTest {
+public class ConfigurationTest
+		extends		Arquillian {
 
 	private DocumentBuilder documentBuilder;
 
 	@Deployment(
 			name = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public static EnterpriseArchive createDeploymentArchive() {
+	public static Archive<?> createDeploymentArchive() {
 		return UtilTestClass.INSTANCE.createDeploymentArchive();
 	}
 
-	@Before
+	@BeforeTest(
+			groups = "configuration"
+	)
 	public void configurationTest()
 			throws ParserConfigurationException {
 		XMLUnit.setControlParser( "org.apache.xerces.jaxp.DocumentBuilderFactoryImpl" );
@@ -51,7 +50,12 @@ public class ConfigurationTest {
 		documentBuilder = documentBuilderFactory.newDocumentBuilder();
 	}
 
-	@Test
+	@Test(
+			groups = "configuration",
+			suiteName = "production",
+			testName = "functional",
+			timeOut = UtilTestClass.DEFAULT_TEST_TIMEOUT
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -63,7 +67,12 @@ public class ConfigurationTest {
 		Assert.assertTrue( diff.similar() );
 	}
 
-	@Test
+	@Test(
+			groups = "configuration",
+			suiteName = "production",
+			testName = "functional",
+			timeOut = UtilTestClass.DEFAULT_TEST_TIMEOUT
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -75,7 +84,12 @@ public class ConfigurationTest {
 		Assert.assertTrue( diff.similar() );
 	}
 
-	@Test
+	@Test(
+			groups = "configuration",
+			suiteName = "production",
+			testName = "functional",
+			timeOut = UtilTestClass.DEFAULT_TEST_TIMEOUT
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -88,7 +102,12 @@ public class ConfigurationTest {
 		Assert.assertTrue( testProxool.equals( proxool ) );
 	}
 
-	@Test
+	@Test(
+			groups = "configuration",
+			suiteName = "production",
+			testName = "functional",
+			timeOut = UtilTestClass.DEFAULT_TEST_TIMEOUT
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -100,7 +119,12 @@ public class ConfigurationTest {
 		Assert.assertTrue( diff.similar() );
 	}
 
-	@Test
+	@Test(
+			groups = "configuration",
+			suiteName = "production",
+			testName = "functional",
+			timeOut = UtilTestClass.DEFAULT_TEST_TIMEOUT
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
