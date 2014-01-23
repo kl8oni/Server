@@ -11,7 +11,7 @@
 		<shrinkwrap.version>1.2.0</shrinkwrap.version>
 		<shrinkwrap-resolver.version>2.0.0</shrinkwrap-resolver.version>
 		<jboss.version>7.1.1.Final</jboss.version>
-		<ehcache.version>2.8.0</ehcache.version>
+		<ehcache.version>2.4.3</ehcache.version>
 		<version.ear.plugin>2.8</version.ear.plugin>
 		<version.ejb.plugin>2.3</version.ejb.plugin>
 		<version.war.plugin>2.1.1</version.war.plugin>
@@ -195,6 +195,10 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
 		</dependency>
+
+		<!--
+		 ~  Dependencies for Proxool database connection pool
+		 -->
 		<dependency>
 			<groupId>proxool</groupId>
 			<artifactId>proxool</artifactId>
@@ -206,7 +210,7 @@
 		 -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
+			<artifactId>ehcache-core</artifactId>
 			<version>${ehcache.version}</version>
 		</dependency>
 
@@ -286,7 +290,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.4</version>
+			<version>1.6.1</version>
 			<scope>test</scope>
 		</dependency>
 
