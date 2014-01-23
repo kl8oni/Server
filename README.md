@@ -26,7 +26,23 @@ How to install test environment
 			</dependencies>
 		</module>
 
-7. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+7. Add to Jboss new module for Proxool database pool
+8. Create dir `$JBOSS_HOME/modules/org/proxool/main`
+9. Copy `proxool-0.8.3.jar` to `$JBOSS_HOME/modules/org/proxool/main`
+
+		<?xml version="1.0" encoding="UTF-8"?>
+		<module xmlns="urn:jboss:module:1.1" name="org.proxool">
+			<resources>
+				<resource-root path="proxool-0.8.3.jar"/>
+			</resources>
+			<dependencies>
+				<module name="javax.api"/>
+				<module name="javax.transaction.api"/>
+				<module name="javax.servlet.api" optional="true"/>
+			</dependencies>
+		</module>
+
+10. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
 		<subsystem xmlns="urn:jboss:domain:datasources:1.0">
 			<datasources>
@@ -96,7 +112,17 @@ How to install test environment
 		<...>
 		</subsystem>
 
-10. Create PostgreSQL database with commands
+10. Add dom4j as a global module.
+
+		<subsystem xmlns="urn:jboss:domain:ee:1.1">
+		<...>
+			<global-modules>
+				<module name="org.dom4j" slot="main"/>
+			</global-modules>
+		<...>
+		</subsystem>
+
+11. Create PostgreSQL database with commands
 
 		createdb -U {user-name} smart-city
 		plsql -U {user-name} -d smart-city
