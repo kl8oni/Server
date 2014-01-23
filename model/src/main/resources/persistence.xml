@@ -6,7 +6,7 @@
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="SmartCity" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:jboss/datasources/SmartCityDataSourceTest</jta-data-source>
+		<jta-data-source>java:jboss/datasources/SmartCityDataSource</jta-data-source>
 		<class>org.smartcity.entity.jpa.AddressEmbedded</class>
 		<class>org.smartcity.entity.jpa.BankAccountEntity</class>
 		<class>org.smartcity.entity.jpa.BankBranchEntity</class>
