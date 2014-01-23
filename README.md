@@ -35,16 +35,28 @@ How to install test environment
 
 11. Add to Jboss new module Ehcache
 12. Create dir `$JBOSS_HOME/modules/net/sf/ehcache/main`
-13. Copy `ehcache-2.8.0.jar` to `$JBOSS_HOME/modules/net/sf/ehcache/main`
+13. Copy `ehcache-core-2.4.3.jar` and `ehcache-terracotta-2.4.3.jar` to `$JBOSS_HOME/modules/net/sf/ehcache/main`
 14. Create `module.xml` with contents:
 
 		<?xml version="1.0" encoding="UTF-8"?>
 		<module xmlns="urn:jboss:module:1.1" name="net.sf.ehcache">
 			<resources>
-				<resource-root path="ehcache-2.8.0.jar"/>
+				<resource-root path="ehcache-core-2.4.3.jar"/>
+				<resource-root path="ehcache-terracotta-2.4.3.jar"/>
 			</resources>
 			<dependencies>
 				<module name="org.slf4j"/>
+				<module name="javax.api"/>
+				<module name="com.sun.xml.bind"/>
+				<module name="javax.xml.bind.api"/>
+				<module name="org.jaxen"/>
+				<module name="javax.transaction.api"/>
+				<system export="true">
+					<paths>
+						<path name="org/xml/sax"/>
+						<path name="org/xml/sax/helpers"/>
+					</paths>
+				</system>
 			</dependencies>
 		</module>
 
