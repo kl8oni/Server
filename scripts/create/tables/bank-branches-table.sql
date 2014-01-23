@@ -4,7 +4,7 @@ create table BANK_BRANCHES (
 	STATE            varchar(50)    not null,
 	CITY             varchar(50)    not null,
 	STREET           varchar(50)    not null,
-	BUILDING_NUMBER  numeric(3, 0)  not null,
+	BUILDING_NUMBER  smallint       not null,
 	TELEPHONE_NUMBER varchar(20)    not null,
 	BANK_ID          numeric(20, 0) not null,
 

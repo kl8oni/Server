@@ -23,9 +23,9 @@ public interface Address<A extends Address,
 
 	public A setStreet( String street );
 
-	public short getBuildingNumber();
+	public Short getBuildingNumber();
 
-	public A setBuildingNumber( short buildingNumber );
+	public A setBuildingNumber( Short buildingNumber );
 
 	public TN getTelephoneNumber();
 

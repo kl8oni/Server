@@ -21,9 +21,9 @@ public interface BankAccount<BA extends BankAccount,
 
 	public BigInteger getID();
 
-	public long getBankAccountNumber();
+	public Long getBankAccountNumber();
 
-	public BA setBankAccountNumber( long bankAccountNumber );
+	public BA setBankAccountNumber( Long bankAccountNumber );
 
 	public U getBankAccountOwner();
 

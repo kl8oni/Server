@@ -34,9 +34,9 @@ public interface Document<D extends Document,
 
 	public D setSeries( String series );
 
-	public long getNumber();
+	public Long getNumber();
 
-	public D setNumber( long number );
+	public D setNumber( Long number );
 
 	public Date getDeliveryDate();
 

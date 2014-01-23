@@ -46,7 +46,7 @@ public class AddressEmbedded
 			name = Address.BUILDING_NUMBER_COLUMN_NAME,
 			nullable = false
 	)
-	private short                   buildingNumber;
+	private Short                   buildingNumber;
 	@Embedded
 	private TelephoneNumberEmbedded telephoneNumber;
 
@@ -58,7 +58,7 @@ public class AddressEmbedded
 			String state,
 			String city,
 			String street,
-			short buildingNumber,
+			Short buildingNumber,
 			TelephoneNumberEmbedded telephoneNumber ) {
 		LOG.debug( "Constructor with parameters is invoked" );
 		setTelephoneNumber( telephoneNumber )
@@ -105,12 +105,12 @@ public class AddressEmbedded
 	}
 
 	@Override
-	public short getBuildingNumber() {
+	public Short getBuildingNumber() {
 		return buildingNumber;
 	}
 
 	@Override
-	public AddressEmbedded setBuildingNumber( short buildingNumber ) {
+	public AddressEmbedded setBuildingNumber( Short buildingNumber ) {
 		LOG.debug( "Building number is " + buildingNumber );
 		if ( buildingNumber < MIN_BUILDING_NUMBER
 				|| buildingNumber > MAX_BUILDING_NUMBER ) {
