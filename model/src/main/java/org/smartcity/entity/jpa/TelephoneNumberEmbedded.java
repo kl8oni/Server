@@ -34,20 +34,20 @@ public class TelephoneNumberEmbedded
 	private static final int    MAX_NUMBER                       = 9999999;
 
 	@Transient
-	private short         stateCode;
+	private Short   stateCode;
 	@Transient
-	private short         cityCode;
+	private Short   cityCode;
 	@Transient
-	private int           number;
+	private Integer number;
 	@Transient
-	private String        pattern;
+	private String  pattern;
 	@Transient
-	private boolean       regenerateTelephoneNumber;
+	private Boolean regenerateTelephoneNumber;
 	@Column(
 			name = TelephoneNumber.TELEPHONE_NUMBER_COLUMN_NAME,
 			nullable = false
 	)
-	private String        telephoneNumberValue;
+	private String  telephoneNumberValue;
 
 	public TelephoneNumberEmbedded() {
 		LOG.debug( "Empty constructor is invoked" );
@@ -67,7 +67,7 @@ public class TelephoneNumberEmbedded
 
 	private void generateTelephoneNumberValue() {
 		if( regenerateTelephoneNumber ) {
-			StringBuilder sb = (StringBuilder)FORMATTER.out();
+			StringBuilder sb = (StringBuilder) FORMATTER.out();
 			sb.delete( 0, sb.length() );
 			FORMATTER.format( Locale.getDefault(), pattern, stateCode, cityCode, number );
 			this.telephoneNumberValue = FORMATTER.out().toString();
@@ -88,10 +88,10 @@ public class TelephoneNumberEmbedded
 	}
 
 	@Override
-	public TelephoneNumberEmbedded setStateCode( short stateCode ) {
+	public TelephoneNumberEmbedded setStateCode( Short stateCode ) {
 		LOG.debug( "State code is " + stateCode );
-		if ( stateCode < MIN_STATE_CODE
-				|| stateCode > MAX_STATE_CODE ) {
+		if( stateCode < MIN_STATE_CODE
+			|| stateCode > MAX_STATE_CODE ) {
 			clearMessageBuilder();
 			MESSAGE_BUILDER.append( "State code is not in allowable bound. State code should be between " )
 					.append( MIN_STATE_CODE )
@@ -109,10 +109,10 @@ public class TelephoneNumberEmbedded
 	}
 
 	@Override
-	public TelephoneNumberEmbedded setCityCode( short cityCode ) {
+	public TelephoneNumberEmbedded setCityCode( Short cityCode ) {
 		LOG.debug( "City code is " + cityCode );
-		if ( cityCode < MIN_CITY_CODE
-				|| cityCode > MAX_CITY_CODE ) {
+		if( cityCode < MIN_CITY_CODE
+			|| cityCode > MAX_CITY_CODE ) {
 			clearMessageBuilder();
 			MESSAGE_BUILDER.append( "City code is not in allowable bound. State code should be between " )
 					.append( MIN_CITY_CODE )
@@ -130,10 +130,10 @@ public class TelephoneNumberEmbedded
 	}
 
 	@Override
-	public TelephoneNumberEmbedded setNumber( int number ) {
+	public TelephoneNumberEmbedded setNumber( Integer number ) {
 		LOG.debug( "Number is " + number );
-		if ( number < MIN_NUMBER
-			 || number > MAX_NUMBER ) {
+		if( number < MIN_NUMBER
+			|| number > MAX_NUMBER ) {
 			clearMessageBuilder();
 			MESSAGE_BUILDER.append( "Number is not in allowable bound. State code should be between " )
 					.append( MIN_NUMBER )
@@ -154,7 +154,7 @@ public class TelephoneNumberEmbedded
 	public TelephoneNumberEmbedded setTelephonePattern( String pattern ) {
 		LOG.debug( "Telephone pattern is " + pattern );
 		regenerateTelephoneNumber = true;
-		if ( pattern == null ) {
+		if( pattern == null ) {
 			LOG.debug( "Set telephone pattern to default" );
 			this.pattern = DEFAULT_TELEPHONE_NUMBER_PATTERN;
 		}
@@ -176,12 +176,12 @@ public class TelephoneNumberEmbedded
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-				&& object.getClass().equals( getClass() ) ) {
-			TelephoneNumberEmbedded telephoneNumber = (TelephoneNumberEmbedded)object;
+		if( object != null
+			&& object.getClass().equals( getClass() ) ) {
+			TelephoneNumberEmbedded telephoneNumber = (TelephoneNumberEmbedded) object;
 			return telephoneNumber.getTelephoneNumberValue().equals( getTelephoneNumberValue() );
 		}
 		return false;

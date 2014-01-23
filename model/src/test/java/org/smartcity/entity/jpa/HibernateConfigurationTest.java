@@ -1,7 +1,7 @@
 package org.smartcity.entity.jpa;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cache.ehcache.EhCacheRegionFactory;
+import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
 import org.hibernate.cache.spi.RegionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Settings;
@@ -46,7 +46,7 @@ public class HibernateConfigurationTest {
 
 	@Before
 	public void beforeTest() {
-		configuration = new Configuration().configure( "/META-INF/hibernate.cfg.xml" );
+		configuration = new Configuration().configure( "/hibernate.cfg.xml" );
 		serviceRegistry = new ServiceRegistryBuilder()
 				.applySettings( configuration.getProperties() )
 				.buildServiceRegistry();
@@ -81,7 +81,7 @@ public class HibernateConfigurationTest {
 		SessionFactory factory = configuration.buildSessionFactory( serviceRegistry );
 		Settings settings = ( (SessionFactoryImpl) factory ).getSettings();
 		RegionFactory regionFactory = settings.getRegionFactory();
-		Assert.assertEquals( EhCacheRegionFactory.class, regionFactory.getClass() );
+		Assert.assertEquals( SingletonEhCacheRegionFactory.class, regionFactory.getClass() );
 	}
 
 	@Test

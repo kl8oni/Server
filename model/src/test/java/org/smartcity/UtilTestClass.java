@@ -35,8 +35,9 @@ public class UtilTestClass {
 		ear.addAsLibraries( libs );
 		JavaArchive build = ShrinkWrap.create( JavaArchive.class, "model.jar" );
 		for ( String file : getFileNames() ) {
-			build.addAsManifestResource( file );
+			build.addAsResource( file );
 		}
+		build.addAsManifestResource( "persistence.xml" );
 		Iterator<Package> iteratorPackages = iteratorPackages();
 		while ( iteratorPackages.hasNext() ) {
 			Package packageEntity = iteratorPackages.next();
@@ -63,7 +64,6 @@ public class UtilTestClass {
 	private Collection<String> getFileNames() {
 		if ( configFileNames == null ) {
 			configFileNames = new ArrayList<>();
-			configFileNames.add( "persistence.xml" );
 			configFileNames.add( "hibernate.cfg.xml" );
 			configFileNames.add( "jboss-deployment-structure.xml" );
 			configFileNames.add( "proxool.properties" );

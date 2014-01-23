@@ -76,7 +76,7 @@ public class DocumentEntity
 			name = Document.NUMBER_COLUMN_NAME,
 			nullable = false
 	)
-	private long                   number;
+	private Long                   number;
 	@Column(
 			name = Document.DELIVERY_DATE_COLUMN_NAME,
 			nullable = false
@@ -120,7 +120,7 @@ public class DocumentEntity
 	public DocumentEntity(
 			String name,
 			String series,
-			long number,
+			Long number,
 			Date deliveryDate,
 			UserEntity owner,
 			GovernmentOfficeEntity office,
@@ -165,12 +165,12 @@ public class DocumentEntity
 	}
 
 	@Override
-	public long getNumber() {
+	public Long getNumber() {
 		return number;
 	}
 
 	@Override
-	public DocumentEntity setNumber( long number ) {
+	public DocumentEntity setNumber( Long number ) {
 		LOG.debug( "Number is " + number );
 		this.number = number;
 		return this;
@@ -233,7 +233,7 @@ public class DocumentEntity
 			 && object.getClass().equals( getClass() ) ) {
 			DocumentEntity document = (DocumentEntity)object;
 			return document.getName().equals( getName() )
-				   && document.getNumber() == getNumber()
+				   && document.getNumber().equals( getNumber() )
 				   && document.getSeries().equals( getSeries() );
 		}
 		return false;
@@ -241,7 +241,7 @@ public class DocumentEntity
 
 	@Override
 	public int hashCode() {
-		return getName().hashCode() + (int)getNumber() + getSeries().hashCode();
+		return getName().hashCode() + getNumber().hashCode() + getSeries().hashCode();
 	}
 
 	@Override

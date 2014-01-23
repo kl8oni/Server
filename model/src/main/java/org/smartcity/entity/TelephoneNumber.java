@@ -11,13 +11,13 @@ public interface TelephoneNumber<TN extends TelephoneNumber>
 
 	public String getTelephoneNumberValue();
 
-	public TN setStateCode( short stateCode );
+	public TN setStateCode( Short stateCode );
 
-	public TN setCityCode( short cityCode );
+	public TN setCityCode( Short cityCode );
 
 	public TN setTelephonePattern( String pattern );
 
-	public TN setNumber( int number );
+	public TN setNumber( Integer number );
 
 	public String getTelephonePattern();
 

@@ -63,7 +63,7 @@ public class BankAccountEntity
 			precision = 16,
 			scale = 0
 	)
-	private long             bankAccountNumber;
+	private Long             bankAccountNumber;
 	@ManyToOne(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY
@@ -101,7 +101,7 @@ public class BankAccountEntity
 	}
 
 	public BankAccountEntity(
-			long bankAccountNumber,
+			Long bankAccountNumber,
 			UserEntity owner,
 			BankEntity bank,
 			BankBranchEntity bankBranch ) {
@@ -118,12 +118,12 @@ public class BankAccountEntity
 	}
 
 	@Override
-	public long getBankAccountNumber() {
+	public Long getBankAccountNumber() {
 		return bankAccountNumber;
 	}
 
 	@Override
-	public BankAccountEntity setBankAccountNumber( long bankAccountNumber ) {
+	public BankAccountEntity setBankAccountNumber( Long bankAccountNumber ) {
 		LOG.debug( "Bank account number is " + bankAccountNumber );
 		this.bankAccountNumber = bankAccountNumber;
 		return this;
@@ -173,7 +173,7 @@ public class BankAccountEntity
 		if ( object != null
 			 && object.getClass().equals( getClass() ) ) {
 			BankAccountEntity bankAccount = (BankAccountEntity) object;
-			return bankAccount.getBankAccountNumber() == getBankAccountNumber()
+			return bankAccount.getBankAccountNumber().equals( getBankAccountNumber() )
 				   && bankAccount.getBank().equals( getBank() );
 		}
 		return false;
@@ -181,7 +181,7 @@ public class BankAccountEntity
 
 	@Override
 	public int hashCode() {
-		return (int) getBankAccountNumber() + getBank().hashCode();
+		return getBankAccountNumber().hashCode() + getBank().hashCode();
 	}
 
 	@Override
