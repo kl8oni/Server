@@ -34,8 +34,8 @@ How to install test environment
 		</module>
 
 11. Add to Jboss new module Ehcache
-12. Create dir `$JBOSS_HOME/modules/net/sf/ehcahe/main`
-13. Copy `ehcache-2.8.0.jar` to `$JBOSS_HOME/modules/net/sf/ehcahe/main`
+12. Create dir `$JBOSS_HOME/modules/net/sf/ehcache/main`
+13. Copy `ehcache-2.8.0.jar` to `$JBOSS_HOME/modules/net/sf/ehcache/main`
 14. Create `module.xml` with contents:
 
 		<?xml version="1.0" encoding="UTF-8"?>
