@@ -19,26 +19,32 @@ How to install test environment
 			<resources>
 				<resource-root path="postgresql-9.1-901.jdbc4.jar"/>
 			</resources>
-			<dependencies>
-				<module name="javax.api"/>
-				<module name="javax.transaction.api"/>
-				<module name="javax.servlet.api" optional="true"/>
-			</dependencies>
 		</module>
 
 7. Add to Jboss new module for Proxool database pool
 8. Create dir `$JBOSS_HOME/modules/org/proxool/main`
 9. Copy `proxool-0.8.3.jar` to `$JBOSS_HOME/modules/org/proxool/main`
+10. Create `module.xml` with contents:
 
 		<?xml version="1.0" encoding="UTF-8"?>
 		<module xmlns="urn:jboss:module:1.1" name="org.proxool">
 			<resources>
 				<resource-root path="proxool-0.8.3.jar"/>
 			</resources>
+		</module>
+
+11. Add to Jboss new module Ehcache
+12. Create dir `$JBOSS_HOME/modules/net/sf/ehcahe/main`
+13. Copy `ehcache-2.8.0.jar` to `$JBOSS_HOME/modules/net/sf/ehcahe/main`
+14. Create `module.xml` with contents:
+
+		<?xml version="1.0" encoding="UTF-8"?>
+		<module xmlns="urn:jboss:module:1.1" name="net.sf.ehcache">
+			<resources>
+				<resource-root path="ehcache-2.8.0.jar"/>
+			</resources>
 			<dependencies>
-				<module name="javax.api"/>
-				<module name="javax.transaction.api"/>
-				<module name="javax.servlet.api" optional="true"/>
+				<module name="org.slf4j"/>
 			</dependencies>
 		</module>
 
@@ -67,7 +73,8 @@ How to install test environment
 			</datasources>
 		</subsystem>
 
-8. For configure logging add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+11. For configure logging smart-city module
+add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
 		<subsystem xmlns="urn:jboss:domain:logging:1.1">
 		<...>
@@ -89,8 +96,8 @@ How to install test environment
 		<...>
 		</subsystem>
 
-9. (Optional) For configure logging hibernate framework in file add to
-`$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+12. (Optional) For configure logging hibernate framework in file
+add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
 		<subsystem xmlns="urn:jboss:domain:logging:1.1">
 		<...>
@@ -112,7 +119,7 @@ How to install test environment
 		<...>
 		</subsystem>
 
-10. Add dom4j as a global module.
+13. Add dom4j as a global module.
 
 		<subsystem xmlns="urn:jboss:domain:ee:1.1">
 		<...>
@@ -122,7 +129,7 @@ How to install test environment
 		<...>
 		</subsystem>
 
-11. Create PostgreSQL database with commands
+14. Create PostgreSQL database with commands
 
 		createdb -U {user-name} smart-city
 		plsql -U {user-name} -d smart-city
