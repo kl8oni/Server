@@ -98,6 +98,6 @@ How to install test environment
 
 10. Create PostgreSQL database with commands
 
-		createdb -u {user-name} smart-city
-		plsql -u {user-name} -d smart-city
+		createdb -U {user-name} smart-city
+		plsql -U {user-name} -d smart-city
 		\i path/to/smart-city-project/scripts/create.sql
