@@ -4,16 +4,81 @@
 <hibernate-configuration>
 
 	<session-factory name="smart-city">
-		<property name="hibernate.proxool.properties">/META-INF/proxool.properties</property>
-		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider</property>
+
+		<!--
+		 ~  Special hibernate properties
+		 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.session_factory_name">smart-city</property>
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.JTASessionContext</property>
+		<property name="hibernate.generate_statistics">true</property>
+		<property name="hibernate.order_updates">true</property>
+		<property name="hibernate.order_inserts">true</property>
+		<property name="hibernate.id.new_generator_mappings">true</property>
+		
+		<!--
+		 ~  Properties for JDBC configuration
+		 -->
+		<property name="hibernate.jdbc.use_streams_for_binary">true</property>
+		<property name="hibernate.jdbc.fetch_size">1000</property> <!-- Count of rows for each Network connection -->
+		<property name="hibernate.jdbc.batch_size">1000</property> <!-- Count of query which send to DBMS through Network -->
+		<property name="hibernate.jdbc.wrap_result_sets">true</property> <!-- In performance testing -->
+		
+		<!--
+		 ~  Properties for transaction
+		 -->
+		<property name="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform</property>
+		<!--property name="hibernate.jta.cacheTransactionManager"> This properties should be investigated </property-->
+		<!--property name="hibernate.jta.cacheUserTransaction"> This properties should be investigated </property-->
+
+		<!--
+		 ~  Properties for cache configuration
+		 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.use_query_cache">true</property>
+		<property name="hibernate.cache.use_minimal_puts">true</property> <!-- For situation when reads more than writes -->
+		<property name="hibernate.cache.provider_configuration_file_resource_path">ehcache.xml</property>
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</property>
+		<property name="hibernate.cache.use_structured_entries">true</property>
+		<property name="hibernate.cache.default_cache_concurrency_strategy">read-only</property>
+
+		<!--
+		 ~  Properties for HQL configuration
+		 -->
+		<property name="hibernate.query.factory_class">org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory</property>
+		<property name="hibernate.query.substitutions">true 'T', false 'F'</property>
+		<property name="hibernate.query.startup_check">true</property> <!-- May off while testing for better test performance-->
+
+		<!--
+		 ~  Properties for hbm configuration
+		 -->
+		<property name="hibernate.hbm2ddl.auto">validate</property> <!-- Off on production and while active testing -->
+
+		<!--
+		 ~  Properties for Proxool database connection pool configuration
+		 -->
+		<property name="hibernate.proxool.properties">/proxool.properties</property>
 		<property name="hibernate.proxool.existing_pool">true</property>
+		<property name="hibernate.proxool.pool_alias">smart-city-db-pool</property>
+
+		<!--
+		 ~  Properties for connection with database configuration
+		 -->
+		<property name="hibernate.connection.autocommit">false</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.datasource">java:jboss/datasources/SmartCityDataSource</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">358962471</property>
+		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider</property>
 		<property name="hibernate.connection.pool_size">20</property>
-		<property name="hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</property>
-		<property name="connection.autocommit">false</property>
-		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="connection.datasource">java:jboss/datasources/SmartCityDataSource</property>
-		<property name="connection.username">postgres</property>
-		<property name="connection.password">358962471</property>
+
+		<!--
+		 ~  Properties for generated SQL
+		 -->
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.use_sql_comments">true</property>
+
 	</session-factory>
-	
+
 </hibernate-configuration>
