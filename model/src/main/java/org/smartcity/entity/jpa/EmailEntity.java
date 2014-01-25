@@ -83,7 +83,7 @@ public class EmailEntity
 
 	public EmailEntity(
 			String emailAddress,
-			boolean mainEmail,
+			Boolean mainEmail,
 			UserEntity owner ) {
 		LOG.debug( "Constructor with parameters is invoked" );
 		setEmailAddress( emailAddress )

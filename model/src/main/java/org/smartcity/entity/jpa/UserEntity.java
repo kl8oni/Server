@@ -128,8 +128,7 @@ public class UserEntity
 				.setNickName( nickName )
 				.setPassword( password )
 				.setUserEmails( new HashSet<EmailEntity>() )
-				.setDocuments( new HashSet<DocumentEntity>() )
-				.setMainEmail( null );
+				.setDocuments( new HashSet<DocumentEntity>() );
 	}
 
 	@Override
@@ -203,23 +202,6 @@ public class UserEntity
 	}
 
 	@Override
-	public UserEntity setMainEmail( EmailEntity mainEmail ) {
-		LOG.debug( "Main email is " + mainEmail );
-		if( mainEmail != null ) {
-			this.mainEmail = mainEmail;
-		}
-		else {
-			for( EmailEntity email : userEmails ) {
-				if( email.isMainEmail() ) {
-					this.mainEmail = email;
-					break;
-				}
-			}
-		}
-		return this;
-	}
-
-	@Override
 	public Set<EmailEntity> getUserEmails() {
 		return userEmails;
 	}
@@ -232,6 +214,9 @@ public class UserEntity
 
 	@Override
 	public UserEntity addUserEmail( EmailEntity email ) {
+		if( email.isMainEmail() ) {
+			mainEmail = email;
+		}
 		userEmails.add( email );
 		return this;
 	}
@@ -245,13 +230,6 @@ public class UserEntity
 	@Override
 	public DocumentEntity getIdentifyDocument() {
 		return identifyDocument;
-	}
-
-	@Override
-	public UserEntity setIdentifyDocument( DocumentEntity identifyDocument ) {
-		LOG.debug( "Identify document is " + identifyDocument );
-		this.identifyDocument = identifyDocument;
-		return this;
 	}
 
 	@Override
@@ -273,6 +251,9 @@ public class UserEntity
 
 	@Override
 	public UserEntity addDocument( DocumentEntity document ) {
+		if( document.isIdentifyDocument() ) {
+			identifyDocument = document;
+		}
 		documents.add( document );
 		return this;
 	}
