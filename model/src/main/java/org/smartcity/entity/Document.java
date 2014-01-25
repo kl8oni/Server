@@ -6,11 +6,12 @@ import java.math.BigInteger;
 
 import java.util.Date;
 
-public interface Document<D extends Document,
-						  U extends User,
-						  DT extends DocumentTemplate,
-						  O extends GovernmentOffice>
-		extends		Serializable {
+public interface Document<
+		D extends Document,
+		U extends User,
+		DT extends DocumentTemplate,
+		O extends GovernmentOffice>
+		extends Serializable {
 
 	String TABLE_NAME                       = "DOCUMENTS";
 	String GENERATOR_NAME                   = "DOCUMENT_ID_GENERATOR";
@@ -24,40 +25,40 @@ public interface Document<D extends Document,
 	String GOVERNMENT_OFFICE_ID_COLUMN_NAME = "GOVERNMENT_OFFICE_ID";
 	String DOCUMENT_TEMPLATE_ID_COLUMN_NAME = "DOCUMENT_TEMPLATE_ID";
 
-	public BigInteger getID();
+	BigInteger getID();
 
-	public String getName();
+	String getName();
 
-	public D setName( String name );
+	D setName( String name );
 
-	public String getSeries();
+	String getSeries();
 
-	public D setSeries( String series );
+	D setSeries( String series );
 
-	public Long getNumber();
+	Long getNumber();
 
-	public D setNumber( Long number );
+	D setNumber( Long number );
 
-	public Date getDeliveryDate();
+	Date getDeliveryDate();
 
-	public D setDeliveryDate( Date deliveryDate );
+	D setDeliveryDate( Date deliveryDate );
 
-	public U getOwner();
+	U getOwner();
 
-	public D setOwner( U owner );
+	D setOwner( U owner );
 
-	public DT getTemplate();
+	DT getTemplate();
 
-	public D setTemplate( DT template );
+	D setTemplate( DT template );
 
-	public O getOffice();
+	O getOffice();
 
-	public D setOffice( O office );
+	D setOffice( O office );
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

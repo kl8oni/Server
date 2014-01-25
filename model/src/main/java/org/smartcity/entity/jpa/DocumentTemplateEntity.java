@@ -29,7 +29,10 @@ import org.smartcity.entity.GovernmentOfficeType;
 		name = DocumentTemplate.TABLE_NAME
 )
 public class DocumentTemplateEntity
-		implements DocumentTemplate<DocumentTemplateEntity, DocumentEntity, GovernmentOfficeTypeEntity> {
+		implements DocumentTemplate<
+		DocumentTemplateEntity,
+		DocumentEntity,
+		GovernmentOfficeTypeEntity> {
 
 	private static final Log LOG = LogFactory.getLog( DocumentTemplateEntity.class );
 
@@ -187,12 +190,11 @@ public class DocumentTemplateEntity
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-			 && object.getClass().equals( getClass() ) ) {
-			DocumentTemplateEntity documentTemplate = (DocumentTemplateEntity)object;
+		if( object != null && object.getClass().equals( getClass() ) ) {
+			DocumentTemplateEntity documentTemplate = (DocumentTemplateEntity) object;
 			return documentTemplate.getName().equals( getName() )
 				   && documentTemplate.getNumberPattern().equals( getNumberPattern() )
 				   && documentTemplate.getSeriesPattern().equals( getSeriesPattern() );

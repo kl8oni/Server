@@ -27,7 +27,10 @@ import org.smartcity.entity.Bank;
 		name = Bank.TABLE_NAME
 )
 public class BankEntity
-		implements Bank<BankEntity, BankBranchEntity, BankAccountEntity> {
+		implements Bank<
+		BankEntity,
+		BankBranchEntity,
+		BankAccountEntity> {
 
 	private static final Log LOG = LogFactory.getLog( BankEntity.class );
 
@@ -167,12 +170,11 @@ public class BankEntity
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-			 && object.getClass().equals( getClass() ) ) {
-			BankEntity bank = (BankEntity)object;
+		if( object != null && object.getClass().equals( getClass() ) ) {
+			BankEntity bank = (BankEntity) object;
 			return getName().equals( bank.getName() )
 				   && getWebsite().equals( bank.getWebsite() );
 		}
@@ -185,7 +187,7 @@ public class BankEntity
 	}
 
 	@Override
-	public String toString()  {
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( "[ Bank with Name = " )
 				.append( getName() )

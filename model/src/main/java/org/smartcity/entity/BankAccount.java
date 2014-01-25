@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import java.math.BigInteger;
 
-public interface BankAccount<BA extends BankAccount,
-							 U extends User,
-							 B extends Bank,
-							 BB extends BankBranch>
-		extends		Serializable {
+public interface BankAccount<
+		BA extends BankAccount,
+		U extends User,
+		B extends Bank,
+		BB extends BankBranch>
+		extends Serializable {
 
 	String TABLE_NAME                 = "BANK_ACCOUNTS";
 	String GENERATOR_NAME             = "BANK_ACCOUNT_ID_GENERATOR";
@@ -19,28 +20,28 @@ public interface BankAccount<BA extends BankAccount,
 	String BANK_ID_COLUMN_NAME        = "BANK_ID";
 	String BANK_BRANCH_ID_COLUMN_NAME = "BANK_BRANCH_ID";
 
-	public BigInteger getID();
+	BigInteger getID();
 
-	public Long getBankAccountNumber();
+	Long getBankAccountNumber();
 
-	public BA setBankAccountNumber( Long bankAccountNumber );
+	BA setBankAccountNumber( Long bankAccountNumber );
 
-	public U getBankAccountOwner();
+	U getBankAccountOwner();
 
-	public BA setBankAccountOwner( U owner );
+	BA setBankAccountOwner( U owner );
 
-	public B getBank();
+	B getBank();
 
-	public BA setBank( B bank );
+	BA setBank( B bank );
 
-	public BB getBankBranch();
+	BB getBankBranch();
 
-	public BA setBankBranch( BB bankBranch );
+	BA setBankBranch( BB bankBranch );
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

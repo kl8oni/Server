@@ -6,10 +6,11 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Set;
 
-public interface GovernmentOfficeType <OT extends GovernmentOfficeType,
-									   DT extends DocumentTemplate,
-									   O extends GovernmentOffice>
-		extends		Serializable {
+public interface GovernmentOfficeType<
+		OT extends GovernmentOfficeType,
+		DT extends DocumentTemplate,
+		O extends GovernmentOffice>
+		extends Serializable {
 
 	String TABLE_NAME            = "GOVERNMENT_OFFICE_TYPES";
 	String GENERATOR_NAME        = "GOVERNMENT_OFFICE_TYPE_ID_GENERATOR";
@@ -18,44 +19,44 @@ public interface GovernmentOfficeType <OT extends GovernmentOfficeType,
 	String NAME_COLUMN_NAME      = "NAME";
 	String PARENT_ID_COLUMN_NAME = "PARENT_ID";
 
-	public BigInteger getID();
+	BigInteger getID();
 
-	public String getName();
+	String getName();
 
-	public OT setName( String name );
+	OT setName( String name );
 
-	public OT getParent();
+	OT getParent();
 
-	public OT setParent( OT parent );
+	OT setParent( OT parent );
 
-	public Set<OT> getChildren();
+	Set<OT> getChildren();
 
-	public OT setChildren( Set<OT> children );
+	OT setChildren( Set<OT> children );
 
-	public OT addChild( OT child );
+	OT addChild( OT child );
 
-	public OT addChildren( Collection<OT> children );
+	OT addChildren( Collection<OT> children );
 
-	public Set<O> getOfficesThisType();
+	Set<O> getOfficesThisType();
 
-	public OT setOfficesThisType( Set<O> officesThisType );
+	OT setOfficesThisType( Set<O> officesThisType );
 
-	public OT addOfficeThisType( O officeThisType );
+	OT addOfficeThisType( O officeThisType );
 
-	public OT addOfficesThisType( Collection<O> officesThisType );
+	OT addOfficesThisType( Collection<O> officesThisType );
 
-	public Set<DT> getDocumentTemplates();
+	Set<DT> getDocumentTemplates();
 
-	public OT setDocumentTemplates( Set<DT> documentTemplates );
+	OT setDocumentTemplates( Set<DT> documentTemplates );
 
-	public OT addDocumentTemplate( DT documentTemplate );
+	OT addDocumentTemplate( DT documentTemplate );
 
-	public OT addDocumentTemplates( Collection<DT> documentTemplates );
+	OT addDocumentTemplates( Collection<DT> documentTemplates );
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

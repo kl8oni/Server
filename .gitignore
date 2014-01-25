@@ -3,3 +3,6 @@
 /model/model.iml
 /controller/controller.iml
 /.idea
+/controller/target
+/model/target
+/view/target

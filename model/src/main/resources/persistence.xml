@@ -33,10 +33,16 @@
 					  value="org.jboss.as.jpa.hibernate4.infinispan.InfinispanRegionFactory"/>
 			<property name="hibernate.cache.infinispan.cachemanager"
 					  value="java:jboss/infinispan/container/hibernate"/>
-			<property name="hibernate.transaction.manager_lookup_class"
-					  value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
 			<property name="hibernate.cache.use_second_level_cache"
 					  value="true"/>
+
+			<!--
+			 ~  transaction configuration
+			 -->
+			<property name="hibernate.transaction.manager_lookup_class"
+					  value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
+			<property name="hibernate.transaction.factory_class"
+					  value="org.hibernate.engine.transaction.internal.jta.JtaTransactionFactory"/>
 
 			<!-- database connection parameters -->
 			<property name="javax.persistence.jdbc.driver"

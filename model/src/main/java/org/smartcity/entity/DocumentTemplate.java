@@ -6,10 +6,11 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Set;
 
-public interface DocumentTemplate<DT extends DocumentTemplate,
-								  D extends Document,
-								  OT extends GovernmentOfficeType>
-		extends		Serializable {
+public interface DocumentTemplate<
+		DT extends DocumentTemplate,
+		D extends Document,
+		OT extends GovernmentOfficeType>
+		extends Serializable {
 
 	String TABLE_NAME                            = "DOCUMENT_TEMPLATES";
 	String GENERATOR_NAME                        = "DOCUMENT_TEMPLATE_ID_GENERATOR";
@@ -20,36 +21,36 @@ public interface DocumentTemplate<DT extends DocumentTemplate,
 	String NUMBER_PATTERN_COLUMN_NAME            = "NUMBER_PATTERN";
 	String GOVERNMENT_OFFICE_TYPE_ID_COLUMN_NAME = "GOVERNMENT_OFFICE_TYPE_ID";
 
-	public BigInteger getID();
+	BigInteger getID();
 
-	public String getName();
+	String getName();
 
-	public DT setName( String name );
+	DT setName( String name );
 
-	public String getSeriesPattern();
+	String getSeriesPattern();
 
-	public DT setSeriesPattern( String seriesPattern );
+	DT setSeriesPattern( String seriesPattern );
 
-	public String getNumberPattern();
+	String getNumberPattern();
 
-	public DT setNumberPattern( String numberPattern );
+	DT setNumberPattern( String numberPattern );
 
-	public OT getGovernmentOfficeType();
+	OT getGovernmentOfficeType();
 
-	public DT setGovernmentOfficeType( OT governmentOfficeType );
+	DT setGovernmentOfficeType( OT governmentOfficeType );
 
-	public Set<D> getDocuments();
+	Set<D> getDocuments();
 
-	public DT setDocuments( Set<D> documents );
+	DT setDocuments( Set<D> documents );
 
-	public DT addDocument( D document );
+	DT addDocument( D document );
 
-	public DT addDocuments( Collection<D> documents );
+	DT addDocuments( Collection<D> documents );
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

@@ -25,7 +25,9 @@ import org.smartcity.entity.User;
 		name = Email.TABLE_NAME
 )
 public class EmailEntity
-		implements	Email<EmailEntity, UserEntity> {
+		implements Email<
+		EmailEntity,
+		UserEntity> {
 
 	private static final Log LOG = LogFactory.getLog( EmailEntity.class );
 
@@ -132,11 +134,10 @@ public class EmailEntity
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-			 && object.getClass().equals( getClass() ) ) {
+		if( object != null && object.getClass().equals( getClass() ) ) {
 			EmailEntity email = (EmailEntity) object;
 			return email.getEmailAddress().equals( getEmailAddress() )
 				   && email.getOwner().equals( getOwner() );

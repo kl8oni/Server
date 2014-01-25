@@ -7,10 +7,11 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Set;
 
-public interface User<U extends User,
-					  E extends Email,
-					  D extends Document>
-		extends		Serializable {
+public interface User<
+		U extends User,
+		E extends Email,
+		D extends Document>
+		extends Serializable {
 
 	String TABLE_NAME                       = "USERS";
 	String GENERATOR_NAME                   = "USER_ID_GENERATOR";
@@ -23,56 +24,56 @@ public interface User<U extends User,
 	String PASSWORD_COLUMN_NAME             = "PASSWORD";
 	String IDENTIFY_DOCUMENT_ID_COLUMN_NAME = "IDENTIFY_DOCUMENT_ID";
 
-	public BigInteger getID();
+	BigInteger getID();
 
-	public String getLastName();
+	String getLastName();
 
-	public U setLastName( String lastName );
+	U setLastName( String lastName );
 
-	public String getFirstName();
+	String getFirstName();
 
-	public U setFirstName( String firstName );
+	U setFirstName( String firstName );
 
-	public String getMiddleName();
+	String getMiddleName();
 
-	public U setMiddleName( String middleName );
+	U setMiddleName( String middleName );
 
-	public String getNickName();
+	String getNickName();
 
-	public U setNickName( String nickName );
+	U setNickName( String nickName );
 
-	public String getPassword();
+	String getPassword();
 
-	public U setPassword( String password );
+	U setPassword( String password );
 
-	public E getMainEmail();
+	E getMainEmail();
 
-	public U setMainEmail( E email );
+	U setMainEmail( E email );
 
-	public Set<E> getUserEmails();
+	Set<E> getUserEmails();
 
-	public U setUserEmails( Set<E> userEmails );
+	U setUserEmails( Set<E> userEmails );
 
-	public U addUserEmail( E email );
+	U addUserEmail( E email );
 
-	public U addUserEmails( Collection<E> emails );
+	U addUserEmails( Collection<E> emails );
 
-	public D getIdentifyDocument();
+	D getIdentifyDocument();
 
-	public U setIdentifyDocument( D identifyDocument );
+	U setIdentifyDocument( D identifyDocument );
 
-	public Set<D> getDocuments();
+	Set<D> getDocuments();
 
-	public U setDocuments( Set<D> documents );
+	U setDocuments( Set<D> documents );
 
-	public U addDocument( D document );
+	U addDocument( D document );
 
-	public U addDocuments( Collection<D> documents );
+	U addDocuments( Collection<D> documents );
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

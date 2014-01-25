@@ -29,7 +29,11 @@ import org.smartcity.entity.User;
 		name = Document.TABLE_NAME
 )
 public class DocumentEntity
-		implements	Document<DocumentEntity, UserEntity, DocumentTemplateEntity, GovernmentOfficeEntity> {
+		implements Document<
+		DocumentEntity,
+		UserEntity,
+		DocumentTemplateEntity,
+		GovernmentOfficeEntity> {
 
 	private static final Log LOG = LogFactory.getLog( DocumentEntity.class );
 
@@ -226,12 +230,11 @@ public class DocumentEntity
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-			 && object.getClass().equals( getClass() ) ) {
-			DocumentEntity document = (DocumentEntity)object;
+		if( object != null && object.getClass().equals( getClass() ) ) {
+			DocumentEntity document = (DocumentEntity) object;
 			return document.getName().equals( getName() )
 				   && document.getNumber().equals( getNumber() )
 				   && document.getSeries().equals( getSeries() );

@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 import java.math.BigInteger;
 
-public interface Email<E extends Email,
-					   U extends User>
-		extends		Serializable {
+public interface Email<
+		E extends Email,
+		U extends User>
+		extends Serializable {
 
 	String TABLE_NAME                = "USER_EMAILS";
 	String GENERATOR_NAME            = "USER_EMAIL_ID_GENERATOR";
@@ -16,24 +17,24 @@ public interface Email<E extends Email,
 	String USER_ID_COLUMN_NAME       = "USER_ID";
 	String MAIN_EMAIL_COLUMN         = "MAIN_EMAIL";
 
-	public BigInteger getID();
+	BigInteger getID();
 
-	public String getEmailAddress();
+	String getEmailAddress();
 
-	public E setEmailAddress( String emailAddress );
+	E setEmailAddress( String emailAddress );
 
-	public U getOwner();
+	U getOwner();
 
-	public E setOwner( U owner );
+	E setOwner( U owner );
 
-	public boolean isMainEmail();
+	boolean isMainEmail();
 
-	public E setMainEmail( boolean mainEmail );
+	E setMainEmail( boolean mainEmail );
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

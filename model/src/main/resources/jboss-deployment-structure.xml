@@ -7,14 +7,4 @@
 	<deployment>
 		<module-alias name="model"/>
 	</deployment>
-	<module name="model">
-		<module-alias name="model"/>
-		<dependencies>
-			<module name="org.hibernate" services="import" optional="false"/>
-			<module name="org.hibernate.proxool" services="import" optional="false"/>
-			<module name="org.infinispan" services="import" optional="false"/>
-			<module name="org.infinispan.commons" services="import" optional="false"/>
-			<module name="org.proxool"/>
-		</dependencies>
-	</module>
 </jboss-deployment-structure>
