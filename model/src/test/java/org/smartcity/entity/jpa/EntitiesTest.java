@@ -1,5 +1,5 @@
 package org.smartcity.entity.jpa;
-
+  /*
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -7,7 +7,7 @@ import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.testng.Arquillian;
 
 import org.jboss.shrinkwrap.api.Archive;
 
@@ -24,14 +24,17 @@ import org.smartcity.entity.GovernmentOfficeType;
 import org.smartcity.entity.TelephoneNumber;
 import org.smartcity.entity.User;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
 
-@RunWith(
-		value = Arquillian.class
-)
-public class EntitiesTest {
-
+import org.testng.annotations.Test;
+                           */
+//@RunWith(
+//		value = Arquillian.class
+//)
+public class EntitiesTest/*
+		extends Arquillian */{
+	                         /*
 	private Address              address;
 	private Bank                 bank;
 	private BankAccount          bankAccount;
@@ -56,7 +59,10 @@ public class EntitiesTest {
 				.createDeploymentArchive();
 	}
 
-	@Test
+	@Test(
+			groups = "entities",
+			timeOut = 10000
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -69,7 +75,11 @@ public class EntitiesTest {
 		utx.commit();
 	}
 
-	@Test
+	@Test(
+			groups = "entities",
+			timeOut = 10000,
+			dependsOnMethods = "testCreateBank"
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
@@ -87,5 +97,5 @@ public class EntitiesTest {
 		em.persist( bankBranch );
 		utx.commit();
 	}
-
+*/
 }

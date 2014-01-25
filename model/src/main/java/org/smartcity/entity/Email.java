@@ -27,7 +27,7 @@ public interface Email<
 
 	E setOwner( U owner );
 
-	boolean isMainEmail();
+	Boolean isMainEmail();
 
 	E setMainEmail( boolean mainEmail );
 

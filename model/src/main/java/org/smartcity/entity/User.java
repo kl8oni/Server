@@ -48,8 +48,6 @@ public interface User<
 
 	E getMainEmail();
 
-	U setMainEmail( E email );
-
 	Set<E> getUserEmails();
 
 	U setUserEmails( Set<E> userEmails );
@@ -59,8 +57,6 @@ public interface User<
 	U addUserEmails( Collection<E> emails );
 
 	D getIdentifyDocument();
-
-	U setIdentifyDocument( D identifyDocument );
 
 	Set<D> getDocuments();
 

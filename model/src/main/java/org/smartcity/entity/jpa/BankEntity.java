@@ -96,6 +96,7 @@ public class BankEntity
 
 	@Override
 	public BigInteger getID() {
+		LOG.debug( "ID = " + ID );
 		return ID;
 	}
 

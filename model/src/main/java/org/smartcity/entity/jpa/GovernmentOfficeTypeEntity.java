@@ -214,15 +214,14 @@ public class GovernmentOfficeTypeEntity
 		}
 		if( object != null && object.getClass().equals( getClass() ) ) {
 			GovernmentOfficeTypeEntity governmentOfficeType = (GovernmentOfficeTypeEntity) object;
-			return governmentOfficeType.getName().equals( getName() )
-				   && governmentOfficeType.getParent().equals( getParent() );
+			return governmentOfficeType.getName().equals( getName() );
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return getName().hashCode() + getParent().hashCode();
+		return getName().hashCode();
 	}
 
 	@Override
