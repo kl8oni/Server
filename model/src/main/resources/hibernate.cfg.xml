@@ -10,7 +10,7 @@
 		 -->
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
 		<property name="hibernate.session_factory_name">smart-city</property>
-		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.JTASessionContext</property>
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ManagedSessionContext</property>
 		<property name="hibernate.generate_statistics">true</property>
 		<property name="hibernate.order_updates">true</property>
 		<property name="hibernate.order_inserts">true</property>
@@ -29,22 +29,21 @@
 		 ~  Properties for transaction
 		 -->
 		<property name="hibernate.transaction.jta.platform">org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform</property>
-		<property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jta.JtaTransactionFactory</property>
-		<!--<property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>-->
+		<property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory</property>
 		<!--property name="hibernate.jta.cacheTransactionManager"> This properties should be investigated </property-->
 		<!--property name="hibernate.jta.cacheUserTransaction"> This properties should be investigated </property-->
 
 		<!--
 		 ~  Properties for cache configuration
 		 -->
-		<!--<property name="hibernate.cache.use_second_level_cache">true</property>-->
-		<!--<property name="hibernate.cache.use_query_cache">true</property>-->
-		<!--<property name="hibernate.cache.use_minimal_puts">true</property> &lt;!&ndash; For situation when reads more than writes &ndash;&gt;-->
-		<!--<property name="hibernate.cache.infinispan.cfg">infinispan.xml</property>-->
-		<!--<property name="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.InfinispanRegionFactory</property>-->
-		<!--<property name="hibernate.cache.use_structured_entries">true</property>-->
-		<!--<property name="hibernate.cache.default_cache_concurrency_strategy">transactional</property>-->
-		<!--<property name="hibernate.cache.auto_evict_collection_cache">true</property>-->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.use_query_cache">true</property>
+		<property name="hibernate.cache.use_minimal_puts">true</property> <!-- For situation when reads more than writes -->
+		<property name="hibernate.cache.infinispan.cfg">infinispan.xml</property>
+		<property name="hibernate.cache.region.factory_class">org.jboss.as.jpa.hibernate4.infinispan.InfinispanRegionFactory</property>
+		<property name="hibernate.cache.use_structured_entries">true</property>
+		<property name="hibernate.cache.default_cache_concurrency_strategy">transactional</property>
+		<property name="hibernate.cache.auto_evict_collection_cache">true</property>
 
 		<!--
 		 ~  Properties for HQL configuration
@@ -59,13 +58,6 @@
 		<property name="hibernate.hbm2ddl.auto">validate</property> <!-- Off on production and while active testing -->
 
 		<!--
-		 ~  Properties for Proxool database connection pool configuration
-		 -->
-		<property name="hibernate.proxool.properties">/proxool.properties</property>
-		<property name="hibernate.proxool.existing_pool">true</property>
-		<property name="hibernate.proxool.pool_alias">smart-city-db-pool</property>
-
-		<!--
 		 ~  Properties for connection with database configuration
 		 -->
 		<property name="hibernate.connection.autocommit">false</property>
@@ -74,8 +66,6 @@
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost/smart-city</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">358962471</property>
-		<property name="hibernate.connection.provider_class">org.hibernate.proxool.internal.ProxoolConnectionProvider</property>
-		<property name="hibernate.connection.pool_size">20</property>
 
 		<!--
 		 ~  Properties for generated SQL
