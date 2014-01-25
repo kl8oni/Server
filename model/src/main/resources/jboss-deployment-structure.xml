@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.1"
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2"
 							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-							xsi:schemaLocation="urn:jboss:deployment-structure:1.1
-		http://www.jboss.org/schema/jbossas/jboss-deployment-structure-1_1.xsd">
+							xsi:schemaLocation="urn:jboss:deployment-structure:1.2
+		http://www.jboss.org/schema/jbossas/jboss-deployment-structure-1_2.xsd">
 	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+	<deployment>
+		<module-alias name="model"/>
+	</deployment>
 	<module name="model">
 		<module-alias name="model"/>
+		<dependencies>
+			<module name="org.hibernate" services="import" optional="false"/>
+			<module name="org.hibernate.proxool" services="import" optional="false"/>
+			<module name="org.infinispan" services="import" optional="false"/>
+			<module name="org.infinispan.commons" services="import" optional="false"/>
+			<module name="org.proxool"/>
+		</dependencies>
 	</module>
 </jboss-deployment-structure>
