@@ -6,12 +6,12 @@
 
 	<properties>
 		<release.version>0.0</release.version>
-		<hibernate.version>4.0.1.Final</hibernate.version>
+		<hibernate.version>4.3.0.Final</hibernate.version>
+		<infinispan.version>6.0.1.Final</infinispan.version>
 		<arquillian.version>1.1.2.Final</arquillian.version>
 		<shrinkwrap.version>1.2.0</shrinkwrap.version>
 		<shrinkwrap-resolver.version>2.0.0</shrinkwrap-resolver.version>
-		<jboss.version>7.1.1.Final</jboss.version>
-		<ehcache.version>2.4.3</ehcache.version>
+		<wildfly.version>8.0.0.CR1</wildfly.version>
 		<version.ear.plugin>2.8</version.ear.plugin>
 		<version.ejb.plugin>2.3</version.ejb.plugin>
 		<version.war.plugin>2.1.1</version.war.plugin>
@@ -32,27 +32,27 @@
 	<!--
 	 ~  Profile for testing on remote Jboss AS
 	 ~  type in command line:
-	 ~  $ mvn clean -Pjboss-container-test
+	 ~  $ mvn clean -Pwildfly-container-test
 	 ~  active by default temporary
 	 -->
 	<profiles>
 		<profile>
-			<id>jboss-container-test</id>
+			<id>wildfly-container-test</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<dependencies>
 				<dependency>
 					<groupId>org.jboss.spec</groupId>
-					<artifactId>jboss-javaee-6.0</artifactId>
-					<version>1.0.0.Final</version>
+					<artifactId>jboss-javaee-7.0</artifactId>
+					<version>1.0.0.Beta2</version>
 					<type>pom</type>
 					<scope>provided</scope>
 				</dependency>
 				<dependency>
-					<groupId>org.jboss.as</groupId>
-					<artifactId>jboss-as-arquillian-container-remote</artifactId>
-					<version>${jboss.version}</version>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-remote</artifactId>
+					<version>${wildfly.version}</version>
 					<scope>test</scope>
 				</dependency>
 				<dependency>
@@ -164,27 +164,27 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-ehcache</artifactId>
+			<artifactId>hibernate-infinispan</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<version>5.0.2.Final</version>
 		</dependency>
 
 		<!--
-		 ~ Dependencies for Java EE 6
+		 ~ Dependencies for Java EE 7
 		 -->
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
-			<version>1.1.2</version>
+			<version>2.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>6.0</version>
+			<version>7.0</version>
 		</dependency>
 
 		<!--
@@ -206,12 +206,12 @@
 		</dependency>
 
 		<!--
-		 ~ Dependencies for ehcache project
+		 ~ Dependencies for infinispan project
 		 -->
 		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache-core</artifactId>
-			<version>${ehcache.version}</version>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-core</artifactId>
+			<version>${infinispan.version}</version>
 		</dependency>
 
 		<!--
