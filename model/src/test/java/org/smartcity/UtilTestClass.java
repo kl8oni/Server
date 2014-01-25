@@ -48,8 +48,8 @@ public class UtilTestClass {
 		return ear;
 	}
 
-	private List<Package>       projectPackages;
-	private Collection<String>  configFileNames;
+	private List<Package>      projectPackages;
+	private Collection<String> configFileNames;
 
 	private Iterator<Package> iteratorPackages() {
 		if ( projectPackages == null ) {
@@ -66,7 +66,6 @@ public class UtilTestClass {
 			configFileNames = new ArrayList<>();
 			configFileNames.add( "hibernate.cfg.xml" );
 			configFileNames.add( "jboss-deployment-structure.xml" );
-			configFileNames.add( "proxool.properties" );
 			configFileNames.add( "infinispan.xml" );
 		}
 		return configFileNames;

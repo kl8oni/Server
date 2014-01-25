@@ -29,7 +29,7 @@
 		 ~  Properties for transaction
 		 -->
 		<property name="hibernate.transaction.jta.platform">org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform</property>
-		<property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory</property>
+		<property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jta.JtaTransactionFactory</property>
 		<!--property name="hibernate.jta.cacheTransactionManager"> This properties should be investigated </property-->
 		<!--property name="hibernate.jta.cacheUserTransaction"> This properties should be investigated </property-->
 

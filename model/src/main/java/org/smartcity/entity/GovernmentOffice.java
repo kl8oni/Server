@@ -5,12 +5,13 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Set;
 
-public interface GovernmentOffice<O extends GovernmentOffice,
-								  D extends Document,
-								  OT extends GovernmentOfficeType,
-								  A extends Address,
-								  T extends TelephoneNumber>
-		extends		Serializable {
+public interface GovernmentOffice<
+		O extends GovernmentOffice,
+		D extends Document,
+		OT extends GovernmentOfficeType,
+		A extends Address,
+		T extends TelephoneNumber>
+		extends Serializable {
 
 	String TABLE_NAME                            = "GOVERNMENT_OFFICES";
 	String GENERATOR_NAME                        = "GOVERNMENT_OFFICE_ID_GENERATOR";
@@ -19,36 +20,36 @@ public interface GovernmentOffice<O extends GovernmentOffice,
 	String NAME_COLUMN_NAME                      = "NAME";
 	String GOVERNMENT_OFFICE_TYPE_ID_COLUMN_NAME = "GOVERNMENT_OFFICE_TYPE_ID";
 
-	public abstract BigInteger getID();
+	BigInteger getID();
 
-	public abstract String getName();
+	String getName();
 
-	public abstract O setName( String name );
+	O setName( String name );
 
-	public abstract A getAddress();
+	A getAddress();
 
-	public abstract O setAddress( A address );
+	O setAddress( A address );
 
-	public abstract T getTelephoneNumber();
+	T getTelephoneNumber();
 
-	public abstract O setTelephoneNumber( T telephoneNumber );
+	O setTelephoneNumber( T telephoneNumber );
 
-	public abstract OT getOfficeType();
+	OT getOfficeType();
 
-	public abstract O setOfficeType( OT officeType );
+	O setOfficeType( OT officeType );
 
-	public abstract Set<D> getReleasedDocuments();
+	Set<D> getReleasedDocuments();
 
-	public abstract O setReleasedDocuments( Set<D> releasedDocuments );
+	O setReleasedDocuments( Set<D> releasedDocuments );
 
-	public abstract O addReleasedDocument( D releasedDocument );
+	O addReleasedDocument( D releasedDocument );
 
-	public abstract O addReleasedDocuments( Collection<D> releasedDocuments );
+	O addReleasedDocuments( Collection<D> releasedDocuments );
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

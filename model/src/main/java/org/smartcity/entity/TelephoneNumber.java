@@ -2,29 +2,30 @@ package org.smartcity.entity;
 
 import java.io.Serializable;
 
-public interface TelephoneNumber<TN extends TelephoneNumber>
-		extends		Serializable {
+public interface TelephoneNumber<
+		TN extends TelephoneNumber>
+		extends Serializable {
 
 	String TELEPHONE_NUMBER_COLUMN_NAME = "TELEPHONE_NUMBER";
 
-	public TN setTelephoneNumberValue( String telephoneNumberValue );
+	TN setTelephoneNumberValue( String telephoneNumberValue );
 
-	public String getTelephoneNumberValue();
+	String getTelephoneNumberValue();
 
-	public TN setStateCode( Short stateCode );
+	TN setStateCode( Short stateCode );
 
-	public TN setCityCode( Short cityCode );
+	TN setCityCode( Short cityCode );
 
-	public TN setTelephonePattern( String pattern );
+	TN setTelephonePattern( String pattern );
 
-	public TN setNumber( Integer number );
+	TN setNumber( Integer number );
 
-	public String getTelephonePattern();
+	String getTelephonePattern();
 
-	public boolean equals( Object object );
+	boolean equals( Object object );
 
-	public int hashCode();
+	int hashCode();
 
-	public String toString();
+	String toString();
 
 }

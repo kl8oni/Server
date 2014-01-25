@@ -46,13 +46,14 @@ public class EntitiesTest {
 	@PersistenceContext
 	private EntityManager        em;
 	@Inject
-	private UserTransaction		 utx;
+	private UserTransaction      utx;
 
 	@Deployment(
 			name = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
 	public static Archive<?> createDeploymentArchive() {
-		return UtilTestClass.INSTANCE.createDeploymentArchive();
+		return UtilTestClass.INSTANCE
+				.createDeploymentArchive();
 	}
 
 	@Test
@@ -65,16 +66,14 @@ public class EntitiesTest {
 		em.joinTransaction();
 		bank = new BankEntity( "Bank", "Website" );
 		em.persist( bank );
-		em.flush();
 		utx.commit();
-		em.close();
 	}
 
 	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testCreateBankAccount()
+	public void testCreateBankBranch()
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
@@ -86,9 +85,7 @@ public class EntitiesTest {
 									   (TelephoneNumberEmbedded) telephoneNumber );
 		bankBranch = new BankBranchEntity( "Bank Branch", (AddressEmbedded) address, (BankEntity) bank );
 		em.persist( bankBranch );
-		em.flush();
 		utx.commit();
-		em.close();
 	}
 
 }

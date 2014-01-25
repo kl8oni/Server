@@ -31,8 +31,12 @@ import org.smartcity.entity.GovernmentOfficeType;
 		name = GovernmentOffice.TABLE_NAME
 )
 public class GovernmentOfficeEntity
-		implements	GovernmentOffice<GovernmentOfficeEntity, DocumentEntity, GovernmentOfficeTypeEntity,
-									 AddressEmbedded, TelephoneNumberEmbedded> {
+		implements GovernmentOffice<
+		GovernmentOfficeEntity,
+		DocumentEntity,
+		GovernmentOfficeTypeEntity,
+		AddressEmbedded,
+		TelephoneNumberEmbedded> {
 
 	private static final Log LOG = LogFactory.getLog( GovernmentOfficeEntity.class );
 
@@ -178,12 +182,11 @@ public class GovernmentOfficeEntity
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-			 && object.getClass().equals( getClass() ) ) {
-			GovernmentOfficeEntity governmentOffice = (GovernmentOfficeEntity)object;
+		if( object != null && object.getClass().equals( getClass() ) ) {
+			GovernmentOfficeEntity governmentOffice = (GovernmentOfficeEntity) object;
 			return governmentOffice.getName().equals( getName() )
 				   && governmentOffice.getOfficeType().equals( getOfficeType() )
 				   && governmentOffice.getAddress().equals( getAddress() )
@@ -194,7 +197,10 @@ public class GovernmentOfficeEntity
 
 	@Override
 	public int hashCode() {
-		return getName().hashCode() + getOfficeType().hashCode() + getAddress().hashCode() + getTelephoneNumber().hashCode();
+		return getName().hashCode()
+			   + getOfficeType().hashCode()
+			   + getAddress().hashCode()
+			   + getTelephoneNumber().hashCode();
 	}
 
 	@Override

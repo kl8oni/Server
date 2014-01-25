@@ -11,7 +11,9 @@ import org.smartcity.entity.Address;
 
 @Embeddable
 public class AddressEmbedded
-		implements Address<AddressEmbedded, TelephoneNumberEmbedded> {
+		implements Address<
+		AddressEmbedded,
+		TelephoneNumberEmbedded> {
 
 	private static final Log LOG = LogFactory.getLog( AddressEmbedded.class );
 
@@ -112,10 +114,10 @@ public class AddressEmbedded
 	@Override
 	public AddressEmbedded setBuildingNumber( Short buildingNumber ) {
 		LOG.debug( "Building number is " + buildingNumber );
-		if ( buildingNumber < MIN_BUILDING_NUMBER
-				|| buildingNumber > MAX_BUILDING_NUMBER ) {
+		if( buildingNumber < MIN_BUILDING_NUMBER || buildingNumber > MAX_BUILDING_NUMBER ) {
 			StringBuilder messageBuilder = new StringBuilder();
-			messageBuilder.append( "Building number is not in allow bound. Building number should be between " )
+			messageBuilder.append(
+					"Building number is not in allow bound. Building number should be between " )
 					.append( MIN_BUILDING_NUMBER )
 					.append( " and " )
 					.append( MAX_BUILDING_NUMBER )
@@ -144,23 +146,25 @@ public class AddressEmbedded
 
 	@Override
 	public int hashCode() {
-		return getState().hashCode() + getCity().hashCode() + getStreet().hashCode() + getBuildingNumber() +
-			   getTelephoneNumber().hashCode();
+		return getState().hashCode()
+			   + getCity().hashCode()
+			   + getStreet().hashCode()
+			   + getBuildingNumber()
+			   + getTelephoneNumber().hashCode();
 	}
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-				&& object.getClass().equals( getClass() ) ) {
-			AddressEmbedded address = (AddressEmbedded)object;
+		if( object != null && object.getClass().equals( getClass() ) ) {
+			AddressEmbedded address = (AddressEmbedded) object;
 			return address.getState().equals( getState() )
-					&& address.getCity().equals( getCity() )
-					&& address.getStreet().equals( getStreet() )
-					&& address.getBuildingNumber() == getBuildingNumber()
-					&& address.getTelephoneNumber().equals( getTelephoneNumber() );
+				   && address.getCity().equals( getCity() )
+				   && address.getStreet().equals( getStreet() )
+				   && address.getBuildingNumber().equals( getBuildingNumber() )
+				   && address.getTelephoneNumber().equals( getTelephoneNumber() );
 		}
 		return false;
 	}

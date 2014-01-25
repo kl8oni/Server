@@ -31,7 +31,10 @@ import org.smartcity.entity.User;
 		name = User.TABLE_NAME
 )
 public class UserEntity
-		implements	User<UserEntity, EmailEntity, DocumentEntity> {
+		implements User<
+		UserEntity,
+		EmailEntity,
+		DocumentEntity> {
 
 	private static final Log LOG = LogFactory.getLog( UserEntity.class );
 
@@ -64,32 +67,32 @@ public class UserEntity
 			precision = 20,
 			scale = 0
 	)
-	private BigInteger       ID;
+	private BigInteger          ID;
 	@Column(
 			name = User.LAST_NAME_COLUMN_NAME,
 			nullable = false
 	)
-	private String           lastName;
+	private String              lastName;
 	@Column(
 			name = User.FIRST_NAME_COLUMN_NAME,
 			nullable = false
 	)
-	private String           firstName;
+	private String              firstName;
 	@Column(
 			name = User.MIDDLE_NAME_COLUMN_NAME,
 			nullable = false
 	)
-	private String           middleName;
+	private String              middleName;
 	@Column(
 			name = User.NICK_NAME_COLUMN_NAME,
 			nullable = false
 	)
-	private String           nickName;
+	private String              nickName;
 	@Column(
 			name = User.PASSWORD_COLUMN_NAME,
 			nullable = false
 	)
-	private String           password;
+	private String              password;
 	@OneToOne(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY
@@ -99,15 +102,15 @@ public class UserEntity
 			nullable = false,
 			referencedColumnName = Document.ID_COLUMN_NAME
 	)
-	private DocumentEntity   identifyDocument;
+	private DocumentEntity      identifyDocument;
 	@Transient
-	private EmailEntity      mainEmail;
+	private EmailEntity         mainEmail;
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
 			mappedBy = EmailEntity.OWNER_FIELD
 	)
-	private Set<EmailEntity> userEmails;
+	private Set<EmailEntity>    userEmails;
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
@@ -212,12 +215,12 @@ public class UserEntity
 	@Override
 	public UserEntity setMainEmail( EmailEntity mainEmail ) {
 		LOG.debug( "Main email is " + mainEmail );
-		if ( mainEmail != null) {
+		if( mainEmail != null ) {
 			this.mainEmail = mainEmail;
 		}
 		else {
-			for ( EmailEntity email : userEmails ) {
-				if ( email.isMainEmail() ) {
+			for( EmailEntity email : userEmails ) {
+				if( email.isMainEmail() ) {
 					this.mainEmail = email;
 					break;
 				}
@@ -286,11 +289,10 @@ public class UserEntity
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-			 && object.getClass().equals( getClass() ) ) {
+		if( object != null && object.getClass().equals( getClass() ) ) {
 			UserEntity user = (UserEntity) object;
 			return user.getNickName().equals( getNickName() )
 				   && user.getFirstName().equals( getFirstName() )

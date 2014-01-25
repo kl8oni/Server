@@ -27,7 +27,11 @@ import org.smartcity.entity.User;
 		name = BankAccount.TABLE_NAME
 )
 public class BankAccountEntity
-		implements	BankAccount<BankAccountEntity, UserEntity, BankEntity, BankBranchEntity> {
+		implements BankAccount<
+		BankAccountEntity,
+		UserEntity,
+		BankEntity,
+		BankBranchEntity> {
 
 	private static final Log LOG = LogFactory.getLog( BankAccountEntity.class );
 
@@ -106,8 +110,7 @@ public class BankAccountEntity
 			BankEntity bank,
 			BankBranchEntity bankBranch ) {
 		LOG.debug( "Constructor with parameters is invoked" );
-		setBankAccountNumber( bankAccountNumber )
-				.setBankAccountOwner( owner )
+		setBankAccountNumber( bankAccountNumber ).setBankAccountOwner( owner )
 				.setBank( bank )
 				.setBankBranch( bankBranch );
 	}
@@ -167,11 +170,10 @@ public class BankAccountEntity
 
 	@Override
 	public boolean equals( Object object ) {
-		if ( object == this ) {
+		if( object == this ) {
 			return true;
 		}
-		if ( object != null
-			 && object.getClass().equals( getClass() ) ) {
+		if( object != null && object.getClass().equals( getClass() ) ) {
 			BankAccountEntity bankAccount = (BankAccountEntity) object;
 			return bankAccount.getBankAccountNumber().equals( getBankAccountNumber() )
 				   && bankAccount.getBank().equals( getBank() );
