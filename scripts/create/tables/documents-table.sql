@@ -7,6 +7,7 @@ create table DOCUMENTS (
 	USER_ID              numeric(20, 0) not null,
 	GOVERNMENT_OFFICE_ID numeric(20, 0) not null,
 	DOCUMENT_TEMPLATE_ID numeric(20, 0) not null,
+	IDENTIFY_DOCUMENT    boolean        not null,
 
 	primary key (DOCUMENT_ID)
 );

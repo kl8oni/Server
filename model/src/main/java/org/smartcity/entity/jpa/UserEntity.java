@@ -93,15 +93,7 @@ public class UserEntity
 			nullable = false
 	)
 	private String              password;
-	@OneToOne(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
-	@JoinColumn(
-			name = User.IDENTIFY_DOCUMENT_ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = Document.ID_COLUMN_NAME
-	)
+	@Transient
 	private DocumentEntity      identifyDocument;
 	@Transient
 	private EmailEntity         mainEmail;
@@ -272,6 +264,12 @@ public class UserEntity
 	@Override
 	public UserEntity setDocuments( Set<DocumentEntity> documents ) {
 		this.documents = documents;
+		for( DocumentEntity document : documents ) {
+			if( document.isIdentifyDocument() ) {
+				identifyDocument = document;
+				break;
+			}
+		}
 		return this;
 	}
 

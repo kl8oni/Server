@@ -86,6 +86,11 @@ public class DocumentEntity
 			nullable = false
 	)
 	private Date                   deliveryDate;
+	@Column(
+			name = Document.IDENTIFY_DOCUMENT_COLUMN_NAME,
+			nullable = false
+	)
+	private Boolean                identifyDocument;
 	@ManyToOne(
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY
@@ -128,7 +133,8 @@ public class DocumentEntity
 			Date deliveryDate,
 			UserEntity owner,
 			GovernmentOfficeEntity office,
-			DocumentTemplateEntity template ) {
+			DocumentTemplateEntity template,
+			Boolean identifyDocument) {
 		LOG.debug( "Constructor with parameters is invoked" );
 		setName( name )
 				.setSeries( series )
@@ -136,7 +142,8 @@ public class DocumentEntity
 				.setDeliveryDate( deliveryDate )
 				.setOwner( owner )
 				.setOffice( office )
-				.setTemplate( template );
+				.setTemplate( template )
+				.setIdentifyDocument( identifyDocument );
 	}
 
 	@Override
@@ -225,6 +232,18 @@ public class DocumentEntity
 	public DocumentEntity setOffice( GovernmentOfficeEntity office ) {
 		LOG.debug( "Office is " + office );
 		this.office = office;
+		return this;
+	}
+
+	@Override
+	public Boolean isIdentifyDocument() {
+		return identifyDocument;
+	}
+
+	@Override
+	public DocumentEntity setIdentifyDocument( Boolean identifyDocument ) {
+		LOG.debug( "Identify document " + identifyDocument );
+		this.identifyDocument = identifyDocument;
 		return this;
 	}
 

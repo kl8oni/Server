@@ -24,6 +24,7 @@ public interface Document<
 	String USER_ID_COLUMN_NAME              = "USER_ID";
 	String GOVERNMENT_OFFICE_ID_COLUMN_NAME = "GOVERNMENT_OFFICE_ID";
 	String DOCUMENT_TEMPLATE_ID_COLUMN_NAME = "DOCUMENT_TEMPLATE_ID";
+	String IDENTIFY_DOCUMENT_COLUMN_NAME    = "IDENTIFY_DOCUMENT";
 
 	BigInteger getID();
 
@@ -54,6 +55,10 @@ public interface Document<
 	O getOffice();
 
 	D setOffice( O office );
+
+	Boolean isIdentifyDocument();
+
+	D setIdentifyDocument( Boolean identifyDocument );
 
 	boolean equals( Object object );
 
