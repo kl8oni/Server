@@ -120,15 +120,13 @@ public class UserEntity
 			String firstName,
 			String middleName,
 			String nickName,
-			String password,
-			DocumentEntity identifyDocument ) {
+			String password ) {
 		LOG.debug( "Constructor with parameters is invoked" );
 		setLastName( lastName )
 				.setFirstName( firstName )
 				.setMiddleName( middleName )
 				.setNickName( nickName )
 				.setPassword( password )
-				.setIdentifyDocument( identifyDocument )
 				.setUserEmails( new HashSet<EmailEntity>() )
 				.setDocuments( new HashSet<DocumentEntity>() )
 				.setMainEmail( null );
