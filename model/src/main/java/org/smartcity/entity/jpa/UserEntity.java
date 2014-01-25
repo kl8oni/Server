@@ -93,15 +93,7 @@ public class UserEntity
 			nullable = false
 	)
 	private String              password;
-	@OneToOne(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY
-	)
-	@JoinColumn(
-			name = User.IDENTIFY_DOCUMENT_ID_COLUMN_NAME,
-			nullable = false,
-			referencedColumnName = Document.ID_COLUMN_NAME
-	)
+	@Transient
 	private DocumentEntity      identifyDocument;
 	@Transient
 	private EmailEntity         mainEmail;
@@ -128,15 +120,13 @@ public class UserEntity
 			String firstName,
 			String middleName,
 			String nickName,
-			String password,
-			DocumentEntity identifyDocument ) {
+			String password ) {
 		LOG.debug( "Constructor with parameters is invoked" );
 		setLastName( lastName )
 				.setFirstName( firstName )
 				.setMiddleName( middleName )
 				.setNickName( nickName )
 				.setPassword( password )
-				.setIdentifyDocument( identifyDocument )
 				.setUserEmails( new HashSet<EmailEntity>() )
 				.setDocuments( new HashSet<DocumentEntity>() )
 				.setMainEmail( null );
@@ -272,6 +262,12 @@ public class UserEntity
 	@Override
 	public UserEntity setDocuments( Set<DocumentEntity> documents ) {
 		this.documents = documents;
+		for( DocumentEntity document : documents ) {
+			if( document.isIdentifyDocument() ) {
+				identifyDocument = document;
+				break;
+			}
+		}
 		return this;
 	}
 
