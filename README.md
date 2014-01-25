@@ -19,6 +19,10 @@ How to install test environment
 			<resources>
 				<resource-root path="postgresql-9.1-901.jdbc4.jar"/>
 			</resources>
+			<dependencies>
+				<module name="javax.api"/>
+				<module name="javax.transaction.api"/>
+			</dependencies>
 		</module>
 
 7. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
