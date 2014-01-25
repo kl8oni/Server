@@ -121,7 +121,7 @@ public class EmailEntity
 	}
 
 	@Override
-	public boolean isMainEmail() {
+	public Boolean isMainEmail() {
 		return mainEmail;
 	}
 
@@ -140,14 +140,15 @@ public class EmailEntity
 		if( object != null && object.getClass().equals( getClass() ) ) {
 			EmailEntity email = (EmailEntity) object;
 			return email.getEmailAddress().equals( getEmailAddress() )
-				   && email.getOwner().equals( getOwner() );
+					&& email.isMainEmail().equals( isMainEmail() )
+					&& email.getOwner().equals( getOwner() );
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return getEmailAddress().hashCode() + getOwner().hashCode();
+		return getEmailAddress().hashCode() + isMainEmail().hashCode() + getOwner().hashCode();
 	}
 
 	@Override

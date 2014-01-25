@@ -274,8 +274,7 @@ public class UserEntity
 			return user.getNickName().equals( getNickName() )
 				   && user.getFirstName().equals( getFirstName() )
 				   && user.getMiddleName().equals( getMiddleName() )
-				   && user.getLastName().equals( getLastName() )
-				   && user.getIdentifyDocument().equals( getIdentifyDocument() );
+				   && user.getLastName().equals( getLastName() );
 		}
 		return false;
 	}
@@ -285,8 +284,7 @@ public class UserEntity
 		return getNickName().hashCode()
 			   + getFirstName().hashCode()
 			   + getMiddleName().hashCode()
-			   + getLastName().hashCode()
-			   + getIdentifyDocument().hashCode();
+			   + getLastName().hashCode();
 	}
 
 	@Override
