@@ -7,7 +7,6 @@
 	<properties>
 		<release.version>0.0</release.version>
 		<hibernate.version>4.3.0.Final</hibernate.version>
-		<infinispan.version>6.0.1.Final</infinispan.version>
 		<arquillian.version>1.1.2.Final</arquillian.version>
 		<shrinkwrap.version>1.2.0</shrinkwrap.version>
 		<shrinkwrap-resolver.version>2.0.0</shrinkwrap-resolver.version>
@@ -194,24 +193,6 @@
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
-		</dependency>
-
-		<!--
-		 ~  Dependencies for Proxool database connection pool
-		 -->
-		<dependency>
-			<groupId>proxool</groupId>
-			<artifactId>proxool</artifactId>
-			<version>0.8.3</version>
-		</dependency>
-
-		<!--
-		 ~ Dependencies for infinispan project
-		 -->
-		<dependency>
-			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-core</artifactId>
-			<version>${infinispan.version}</version>
 		</dependency>
 
 		<!--

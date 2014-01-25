@@ -21,62 +21,27 @@ How to install test environment
 			</resources>
 		</module>
 
-7. Add to Jboss new module for Proxool database pool
-8. Create dir `$JBOSS_HOME/modules/system/layers/base/org/proxool/main`
-9. Copy `proxool-0.8.3.jar` to `$JBOSS_HOME/modules/system/layers/base/org/proxool/main`
-10. Create `module.xml` with contents:
-
-		<?xml version="1.0" encoding="UTF-8"?>
-		<module xmlns="urn:jboss:module:1.1" name="org.proxool">
-			<resources>
-				<resource-root path="proxool-0.8.3.jar"/>
-			</resources>
-		</module>
-
-11. Add to Jboss new module for hibernate proxool integration
-12. Create dir `$JBOSS_HOME/modules/system/layers/base/org/hibernate/proxool/main`
-13. Copy `hibernate-proxool-4.3.0.Final.jar` to `$JBOSS_HOME/modules/system/layers/base/org/hibernate/proxool/main`
-14. Create `module.xml` with contents:
-
-		<?xml version="1.0" encoding="UTF-8"?>
-		<module xmlns="urn:jboss:module:1.1" name="org.hibernate.proxool">
-			<resources>
-				<resource-root path="hibernate-proxool-4.3.0.Final.jar"/>
-			</resources>
-			<dependencies>
-				<module name="org.hibernate"/>
-				<module name="org.jboss.logging"/>
-				<module name="org.dom4j"/>
-				<module name="javax.api"/>
-				<module name="javax.persistence.api"/>
-				<module name="javax.transaction.api"/>
-				<module name="org.javassist"/>
-				<module name="org.proxool"/>
-			</dependencies>
-		</module>
-
-15. Add org.hibernate.proxool module to org.hibernate
-16. For this add next line in `$JBOSS_HOME/modules/system/layers/base/org/hibernate/main/module.xml`:
-
-		<dependencies>
-		<...>
-			<module name="org.hibernate.proxool" services="import"/>
-		<...>
-		</dependencies>
-
-17. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+7. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
 		<subsystem xmlns="urn:jboss:domain:datasources:2.0">
 			<datasources>
 				<...>
-				<datasource jndi-name="java:jboss/datasources/SmartCityDataSource" pool-name="smart-city-db-pool" enabled="true" use-java-context="true">
-					<connection-url>jdbc:postgresql://localhost/smart-city</connection-url>
-					<driver>postgresql</driver>
-					<security>
-						<user-name>${user-name}</user-name>
-						<password>${password}</password>
-					</security>
-				</datasource>
+					<datasource jndi-name="java:jboss/datasources/SmartCityDataSource" pool-name="proxool.smart-city-db-pool" enabled="true" use-java-context="true">
+						<connection-url>jdbc:postgresql://localhost/smart-city</connection-url>
+						<driver>postgresql</driver>
+						<pool>
+							<min-pool-size>10</min-pool-size>
+							<initial-pool-size>10</initial-pool-size>
+							<max-pool-size>30</max-pool-size>
+						</pool>
+						<security>
+							<user-name>${user.name}</user-name>
+							<password>${password}</password>
+						</security>
+						<statement>
+							<prepared-statement-cache-size>50</prepared-statement-cache-size>
+						</statement>
+					</datasource>
 				<...>
 				<drivers>
 					<...>
@@ -89,10 +54,10 @@ How to install test environment
 			</datasources>
 		</subsystem>
 
-18. Change line `<local-cache name="entity">` in `$JBOSS_HOME/standalone/configuration/standalone.xml`
+8. Change line `<local-cache name="entity">` in `$JBOSS_HOME/standalone/configuration/standalone.xml`
 to `<local-cache name="local-entity">`
 
-19. For configure logging smart-city module
+9. For configure logging smart-city module
 add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
 		<subsystem xmlns="urn:jboss:domain:logging:2.0">
@@ -115,7 +80,7 @@ add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 		<...>
 		</subsystem>
 
-20. (Optional) For configure logging hibernate framework in file
+10. (Optional) For configure logging hibernate framework in file
 add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
 		<subsystem xmlns="urn:jboss:domain:logging:2.0">
@@ -138,7 +103,7 @@ add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 		<...>
 		</subsystem>
 
-21. (Optional) For configure logging infinispan framework in file
+11. (Optional) For configure logging infinispan framework in file
 add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
 		<subsystem xmlns="urn:jboss:domain:logging:2.0">
@@ -161,7 +126,7 @@ add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 		<...>
 		</subsystem>
 
-21. Create PostgreSQL database with commands
+12. Create PostgreSQL database with commands
 
 		createdb -U {user-name} smart-city
 		plsql -U {user-name} -d smart-city
