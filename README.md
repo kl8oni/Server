@@ -8,10 +8,10 @@ How to install test environment
 ===============================
 
 1. Install PostgreSQL 9.1.11
-2. Install Jboss AS 7
-3. Add to Jboss new module for PostgreSQL
-4. Create dir `$JBOSS_HOME/modules/org/postgresql/main`
-5. Copy `postgresql-9.1-901.jdbc4.jar` to `$JBOSS_HOME/modules/org/postgresql/main`
+2. Install Wildfly 8.0.0.CR1
+3. Add to Wildfly new module for PostgreSQL
+4. Create dir `$JBOSS_HOME/modules/system/layers/base/org/postgresql/main`
+5. Copy `postgresql-9.1-901.jdbc4.jar` to `$JBOSS_HOME/modules/system/layers/base/org/postgresql/main`
 6. Create `module.xml` with contents:
 
 		<?xml version="1.0" encoding="UTF-8"?>
@@ -22,8 +22,8 @@ How to install test environment
 		</module>
 
 7. Add to Jboss new module for Proxool database pool
-8. Create dir `$JBOSS_HOME/modules/org/proxool/main`
-9. Copy `proxool-0.8.3.jar` to `$JBOSS_HOME/modules/org/proxool/main`
+8. Create dir `$JBOSS_HOME/modules/system/layers/base/org/proxool/main`
+9. Copy `proxool-0.8.3.jar` to `$JBOSS_HOME/modules/system/layers/base/org/proxool/main`
 10. Create `module.xml` with contents:
 
 		<?xml version="1.0" encoding="UTF-8"?>
@@ -33,36 +33,40 @@ How to install test environment
 			</resources>
 		</module>
 
-11. Add to Jboss new module Ehcache
-12. Create dir `$JBOSS_HOME/modules/net/sf/ehcache/main`
-13. Copy `ehcache-core-2.4.3.jar` and `ehcache-terracotta-2.4.3.jar` to `$JBOSS_HOME/modules/net/sf/ehcache/main`
+11. Add to Jboss new module for hibernate proxool integration
+12. Create dir `$JBOSS_HOME/modules/system/layers/base/org/hibernate/proxool/main`
+13. Copy `hibernate-proxool-4.3.0.Final.jar` to `$JBOSS_HOME/modules/system/layers/base/org/hibernate/proxool/main`
 14. Create `module.xml` with contents:
 
 		<?xml version="1.0" encoding="UTF-8"?>
-		<module xmlns="urn:jboss:module:1.1" name="net.sf.ehcache">
+		<module xmlns="urn:jboss:module:1.1" name="org.hibernate.proxool">
 			<resources>
-				<resource-root path="ehcache-core-2.4.3.jar"/>
-				<resource-root path="ehcache-terracotta-2.4.3.jar"/>
+				<resource-root path="hibernate-proxool-4.3.0.Final.jar"/>
 			</resources>
 			<dependencies>
-				<module name="org.slf4j"/>
+				<module name="org.hibernate"/>
+				<module name="org.jboss.logging"/>
+				<module name="org.dom4j"/>
 				<module name="javax.api"/>
-				<module name="com.sun.xml.bind"/>
-				<module name="javax.xml.bind.api"/>
-				<module name="org.jaxen"/>
+				<module name="javax.persistence.api"/>
 				<module name="javax.transaction.api"/>
-				<system export="true">
-					<paths>
-						<path name="org/xml/sax"/>
-						<path name="org/xml/sax/helpers"/>
-					</paths>
-				</system>
+				<module name="org.javassist"/>
+				<module name="org.proxool"/>
 			</dependencies>
 		</module>
 
-10. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+15. Add org.hibernate.proxool module to org.hibernate
+16. For this add next line in `$JBOSS_HOME/modules/system/layers/base/org/hibernate/main/module.xml`:
 
-		<subsystem xmlns="urn:jboss:domain:datasources:1.0">
+		<dependencies>
+		<...>
+			<module name="org.hibernate.proxool" services="import"/>
+		<...>
+		</dependencies>
+
+17. For configure datasource add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
+
+		<subsystem xmlns="urn:jboss:domain:datasources:2.0">
 			<datasources>
 				<...>
 				<datasource jndi-name="java:jboss/datasources/SmartCityDataSource" pool-name="smart-city-db-pool" enabled="true" use-java-context="true">
@@ -85,10 +89,13 @@ How to install test environment
 			</datasources>
 		</subsystem>
 
-11. For configure logging smart-city module
+18. Change line `<local-cache name="entity">` in `$JBOSS_HOME/standalone/configuration/standalone.xml`
+to `<local-cache name="local-entity">`
+
+19. For configure logging smart-city module
 add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
-		<subsystem xmlns="urn:jboss:domain:logging:1.1">
+		<subsystem xmlns="urn:jboss:domain:logging:2.0">
 		<...>
 			<periodic-rotating-file-handler name="SMART-CITY-LOG">
 				<formatter>
@@ -108,14 +115,14 @@ add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 		<...>
 		</subsystem>
 
-12. (Optional) For configure logging hibernate framework in file
+20. (Optional) For configure logging hibernate framework in file
 add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
-		<subsystem xmlns="urn:jboss:domain:logging:1.1">
+		<subsystem xmlns="urn:jboss:domain:logging:2.0">
 		<...>
 			<periodic-rotating-file-handler name="HIBERNATE-LOG">
 				<formatter>
-					<pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] %s%E%n"/>
+					<pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c.%M] %s%E%n"/>
 				</formatter>
 				<file relative-to="jboss.server.log.dir" path="hibernate.log"/>
 				<suffix value=".yyyy-MM-dd"/>
@@ -131,17 +138,30 @@ add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 		<...>
 		</subsystem>
 
-13. Add dom4j as a global module.
+21. (Optional) For configure logging infinispan framework in file
+add to `$JBOSS_HOME/standalone/configuration/standalone.xml` next lines:
 
-		<subsystem xmlns="urn:jboss:domain:ee:1.1">
+		<subsystem xmlns="urn:jboss:domain:logging:2.0">
 		<...>
-			<global-modules>
-				<module name="org.dom4j" slot="main"/>
-			</global-modules>
+			<periodic-rotating-file-handler name="INFINISPAN-LOG">
+				<formatter>
+					<pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c.%M] %s%E%n"/>
+				</formatter>
+				<file relative-to="jboss.server.log.dir" path="infinispan.log"/>
+				<suffix value=".yyyy-MM-dd"/>
+				<append value="true"/>
+			</periodic-rotating-file-handler>
+			<...>
+			<logger category="org.infinispan" use-parent-handlers="false">
+				<level name="INFO"/>
+				<handlers>
+					<handler name="INFINISPAN-LOG"/>
+				</handlers>
+			</logger>
 		<...>
 		</subsystem>
 
-14. Create PostgreSQL database with commands
+21. Create PostgreSQL database with commands
 
 		createdb -U {user-name} smart-city
 		plsql -U {user-name} -d smart-city

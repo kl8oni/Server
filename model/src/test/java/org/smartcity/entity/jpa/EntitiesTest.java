@@ -1,7 +1,9 @@
 package org.smartcity.entity.jpa;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
@@ -43,6 +45,8 @@ public class EntitiesTest {
 	private User                 user;
 	@PersistenceContext
 	private EntityManager        em;
+	@Inject
+	private UserTransaction		 utx;
 
 	@Deployment(
 			name = UtilTestClass.PRODUCTION_DEPLOYMENT
@@ -55,17 +59,25 @@ public class EntitiesTest {
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testCreateBank() {
+	public void testCreateBank()
+			throws Exception {
+		utx.begin();
+		em.joinTransaction();
 		bank = new BankEntity( "Bank", "Website" );
 		em.persist( bank );
 		em.flush();
+		utx.commit();
+		em.close();
 	}
 
 	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testCreateBankAccount() {
+	public void testCreateBankAccount()
+			throws Exception {
+		utx.begin();
+		em.joinTransaction();
 		telephoneNumber = new TelephoneNumberEmbedded( (short) 10, (short) 10, (short) 50, null );
 		address = new AddressEmbedded( "State",
 									   "City",
@@ -75,6 +87,8 @@ public class EntitiesTest {
 		bankBranch = new BankBranchEntity( "Bank Branch", (AddressEmbedded) address, (BankEntity) bank );
 		em.persist( bankBranch );
 		em.flush();
+		utx.commit();
+		em.close();
 	}
 
 }

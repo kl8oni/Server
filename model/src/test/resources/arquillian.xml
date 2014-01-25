@@ -13,7 +13,7 @@
 			<property name="username">smartcity</property>
 			<property name="password">jbosssmartcity</property>
 			<property name="managementAddress">127.0.0.1</property>
-			<property name="managementPort">9999</property>
+			<property name="managementPort">9990</property>
 		</configuration>
 	</container>
 

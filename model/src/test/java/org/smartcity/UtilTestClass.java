@@ -67,7 +67,7 @@ public class UtilTestClass {
 			configFileNames.add( "hibernate.cfg.xml" );
 			configFileNames.add( "jboss-deployment-structure.xml" );
 			configFileNames.add( "proxool.properties" );
-			configFileNames.add( "ehcache.xml" );
+			configFileNames.add( "infinispan.xml" );
 		}
 		return configFileNames;
 	}
