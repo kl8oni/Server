@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
@@ -38,6 +39,7 @@ public class UtilTestClass {
 			build.addAsResource( file );
 		}
 		build.addAsManifestResource( "persistence.xml" );
+		build.addAsManifestResource( EmptyAsset.INSTANCE, "bean.xml" );
 		Iterator<Package> iteratorPackages = iteratorPackages();
 		while ( iteratorPackages.hasNext() ) {
 			Package packageEntity = iteratorPackages.next();

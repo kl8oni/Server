@@ -7,17 +7,17 @@ city infrastructure
 How to install test environment
 ===============================
 
-1. Install PostgreSQL 9.1.11
+1. Install PostgreSQL 9.2.4
 2. Install Wildfly 8.0.0.CR1
 3. Add to Wildfly new module for PostgreSQL
 4. Create dir `$JBOSS_HOME/modules/system/layers/base/org/postgresql/main`
-5. Copy `postgresql-9.1-901.jdbc4.jar` to `$JBOSS_HOME/modules/system/layers/base/org/postgresql/main`
+5. Copy `postgresql-9.2-1004-jdbc41.jar` to `$JBOSS_HOME/modules/system/layers/base/org/postgresql/main`
 6. Create `module.xml` with contents:
 
 		<?xml version="1.0" encoding="UTF-8"?>
 		<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
 			<resources>
-				<resource-root path="postgresql-9.1-901.jdbc4.jar"/>
+				<resource-root path="postgresql-9.2-1004-jdbc41.jar"/>
 			</resources>
 			<dependencies>
 				<module name="javax.api"/>
