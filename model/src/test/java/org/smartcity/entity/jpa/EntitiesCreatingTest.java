@@ -1,9 +1,11 @@
 package org.smartcity.entity.jpa;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import javax.transaction.UserTransaction;
+
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
@@ -13,6 +15,7 @@ import org.jboss.shrinkwrap.api.Archive;
 
 import org.smartcity.UtilTestClass;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,7 +27,7 @@ import java.util.Date;
 public class EntitiesCreatingTest {
 
 	@PersistenceContext
-	private EntityManager em;
+	private EntityManager   em;
 	@Inject
 	private UserTransaction utx;
 
@@ -47,6 +50,7 @@ public class EntitiesCreatingTest {
 		BankEntity bank = new BankEntity( "Bank", "Website" );
 		em.persist( bank );
 		utx.commit();
+		Assert.assertNotNull( bank.getID() );
 	}
 
 	@Test
@@ -68,6 +72,7 @@ public class EntitiesCreatingTest {
 		bank.addBankBranch( bankBranch );
 		em.persist( bankBranch );
 		utx.commit();
+		Assert.assertNotNull( bankBranch.getID() );
 	}
 
 	@Test
@@ -81,6 +86,7 @@ public class EntitiesCreatingTest {
 		UserEntity user = new UserEntity( "lastName", "firstName", "middleName", "nickName", "password" );
 		em.persist( user );
 		utx.commit();
+		Assert.assertNotNull( user.getID() );
 	}
 
 	@Test
@@ -96,6 +102,7 @@ public class EntitiesCreatingTest {
 		user.addUserEmail( email );
 		em.persist( email );
 		utx.commit();
+		Assert.assertNotNull( email.getID() );
 	}
 
 	@Test
@@ -111,6 +118,7 @@ public class EntitiesCreatingTest {
 		user.addUserEmail( email );
 		em.persist( email );
 		utx.commit();
+		Assert.assertNotNull( email.getID() );
 	}
 
 	@Test
@@ -133,6 +141,7 @@ public class EntitiesCreatingTest {
 		BankAccountEntity bankAccount = new BankAccountEntity( 1000L, user, bank, bankBranch );
 		em.persist( bankAccount );
 		utx.commit();
+		Assert.assertNotNull( bankAccount.getID() );
 	}
 
 	@Test
@@ -146,6 +155,7 @@ public class EntitiesCreatingTest {
 		GovernmentOfficeTypeEntity governmentOfficeType = new GovernmentOfficeTypeEntity( "office type", null );
 		em.persist( governmentOfficeType );
 		utx.commit();
+		Assert.assertNotNull( governmentOfficeType.getID() );
 	}
 
 	@Test
@@ -169,6 +179,7 @@ public class EntitiesCreatingTest {
 		governmentOfficeType.addOfficeThisType( governmentOffice );
 		em.persist( governmentOffice );
 		utx.commit();
+		Assert.assertNotNull( governmentOffice.getID() );
 	}
 
 	@Test
@@ -188,6 +199,7 @@ public class EntitiesCreatingTest {
 		governmentOfficeType.addDocumentTemplate( documentTemplate );
 		em.persist( documentTemplate );
 		utx.commit();
+		Assert.assertNotNull( documentTemplate.getID() );
 	}
 
 	@Test
@@ -228,6 +240,7 @@ public class EntitiesCreatingTest {
 		user.addDocument( identifyDocument );
 		em.persist( identifyDocument );
 		utx.commit();
+		Assert.assertNotNull( user.getID() );
 	}
 
 	@Test
@@ -268,6 +281,7 @@ public class EntitiesCreatingTest {
 		user.addDocument( document );
 		em.persist( document );
 		utx.commit();
+		Assert.assertNotNull( document.getID() );
 	}
 
 }
