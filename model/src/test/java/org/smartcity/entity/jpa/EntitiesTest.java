@@ -70,7 +70,7 @@ public class EntitiesTest/*
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		bank = new BankEntity( "Bank", "Website" );
+		bank = new Bank( "Bank", "Website" );
 		em.persist( bank );
 		utx.commit();
 	}
@@ -87,13 +87,13 @@ public class EntitiesTest/*
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		telephoneNumber = new TelephoneNumberEmbedded( (short) 10, (short) 10, (short) 50, null );
-		address = new AddressEmbedded( "State",
+		telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, (short) 50, null );
+		address = new Address( "State",
 									   "City",
 									   "Street",
 									   (short) 10,
-									   (TelephoneNumberEmbedded) telephoneNumber );
-		bankBranch = new BankBranchEntity( "Bank Branch", (AddressEmbedded) address, (BankEntity) bank );
+									   (TelephoneNumber) telephoneNumber );
+		bankBranch = new BankBranch( "Bank Branch", (Address) address, (Bank) bank );
 		em.persist( bankBranch );
 		utx.commit();
 	}

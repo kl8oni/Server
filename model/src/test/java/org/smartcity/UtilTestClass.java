@@ -14,7 +14,6 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 import org.smartcity.entity.Address;
-import org.smartcity.entity.jpa.AddressEmbedded;
 
 public class UtilTestClass {
 
@@ -58,7 +57,6 @@ public class UtilTestClass {
 			projectPackages = new ArrayList<>();
 			projectPackages.add( getClass().getPackage() );
 			projectPackages.add( Address.class.getPackage() );
-			projectPackages.add( AddressEmbedded.class.getPackage() );
 		}
 		return projectPackages.iterator();
 	}
