@@ -3,6 +3,7 @@ package org.smartcity.entity;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -23,7 +24,7 @@ import org.junit.runner.RunWith;
 public class EntitiesTest {
 
 	@PersistenceContext(
-			type = javax.persistence.PersistenceContextType.EXTENDED
+			type = PersistenceContextType.EXTENDED
 	)
 	private EntityManager   em;
 	@Inject
