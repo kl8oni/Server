@@ -30,6 +30,7 @@
 		 -->
 		<property name="hibernate.transaction.jta.platform">org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform</property>
 		<property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jta.JtaTransactionFactory</property>
+		<property name="hibernate.transaction.flush_before_completion">true</property><!-- todo: investigate may be its just for testing -->
 		<!--property name="hibernate.jta.cacheTransactionManager"> This properties should be investigated </property-->
 		<!--property name="hibernate.jta.cacheUserTransaction"> This properties should be investigated </property-->
 
