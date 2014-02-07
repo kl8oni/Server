@@ -1,6 +1,5 @@
 package org.smartcity.dao;
 
-
 import java.math.BigInteger;
 
 interface EntityDAO {

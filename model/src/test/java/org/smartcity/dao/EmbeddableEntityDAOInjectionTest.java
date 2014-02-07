@@ -10,13 +10,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.smartcity.UtilTestClass;
 
+import javax.enterprise.context.RequestScoped;
+
 import javax.inject.Inject;
+import javax.inject.Named;
 
 @RunWith(
 		value = Arquillian.class
 )
+@Named
+@RequestScoped
 public class EmbeddableEntityDAOInjectionTest {
 
 	@Inject
@@ -26,23 +32,22 @@ public class EmbeddableEntityDAOInjectionTest {
 	@Inject
 	private DocumentsOfficesDAOImpl documentsOfficesDAO;
 
-	@Deployment
+	@Deployment(
+			name = UtilTestClass.PRODUCTION_DEPLOYMENT
+	)
 	public static Archive createArchive() {
 		return UtilTestClass.INSTANCE.createDeploymentArchive();
 	}
 
-	@Before
-	public void injectProperty( BankDAOImpl bankDAO ) {
+	public void setBankDAO( BankDAOImpl bankDAO ) {
 		this.bankDAO = bankDAO;
 	}
 
-	@Before
-	public void injectProperty( UserDAOImpl userDAO ) {
+	public void setUserDAO( UserDAOImpl userDAO ) {
 		this.userDAO = userDAO;
 	}
 
-	@Before
-	public void injectProperty( DocumentsOfficesDAOImpl documentsOfficesDAO ) {
+	public void setDocumentsOfficesDAO( DocumentsOfficesDAOImpl documentsOfficesDAO ) {
 		this.documentsOfficesDAO = documentsOfficesDAO;
 	}
 

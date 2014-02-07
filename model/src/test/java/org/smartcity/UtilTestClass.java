@@ -3,17 +3,16 @@ package org.smartcity;
 import java.io.File;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
-import org.smartcity.entity.Address;
+import org.smartcity.dao.UserDAOImpl;
+import org.smartcity.entity.User;
 
 public class UtilTestClass {
 
@@ -34,14 +33,16 @@ public class UtilTestClass {
 				.asFile();
 		ear.addAsLibraries( libs );
 		JavaArchive build = ShrinkWrap.create( JavaArchive.class, "model.jar" );
-		for( String file : getFileNames() ) {
+		for( int i = 0; i < getModelConfigurationFileNames().size(); i++ ) {
+			String file = getModelConfigurationFileNames().get( i );
 			build.addAsResource( file );
 		}
-		build.addAsManifestResource( "persistence.xml" );
-		build.addAsManifestResource( EmptyAsset.INSTANCE, "bean.xml" );
-		Iterator<Package> iteratorPackages = iteratorPackages();
-		while( iteratorPackages.hasNext() ) {
-			Package packageEntity = iteratorPackages.next();
+		for( int i = 0; i < getManifestResourcesFileNames().size(); i++ ) {
+			String manifestResource = getManifestResourcesFileNames().get( i );
+			build.addAsManifestResource( manifestResource );
+		}
+		for( int i = 0; i < getPackages().size(); i++ ) {
+			Package packageEntity = getPackages().get( i );
 			build.addPackage( packageEntity );
 		}
 		ear.addAsModule( build );
@@ -49,19 +50,21 @@ public class UtilTestClass {
 		return ear;
 	}
 
-	private List<Package>      projectPackages;
-	private Collection<String> configFileNames;
+	private List<Package> projectPackages;
+	private List<String>  configFileNames;
+	private List<String>  manifestResourcesFileNames;
 
-	private Iterator<Package> iteratorPackages() {
+	private List<Package> getPackages() {
 		if( projectPackages == null ) {
 			projectPackages = new ArrayList<>();
 			projectPackages.add( getClass().getPackage() );
-			projectPackages.add( Address.class.getPackage() );
+			projectPackages.add( User.class.getPackage() );
+			projectPackages.add( UserDAOImpl.class.getPackage() );
 		}
-		return projectPackages.iterator();
+		return projectPackages;
 	}
 
-	private Collection<String> getFileNames() {
+	private List<String> getModelConfigurationFileNames() {
 		if( configFileNames == null ) {
 			configFileNames = new ArrayList<>();
 			configFileNames.add( "hibernate.cfg.xml" );
@@ -69,6 +72,15 @@ public class UtilTestClass {
 			configFileNames.add( "infinispan.xml" );
 		}
 		return configFileNames;
+	}
+
+	private List<String> getManifestResourcesFileNames() {
+		if( manifestResourcesFileNames == null ) {
+			manifestResourcesFileNames = new ArrayList<>();
+			manifestResourcesFileNames.add( "persistence.xml" );
+			manifestResourcesFileNames.add( "beans.xml" );
+		}
+		return manifestResourcesFileNames;
 	}
 
 }

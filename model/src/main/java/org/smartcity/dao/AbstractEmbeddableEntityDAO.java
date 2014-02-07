@@ -4,8 +4,13 @@ package org.smartcity.dao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.inject.Inject;
+import javax.enterprise.context.RequestScoped;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
+@RequestScoped
 public abstract class AbstractEmbeddableEntityDAO
 		implements EmbeddableEntityDAO {
 
