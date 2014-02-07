@@ -3,7 +3,6 @@ package org.smartcity.entity;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -14,17 +13,9 @@ import org.jboss.shrinkwrap.api.Archive;
 
 import org.junit.Assert;
 import org.smartcity.UtilTestClass;
-import org.smartcity.entity.Address;
-import org.smartcity.entity.Bank;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.smartcity.entity.BankAccount;
-import org.smartcity.entity.BankBranch;
-import org.smartcity.entity.TelephoneNumber;
-import org.smartcity.entity.User;
-
-import java.math.BigInteger;
 
 @RunWith(
 		value = Arquillian.class
