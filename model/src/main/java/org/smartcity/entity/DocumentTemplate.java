@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,11 +22,15 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * todo javadoc
+ */
 @Entity
 @Table(
 		name = DocumentTemplate.TABLE_NAME
 )
-public class DocumentTemplate {
+public class DocumentTemplate
+		implements Serializable {
 
 	private static final Log LOG = LogFactory.getLog( DocumentTemplate.class );
 
@@ -56,7 +61,8 @@ public class DocumentTemplate {
 	@SequenceGenerator(
 			name = DocumentTemplate.GENERATOR_NAME,
 			sequenceName = DocumentTemplate.SEQUENCE_NAME,
-			initialValue = 1
+			initialValue = 1,
+			allocationSize = 1
 	)
 	@Column(
 			name = DocumentTemplate.ID_COLUMN_NAME,
@@ -138,10 +144,22 @@ public class DocumentTemplate {
 		return this;
 	}
 
+	/**
+	 * This method in para with setter should use in generation of
+	 * {@link org.smartcity.entity.Document} number property
+	 *
+	 * @return number formatted pattern for document number
+	 */
 	public String getNumberPattern() {
 		return numberPattern;
 	}
 
+	/**
+	 * This method in para with getter should use in generation of
+	 * {@link org.smartcity.entity.Document} number property
+	 *
+	 * @return number formatted pattern for document number
+	 */
 	public DocumentTemplate setNumberPattern( String numberPattern ) {
 		LOG.debug( "Number pattern is " + numberPattern );
 		this.numberPattern = numberPattern;

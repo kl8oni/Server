@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import java.util.Collection;
@@ -21,11 +22,15 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * todo javadoc
+ */
 @Entity
 @Table(
 		name = User.TABLE_NAME
 )
-public class User {
+public class User
+		implements Serializable {
 
 	private static final Log LOG = LogFactory.getLog( User.class );
 
@@ -61,7 +66,8 @@ public class User {
 	@SequenceGenerator(
 			name = User.GENERATOR_NAME,
 			sequenceName = User.SEQUENCE_NAME,
-			initialValue = 1
+			initialValue = 1,
+			allocationSize = 1
 	)
 	@Column(
 			name = User.ID_COLUMN_NAME,

@@ -20,7 +20,7 @@
 		<!--
 		 ~  Properties for JDBC configuration
 		 -->
-		<property name="hibernate.jdbc.use_streams_for_binary">true</property>
+		<property name="hibernate.jdbc.use_streams_for_binary">true</property><!-- todo: System level property -->
 		<property name="hibernate.jdbc.fetch_size">1000</property> <!-- Count of rows for each Network connection -->
 		<property name="hibernate.jdbc.batch_size">1000</property> <!-- Count of query which send to DBMS through Network -->
 		<property name="hibernate.jdbc.wrap_result_sets">true</property> <!-- In performance testing -->

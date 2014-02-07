@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import java.util.Collection;
@@ -23,11 +24,15 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * todo javadoc
+ */
 @Entity
 @Table(
 		name = GovernmentOffice.TABLE_NAME
 )
-public class GovernmentOffice {
+public class GovernmentOffice
+		implements Serializable {
 
 	private static final Log LOG = LogFactory.getLog( GovernmentOffice.class );
 
@@ -55,7 +60,8 @@ public class GovernmentOffice {
 	@SequenceGenerator(
 			name = GovernmentOffice.GENERATOR_NAME,
 			sequenceName = GovernmentOffice.SEQUENCE_NAME,
-			initialValue = 1
+			initialValue = 1,
+			allocationSize = 1
 	)
 	@Column(
 			name = GovernmentOffice.ID_COLUMN_NAME,

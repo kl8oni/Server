@@ -12,16 +12,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * todo javadoc
+ */
 @Entity
 @Table(
 		name = Email.TABLE_NAME
 )
-public class Email {
+public class Email
+		implements Serializable {
 
 	private static final Log LOG = LogFactory.getLog( Email.class );
 
@@ -49,7 +54,8 @@ public class Email {
 	@SequenceGenerator(
 			name = Email.GENERATOR_NAME,
 			sequenceName = Email.SEQUENCE_NAME,
-			initialValue = 1
+			initialValue = 1,
+			allocationSize = 1
 	)
 	@Column(
 			name = Email.ID_COLUMN_NAME,
@@ -135,8 +141,8 @@ public class Email {
 		if( object != null && object.getClass().equals( getClass() ) ) {
 			Email email = (Email) object;
 			return email.getEmailAddress().equals( getEmailAddress() )
-					&& email.isMainEmail().equals( isMainEmail() )
-					&& email.getOwner().equals( getOwner() );
+				   && email.isMainEmail().equals( isMainEmail() )
+				   && email.getOwner().equals( getOwner() );
 		}
 		return false;
 	}

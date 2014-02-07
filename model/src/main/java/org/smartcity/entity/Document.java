@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import java.util.Date;
@@ -19,11 +20,16 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * todo javadoc
+ * todo i don't like implementation need to do better look
+ */
 @Entity
 @Table(
 		name = Document.TABLE_NAME
 )
-public class Document {
+public class Document
+		implements Serializable {
 
 	private static final Log LOG = LogFactory.getLog( Document.class );
 
@@ -60,7 +66,8 @@ public class Document {
 	@SequenceGenerator(
 			name = Document.GENERATOR_NAME,
 			sequenceName = Document.SEQUENCE_NAME,
-			initialValue = 1
+			initialValue = 1,
+			allocationSize = 1
 	)
 	@Column(
 			name = Document.ID_COLUMN_NAME,
@@ -231,6 +238,12 @@ public class Document {
 		LOG.debug( "Identify document " + identifyDocument );
 		this.identifyDocument = identifyDocument;
 		return this;
+	}
+
+	public String formatted() {
+		//TODO need to implement
+		// see DocumentTemplate#getSeriesPattern and DocumentTemplate#getNumberPattern
+		return "formattedDocumentString";
 	}
 
 	@Override

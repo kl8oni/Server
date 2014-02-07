@@ -4,14 +4,19 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 
+import java.io.Serializable;
 import java.util.Formatter;
 import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * todo javadoc
+ */
 @Embeddable
-public class TelephoneNumber {
+public class TelephoneNumber
+		implements Serializable {
 
 	private static final Log           LOG             = LogFactory.getLog( TelephoneNumber.class );
 	private static final Formatter     FORMATTER       = new Formatter();
@@ -53,9 +58,9 @@ public class TelephoneNumber {
 	}
 
 	public TelephoneNumber(
-			short stateCode,
-			short cityCode,
-			int number,
+			Short stateCode,
+			Short cityCode,
+			Integer number,
 			String pattern ) {
 		LOG.debug( "Constructor with parameters is invoked" );
 		setTelephonePattern( pattern )

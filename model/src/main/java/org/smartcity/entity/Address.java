@@ -7,8 +7,14 @@ import javax.persistence.Embedded;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.Serializable;
+
+/**
+ * todo javadoc
+ */
 @Embeddable
-public class Address {
+public class Address
+		implements Serializable {
 
 	private static final Log LOG = LogFactory.getLog( Address.class );
 

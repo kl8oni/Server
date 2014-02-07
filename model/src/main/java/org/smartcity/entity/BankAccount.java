@@ -12,16 +12,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * todo javadoc
+ */
 @Entity
 @Table(
 		name = BankAccount.TABLE_NAME
 )
-public class BankAccount {
+public class BankAccount
+		implements Serializable {
 
 	private static final Log LOG = LogFactory.getLog( BankAccount.class );
 
@@ -51,7 +56,8 @@ public class BankAccount {
 	@SequenceGenerator(
 			name = BankAccount.GENERATOR_NAME,
 			sequenceName = BankAccount.SEQUENCE_NAME,
-			initialValue = 1
+			initialValue = 1,
+			allocationSize = 1
 	)
 	@Column(
 			name = BankAccount.ID_COLUMN_NAME,
