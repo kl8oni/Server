@@ -1,4 +1,4 @@
-package org.smartcity.entity.jpa;
+package org.smartcity.entity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +18,6 @@ import org.smartcity.UtilTestClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.smartcity.entity.*;
 
 import java.util.Date;
 
@@ -63,11 +62,7 @@ public class EntitiesCreatingTest {
 		utx.begin();
 		em.joinTransaction();
 		Bank bank = new Bank( "Bank", "Website" );
-		TelephoneNumber telephoneNumber = new TelephoneNumber(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
 		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
 		BankBranch bankBranch = new BankBranch( "Bank Branch", address, bank );
 		bank.addBankBranch( bankBranch );
@@ -132,11 +127,7 @@ public class EntitiesCreatingTest {
 		em.joinTransaction();
 		User user = new User( "lastName", "firstName", "middleName", "nickName", "password" );
 		Bank bank = new Bank( "Bank", "Website" );
-		TelephoneNumber telephoneNumber = new TelephoneNumber(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
 		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
 		BankBranch bankBranch = new BankBranch( "Bank Branch", address, bank );
 		BankAccount bankAccount = new BankAccount( 1000L, user, bank, bankBranch );
@@ -168,11 +159,7 @@ public class EntitiesCreatingTest {
 		utx.begin();
 		em.joinTransaction();
 		GovernmentOfficeType governmentOfficeType = new GovernmentOfficeType( "office type", null );
-		TelephoneNumber telephoneNumber = new TelephoneNumber(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
 		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
 		GovernmentOffice governmentOffice = new GovernmentOffice(
 				"government office", address,
@@ -218,11 +205,7 @@ public class EntitiesCreatingTest {
 				"cc",
 				"999999",
 				governmentOfficeType );
-		TelephoneNumber telephoneNumber = new TelephoneNumber(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
 		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
 		GovernmentOffice governmentOffice = new GovernmentOffice(
 				"government office", address,
@@ -259,11 +242,7 @@ public class EntitiesCreatingTest {
 				"cc",
 				"999999",
 				governmentOfficeType );
-		TelephoneNumber telephoneNumber = new TelephoneNumber(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
 		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
 		GovernmentOffice governmentOffice = new GovernmentOffice(
 				"government office", address,
