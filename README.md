@@ -58,11 +58,6 @@ How to install test environment
 			</datasources>
 		</subsystem>
 
-		<subsystem xmlns="urn:jboss:domain:ee:2.0">
-		<...>
-            <default-bindings ... datasource="java:jboss/datasources/SmartCityDataSource" .../>
-		</subsystem>
-
 8. Change line `<local-cache name="entity">` in `$JBOSS_HOME/standalone/configuration/standalone.xml`
 to `<local-cache name="local-entity">`
 
