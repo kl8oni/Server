@@ -52,8 +52,3 @@ alter table USER_EMAILS
 add constraint USER_EMAIL_FK
 foreign key (USER_ID)
 references USERS (USER_ID);
-
-alter table USERS
-add constraint IDENTIFY_DOCUMENT_USER_FK
-foreign key (IDENTIFY_DOCUMENT_ID)
-references DOCUMENTS (DOCUMENT_ID);

@@ -20,7 +20,7 @@
 		<!--
 		 ~  Properties for JDBC configuration
 		 -->
-		<property name="hibernate.jdbc.use_streams_for_binary">true</property>
+		<property name="hibernate.jdbc.use_streams_for_binary">true</property><!-- todo: System level property -->
 		<property name="hibernate.jdbc.fetch_size">1000</property> <!-- Count of rows for each Network connection -->
 		<property name="hibernate.jdbc.batch_size">1000</property> <!-- Count of query which send to DBMS through Network -->
 		<property name="hibernate.jdbc.wrap_result_sets">true</property> <!-- In performance testing -->
@@ -29,7 +29,9 @@
 		 ~  Properties for transaction
 		 -->
 		<property name="hibernate.transaction.jta.platform">org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform</property>
+		<property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
 		<property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jta.JtaTransactionFactory</property>
+		<property name="hibernate.transaction.flush_before_completion">true</property>
 		<!--property name="hibernate.jta.cacheTransactionManager"> This properties should be investigated </property-->
 		<!--property name="hibernate.jta.cacheUserTransaction"> This properties should be investigated </property-->
 

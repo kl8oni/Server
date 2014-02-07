@@ -11,17 +11,17 @@
 
 		<jta-data-source>java:jboss/datasources/SmartCityDataSource</jta-data-source>
 
-		<class>org.smartcity.entity.jpa.AddressEmbedded</class>
-		<class>org.smartcity.entity.jpa.BankAccountEntity</class>
-		<class>org.smartcity.entity.jpa.BankBranchEntity</class>
-		<class>org.smartcity.entity.jpa.BankEntity</class>
-		<class>org.smartcity.entity.jpa.DocumentEntity</class>
-		<class>org.smartcity.entity.jpa.DocumentTemplateEntity</class>
-		<class>org.smartcity.entity.jpa.EmailEntity</class>
-		<class>org.smartcity.entity.jpa.GovernmentOfficeEntity</class>
-		<class>org.smartcity.entity.jpa.GovernmentOfficeTypeEntity</class>
-		<class>org.smartcity.entity.jpa.TelephoneNumberEmbedded</class>
-		<class>org.smartcity.entity.jpa.UserEntity</class>
+		<class>org.smartcity.entity.Address</class>
+		<class>org.smartcity.entity.BankAccount</class>
+		<class>org.smartcity.entity.BankBranch</class>
+		<class>org.smartcity.entity.Bank</class>
+		<class>org.smartcity.entity.Document</class>
+		<class>org.smartcity.entity.DocumentTemplate</class>
+		<class>org.smartcity.entity.Email</class>
+		<class>org.smartcity.entity.GovernmentOffice</class>
+		<class>org.smartcity.entity.GovernmentOfficeType</class>
+		<class>org.smartcity.entity.TelephoneNumber</class>
+		<class>org.smartcity.entity.User</class>
 
 		<properties>
 

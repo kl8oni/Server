@@ -1,4 +1,4 @@
-package org.smartcity.entity.jpa;
+package org.smartcity.entity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -47,7 +47,7 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		BankEntity bank = new BankEntity( "Bank", "Website" );
+		Bank bank = new Bank( "Bank", "Website" );
 		em.persist( bank );
 		utx.commit();
 		Assert.assertNotNull( bank.getID() );
@@ -61,14 +61,10 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		BankEntity bank = new BankEntity( "Bank", "Website" );
-		TelephoneNumberEmbedded telephoneNumber = new TelephoneNumberEmbedded(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
-		AddressEmbedded address = new AddressEmbedded( "State", "City", "Street", (short) 10, telephoneNumber );
-		BankBranchEntity bankBranch = new BankBranchEntity( "Bank Branch", address, bank );
+		Bank bank = new Bank( "Bank", "Website" );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
+		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
+		BankBranch bankBranch = new BankBranch( "Bank Branch", address, bank );
 		bank.addBankBranch( bankBranch );
 		em.persist( bankBranch );
 		utx.commit();
@@ -83,7 +79,7 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		UserEntity user = new UserEntity( "lastName", "firstName", "middleName", "nickName", "password" );
+		User user = new User( "lastName", "firstName", "middleName", "nickName", "password" );
 		em.persist( user );
 		utx.commit();
 		Assert.assertNotNull( user.getID() );
@@ -97,8 +93,8 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		UserEntity user = new UserEntity( "lastName", "firstName", "middleName", "nickName", "password" );
-		EmailEntity email = new EmailEntity( "main-user-email@email.com", Boolean.TRUE, user );
+		User user = new User( "lastName", "firstName", "middleName", "nickName", "password" );
+		Email email = new Email( "main-user-email@email.com", Boolean.TRUE, user );
 		user.addUserEmail( email );
 		em.persist( email );
 		utx.commit();
@@ -113,8 +109,8 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		UserEntity user = new UserEntity( "lastName", "firstName", "middleName", "nickName", "password" );
-		EmailEntity email = new EmailEntity( "user-email@email.com", Boolean.FALSE, user );
+		User user = new User( "lastName", "firstName", "middleName", "nickName", "password" );
+		Email email = new Email( "user-email@email.com", Boolean.FALSE, user );
 		user.addUserEmail( email );
 		em.persist( email );
 		utx.commit();
@@ -129,16 +125,12 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		UserEntity user = new UserEntity( "lastName", "firstName", "middleName", "nickName", "password" );
-		BankEntity bank = new BankEntity( "Bank", "Website" );
-		TelephoneNumberEmbedded telephoneNumber = new TelephoneNumberEmbedded(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
-		AddressEmbedded address = new AddressEmbedded( "State", "City", "Street", (short) 10, telephoneNumber );
-		BankBranchEntity bankBranch = new BankBranchEntity( "Bank Branch", address, bank );
-		BankAccountEntity bankAccount = new BankAccountEntity( 1000L, user, bank, bankBranch );
+		User user = new User( "lastName", "firstName", "middleName", "nickName", "password" );
+		Bank bank = new Bank( "Bank", "Website" );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
+		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
+		BankBranch bankBranch = new BankBranch( "Bank Branch", address, bank );
+		BankAccount bankAccount = new BankAccount( 1000L, user, bank, bankBranch );
 		em.persist( bankAccount );
 		utx.commit();
 		Assert.assertNotNull( bankAccount.getID() );
@@ -152,7 +144,7 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		GovernmentOfficeTypeEntity governmentOfficeType = new GovernmentOfficeTypeEntity( "office type", null );
+		GovernmentOfficeType governmentOfficeType = new GovernmentOfficeType( "office type", null );
 		em.persist( governmentOfficeType );
 		utx.commit();
 		Assert.assertNotNull( governmentOfficeType.getID() );
@@ -166,14 +158,10 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		GovernmentOfficeTypeEntity governmentOfficeType = new GovernmentOfficeTypeEntity( "office type", null );
-		TelephoneNumberEmbedded telephoneNumber = new TelephoneNumberEmbedded(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
-		AddressEmbedded address = new AddressEmbedded( "State", "City", "Street", (short) 10, telephoneNumber );
-		GovernmentOfficeEntity governmentOffice = new GovernmentOfficeEntity(
+		GovernmentOfficeType governmentOfficeType = new GovernmentOfficeType( "office type", null );
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
+		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
+		GovernmentOffice governmentOffice = new GovernmentOffice(
 				"government office", address,
 				governmentOfficeType );
 		governmentOfficeType.addOfficeThisType( governmentOffice );
@@ -190,8 +178,8 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		GovernmentOfficeTypeEntity governmentOfficeType = new GovernmentOfficeTypeEntity( "office type", null );
-		DocumentTemplateEntity documentTemplate = new DocumentTemplateEntity(
+		GovernmentOfficeType governmentOfficeType = new GovernmentOfficeType( "office type", null );
+		DocumentTemplate documentTemplate = new DocumentTemplate(
 				"Passport Type",
 				"cc",
 				"999999",
@@ -210,23 +198,19 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		UserEntity user = new UserEntity( "lastName", "firstName", "middleName", "nickName", "password" );
-		GovernmentOfficeTypeEntity governmentOfficeType = new GovernmentOfficeTypeEntity( "office type", null );
-		DocumentTemplateEntity documentTemplate = new DocumentTemplateEntity(
+		User user = new User( "lastName", "firstName", "middleName", "nickName", "password" );
+		GovernmentOfficeType governmentOfficeType = new GovernmentOfficeType( "office type", null );
+		DocumentTemplate documentTemplate = new DocumentTemplate(
 				"Passport Type",
 				"cc",
 				"999999",
 				governmentOfficeType );
-		TelephoneNumberEmbedded telephoneNumber = new TelephoneNumberEmbedded(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
-		AddressEmbedded address = new AddressEmbedded( "State", "City", "Street", (short) 10, telephoneNumber );
-		GovernmentOfficeEntity governmentOffice = new GovernmentOfficeEntity(
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
+		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
+		GovernmentOffice governmentOffice = new GovernmentOffice(
 				"government office", address,
 				governmentOfficeType );
-		DocumentEntity identifyDocument = new DocumentEntity(
+		Document identifyDocument = new Document(
 				"passport",
 				"MA",
 				456875L,
@@ -251,23 +235,19 @@ public class EntitiesCreatingTest {
 			throws Exception {
 		utx.begin();
 		em.joinTransaction();
-		UserEntity user = new UserEntity( "lastName", "firstName", "middleName", "nickName", "password" );
-		GovernmentOfficeTypeEntity governmentOfficeType = new GovernmentOfficeTypeEntity( "office type", null );
-		DocumentTemplateEntity documentTemplate = new DocumentTemplateEntity(
+		User user = new User( "lastName", "firstName", "middleName", "nickName", "password" );
+		GovernmentOfficeType governmentOfficeType = new GovernmentOfficeType( "office type", null );
+		DocumentTemplate documentTemplate = new DocumentTemplate(
 				"Passport Type",
 				"cc",
 				"999999",
 				governmentOfficeType );
-		TelephoneNumberEmbedded telephoneNumber = new TelephoneNumberEmbedded(
-				(short) 10,
-				(short) 10,
-				(short) 50,
-				null );
-		AddressEmbedded address = new AddressEmbedded( "State", "City", "Street", (short) 10, telephoneNumber );
-		GovernmentOfficeEntity governmentOffice = new GovernmentOfficeEntity(
+		TelephoneNumber telephoneNumber = new TelephoneNumber( (short) 10, (short) 10, 50, null );
+		Address address = new Address( "State", "City", "Street", (short) 10, telephoneNumber );
+		GovernmentOffice governmentOffice = new GovernmentOffice(
 				"government office", address,
 				governmentOfficeType );
-		DocumentEntity document = new DocumentEntity(
+		Document document = new Document(
 				"passport",
 				"MA",
 				456875L,
