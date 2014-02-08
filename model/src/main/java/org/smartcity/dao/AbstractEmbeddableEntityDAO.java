@@ -8,6 +8,7 @@ import javax.enterprise.context.RequestScoped;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 
 @Named
 @RequestScoped
@@ -17,11 +18,11 @@ public abstract class AbstractEmbeddableEntityDAO
 	private static final Log LOG = LogFactory.getLog( AbstractEmbeddableEntityDAO.class );
 
 	@Inject
-	private EntityDAO          entityDAO;
+	private EntityDAO<EntityManager> entityDAO;
 	@Inject
-	private AddressDAO         addressDAO;
+	private AddressDAO               addressDAO;
 	@Inject
-	private TelephoneNumberDAO telephoneNumberDAO;
+	private TelephoneNumberDAO       telephoneNumberDAO;
 
 	public void setAddressDAO( AddressDAO addressDAO ) {
 		LOG.debug( "Address dao implementation is " + addressDAO.getClass() );
@@ -35,7 +36,7 @@ public abstract class AbstractEmbeddableEntityDAO
 
 	public void setEntityDAO( EntityDAO entityDAO ) {
 		LOG.debug( "Entity dao implementation is " + entityDAO.getClass() );
-		this.entityDAO = entityDAO;
+		this.entityDAO = (JPAEntityDAOImpl) entityDAO;
 	}
 
 	public AddressDAO getAddressDAO() {
@@ -48,7 +49,7 @@ public abstract class AbstractEmbeddableEntityDAO
 		return telephoneNumberDAO;
 	}
 
-	public EntityDAO getEntityDAO() {
+	public EntityDAO<EntityManager> getEntityDAO() {
 		LOG.debug( "Get entity dao" );
 		return entityDAO;
 	}

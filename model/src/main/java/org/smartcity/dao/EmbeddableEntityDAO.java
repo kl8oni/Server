@@ -7,6 +7,6 @@ public interface EmbeddableEntityDAO {
 
 	void setTelephoneDAO( TelephoneNumberDAO telephoneNumberDAO );
 
-	void setEntityDAO( EntityDAO entityDAO );
+	void setEntityDAO( EntityDAO<?> entityDAO );
 
 }

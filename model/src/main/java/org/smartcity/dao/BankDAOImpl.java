@@ -6,6 +6,9 @@ import org.smartcity.entity.BankAccount;
 import org.smartcity.entity.BankBranch;
 import org.smartcity.entity.User;
 
+import javax.persistence.EntityManager;
+import java.math.BigInteger;
+
 public class BankDAOImpl
 		extends AbstractEmbeddableEntityDAO
 		implements BankDAO,
@@ -13,6 +16,7 @@ public class BankDAOImpl
 
 	@Override
 	public Bank createBank( String name, String website ) {
+		EntityManager em = getEntityDAO().getEntitiesManager();
 		return null;
 	}
 
@@ -57,7 +61,7 @@ public class BankDAOImpl
 
 	@Override
 	public BankAccount createBankAccount(
-			Long bankAccountNumber, User owner, String bankName, BankBranch bankBranch, Bank bank ) {
+			Long bankAccountNumber, User owner, BankBranch bankBranch, Bank bank ) {
 		return null;
 	}
 
@@ -100,6 +104,21 @@ public class BankDAOImpl
 	@Override
 	public void removeBankBranch( BankBranch bankBranch ) {
 
+	}
+
+	@Override
+	public Bank findBank( BigInteger bankID ) {
+		return null;
+	}
+
+	@Override
+	public BankAccount findBankAccount( BigInteger bankAccountID ) {
+		return null;
+	}
+
+	@Override
+	public BankBranch findBankBranch( BigInteger bankBranchID ) {
+		return null;
 	}
 
 }

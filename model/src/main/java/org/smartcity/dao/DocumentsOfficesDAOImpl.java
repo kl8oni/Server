@@ -6,6 +6,8 @@ import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.GovernmentOfficeType;
 import org.smartcity.entity.User;
 
+import java.math.BigInteger;
+
 import java.util.Date;
 
 public class DocumentsOfficesDAOImpl
@@ -20,6 +22,24 @@ public class DocumentsOfficesDAOImpl
 			String numberPattern,
 			String officeTypeName,
 			GovernmentOfficeType parent ) {
+		return null;
+	}
+
+	@Override
+	public DocumentTemplate createDocumentTemplate(
+			String name,
+			String seriesPattern,
+			String numberPattern,
+			GovernmentOfficeType officeType ) {
+		return null;
+	}
+
+	@Override
+	public DocumentTemplate createDocumentTemplate(
+			String name,
+			String seriesPattern,
+			String numberPattern,
+			String officeTypeName ) {
 		return null;
 	}
 
@@ -90,6 +110,26 @@ public class DocumentsOfficesDAOImpl
 	@Override
 	public void removeOffice( GovernmentOffice office ) {
 
+	}
+
+	@Override
+	public DocumentTemplate findDocumentTemplate( BigInteger documentTemplateID ) {
+		return null;
+	}
+
+	@Override
+	public Document findDocument( BigInteger documentID ) {
+		return null;
+	}
+
+	@Override
+	public GovernmentOfficeType findOfficeType( BigInteger officeTypeID ) {
+		return null;
+	}
+
+	@Override
+	public GovernmentOffice findOffice( BigInteger officeID ) {
+		return null;
 	}
 
 }

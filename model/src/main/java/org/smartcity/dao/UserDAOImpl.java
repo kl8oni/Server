@@ -4,6 +4,8 @@ package org.smartcity.dao;
 import org.smartcity.entity.Email;
 import org.smartcity.entity.User;
 
+import java.math.BigInteger;
+
 public class UserDAOImpl
 		extends AbstractEmbeddableEntityDAO
 		implements UserDAO,
@@ -49,6 +51,16 @@ public class UserDAOImpl
 	@Override
 	public void removeUserEmail( Email email ) {
 
+	}
+
+	@Override
+	public User findUser( BigInteger userID ) {
+		return null;
+	}
+
+	@Override
+	public Email findEmail( BigInteger emailID ) {
+		return null;
 	}
 
 }

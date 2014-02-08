@@ -1,5 +1,5 @@
 package org.smartcity.dao;
-
+       /*
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -7,7 +7,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,8 +21,8 @@ import javax.inject.Named;
 		value = Arquillian.class
 )
 @Named
-@RequestScoped
-public class EmbeddableEntityDAOInjectionTest {
+@RequestScoped            */
+public class EmbeddableEntityDAOInjectionTest {   /*
 
 	@Inject
 	private BankDAOImpl             bankDAO;
@@ -80,5 +79,5 @@ public class EmbeddableEntityDAOInjectionTest {
 		Assert.assertNotNull( documentsOfficesDAO.getEntityDAO() );
 		Assert.assertNotNull( documentsOfficesDAO.getTelephoneNumberDAO() );
 	}
-
+        */
 }

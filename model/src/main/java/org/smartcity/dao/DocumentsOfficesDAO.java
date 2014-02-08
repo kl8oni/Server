@@ -7,6 +7,7 @@ import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.GovernmentOfficeType;
 import org.smartcity.entity.User;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 public interface DocumentsOfficesDAO {
@@ -18,7 +19,21 @@ public interface DocumentsOfficesDAO {
 			String officeTypeName,
 			GovernmentOfficeType parent );
 
+	DocumentTemplate createDocumentTemplate(
+			String name,
+			String seriesPattern,
+			String numberPattern,
+			GovernmentOfficeType officeType );
+
+	DocumentTemplate createDocumentTemplate(
+			String name,
+			String seriesPattern,
+			String numberPattern,
+			String officeTypeName );
+
 	void removeDocumentTemplate( DocumentTemplate documentTemplate );
+
+	DocumentTemplate findDocumentTemplate( BigInteger documentTemplateID );
 
 	Document createDocument(
 			String name,
@@ -40,11 +55,15 @@ public interface DocumentsOfficesDAO {
 
 	void removeDocument( Document document );
 
+	Document findDocument( BigInteger documentID );
+
 	GovernmentOfficeType createOfficeType( String name, GovernmentOfficeType parent );
 
 	GovernmentOfficeType createRootOfficeType( String name );
 
 	void removeOfficeType( GovernmentOfficeType officeType );
+
+	GovernmentOfficeType findOfficeType( BigInteger officeTypeID );
 
 	GovernmentOffice createOffice(
 			String name,
@@ -59,5 +78,7 @@ public interface DocumentsOfficesDAO {
 			GovernmentOfficeType officeType);
 
 	void removeOffice( GovernmentOffice office );
+
+	GovernmentOffice findOffice( BigInteger officeID );
 
 }

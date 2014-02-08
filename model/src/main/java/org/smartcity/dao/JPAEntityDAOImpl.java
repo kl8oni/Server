@@ -1,6 +1,6 @@
 package org.smartcity.dao;
 
-
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContextType;
 import java.math.BigInteger;
 
 class JPAEntityDAOImpl
-		implements EntityDAO {
+		implements EntityDAO<EntityManager> {
 
 	@PersistenceContext(
 			type = PersistenceContextType.EXTENDED
@@ -24,4 +24,10 @@ class JPAEntityDAOImpl
 	public void removeEntityByID( BigInteger ID ) {
 
 	}
+
+	@Override
+	public EntityManager getEntitiesManager() {
+		return em;
+	}
+
 }
