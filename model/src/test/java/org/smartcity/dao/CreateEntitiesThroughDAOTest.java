@@ -31,6 +31,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import javax.transaction.UserTransaction;
+import java.util.Date;
 
 @RunWith(
 		value = Arquillian.class
@@ -373,7 +374,7 @@ public class CreateEntitiesThroughDAOTest {
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testCreateDocumentType()
+	public void testCreateDocumentTemplate()
 			throws Exception {
 		try {
 			utx.begin();
@@ -394,7 +395,7 @@ public class CreateEntitiesThroughDAOTest {
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testCreateDocumentTypeWithOfficeType()
+	public void testCreateDocumentTemplateWithOfficeType()
 			throws Exception {
 		try {
 			utx.begin();
@@ -410,6 +411,79 @@ public class CreateEntitiesThroughDAOTest {
 		finally {
 			utx.commit();
 		}
+	}
+
+	@Test
+	@OperateOnDeployment(
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
+	)
+	public void testCreateDocumentTemplateWithRootOfficeType()
+			throws Exception {
+		try {
+			utx.begin();
+			GovernmentOfficeType parent = documentsOfficesDAO.createRootOfficeType( "parent" );
+			DocumentTemplate documentTemplate = documentsOfficesDAO.createDocumentTemplate(
+					"name",
+					"%s",
+					"%d",
+					parent );
+			Assert.assertNotNull( documentTemplate );
+			Assert.assertNotNull( documentTemplate.getGovernmentOfficeType() );
+		}
+		finally {
+			utx.commit();
+		}
+	}
+
+	@Test
+	@OperateOnDeployment(
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
+	)
+	public void testCreateDocument()
+			throws Exception {
+		try {
+			utx.begin();
+			GovernmentOfficeType officeType = documentsOfficesDAO.createRootOfficeType( "name" );
+			GovernmentOffice office = documentsOfficesDAO.createOffice(
+					"name",
+					"state",
+					"city",
+					"street",
+					(short) 50,
+					(short) 38,
+					(short) 542,
+					546123,
+					null,
+					officeType );
+			DocumentTemplate documentTemplate = documentsOfficesDAO.createDocumentTemplate(
+					"name",
+					"%s",
+					"%d",
+					officeType );
+			User owner = userDAO.createUser(
+					"user last name",
+					"user first name",
+					"user middle name",
+					"user nick name",
+					"user password" );
+			Document document = documentsOfficesDAO.createDocument(
+					"passport",
+					"MA",
+					128554L,
+					new Date(),
+					owner,
+					office,
+					documentTemplate );
+			Assert.assertNotNull( document );
+			Assert.assertNotNull( document.getOwner() );
+			Assert.assertNotNull( document.getTemplate() );
+			Assert.assertNotNull( document.getOffice() );
+			Assert.assertNotNull( document.getOffice().getOfficeType() );
+		}
+		finally {
+			utx.commit();
+		}
+
 	}
 
 }
