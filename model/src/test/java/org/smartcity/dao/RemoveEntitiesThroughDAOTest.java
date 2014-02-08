@@ -2,11 +2,11 @@ package org.smartcity.dao;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
+
 import org.jboss.shrinkwrap.api.Archive;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.smartcity.UtilTestClass;
 import org.smartcity.entity.Bank;
 import org.smartcity.entity.BankAccount;
@@ -20,11 +20,12 @@ import org.smartcity.entity.User;
 
 import javax.inject.Inject;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.UserTransaction;
-
+import java.math.BigInteger;
 import java.util.Date;
 
-public class FindEntityThroughDAOTest
+public class RemoveEntitiesThroughDAOTest
 		extends AbstractDAOTest {
 
 	@Inject
@@ -33,15 +34,17 @@ public class FindEntityThroughDAOTest
 	@Deployment(
 			name = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public static Archive<?> createArchive() {
+	public static Archive createArchive() {
 		return UtilTestClass.INSTANCE.createDeploymentArchive();
 	}
 
-	@Test
-	 @OperateOnDeployment(
-			 value = UtilTestClass.PRODUCTION_DEPLOYMENT
-	 )
-	 public void testFindUser()
+	@Test(
+			expected = EntityNotFoundException.class
+	)
+	@OperateOnDeployment(
+			value = UtilTestClass.PRODUCTION_DEPLOYMENT
+	)
+	public void testRemoveUser()
 			throws Exception {
 		User user;
 		try {
@@ -56,21 +59,32 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "User shouldn't be NULL" );
 		}
 
+		BigInteger userID = user.getID();
+
 		try {
 			utx.begin();
-			User foundUser = getUserDAO().findUser( user.getID() );
-			Assert.assertNotNull( foundUser );
+			try {
+				User foundUser = getUserDAO().findUser( userID );
+				Assert.assertNotNull( foundUser );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created user is not found" );
+			}
+			getUserDAO().removeUser( user );
+			getUserDAO().findUser( userID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindEmail()
+	public void testRemoveEmail()
 			throws Exception {
 		Email email;
 		try {
@@ -86,21 +100,32 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Email shouldn't be NULL" );
 		}
 
+		BigInteger emailID = email.getID();
+
 		try {
 			utx.begin();
-			Email foundEmail = getUserDAO().findEmail( email.getID() );
-			Assert.assertNotNull( foundEmail );
+			try {
+				Email foundEmail = getUserDAO().findEmail( emailID );
+				Assert.assertNotNull( foundEmail );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created email is not found" );
+			}
+			getUserDAO().removeUserEmail( email );
+			getUserDAO().findEmail( emailID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindBank()
+	public void testRemoveBank()
 			throws Exception {
 		Bank bank;
 		try {
@@ -115,21 +140,32 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Bank shouldn't be NULL" );
 		}
 
+		BigInteger bankID = bank.getID();
+
 		try {
 			utx.begin();
-			Bank foundBank = getBankDAO().findBank( bank.getID() );
-			Assert.assertNotNull( foundBank );
+			try {
+				Bank foundBank = getBankDAO().findBank( bankID );
+				Assert.assertNotNull( foundBank );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created bank is not found" );
+			}
+			getBankDAO().removeBank( bank );
+			getBankDAO().findBank( bankID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindBankBranch()
+	public void testRemoveBankBranch()
 			throws Exception {
 		BankBranch bankBranch;
 		try {
@@ -155,21 +191,32 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Bank branch shouldn't be NULL" );
 		}
 
+		BigInteger bankBranchID = bankBranch.getID();
+
 		try {
 			utx.begin();
-			BankBranch foundBankBranch = getBankDAO().findBankBranch( bankBranch.getID() );
-			Assert.assertNotNull( foundBankBranch );
+			try {
+				BankBranch foundBankBranch = getBankDAO().findBankBranch( bankBranchID );
+				Assert.assertNotNull( foundBankBranch );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created bank branch is not found");
+			}
+			getBankDAO().removeBankBranch( bankBranch );
+			getBankDAO().findBank( bankBranchID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindBankAccount()
+	public void testRemoveBankAccount()
 			throws Exception {
 		BankAccount bankAccount;
 		try {
@@ -197,21 +244,32 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Bank account shouldn't be NULL" );
 		}
 
+		BigInteger bankAccountID = bankAccount.getID();
+
 		try {
 			utx.begin();
-			BankAccount foundBankAccount = getBankDAO().findBankAccount( bankAccount.getID() );
-			Assert.assertNotNull( foundBankAccount );
+			try {
+				BankAccount foundBankAccount = getBankDAO().findBankAccount( bankAccount.getID() );
+				Assert.assertNotNull( foundBankAccount );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created bank account is not found");
+			}
+			getBankDAO().removeBankAccount( bankAccount );
+			getBankDAO().findBankAccount( bankAccountID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindOfficeType()
+	public void testRemoveOfficeType()
 			throws Exception {
 		GovernmentOfficeType officeType;
 		try {
@@ -226,21 +284,32 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Office type shouldn't be NULL" );
 		}
 
+		BigInteger officeTypeID = officeType.getID();
+
 		try {
 			utx.begin();
-			GovernmentOfficeType foundOfficeType = getDocumentsOfficesDAO().findOfficeType( officeType.getID() );
-			Assert.assertNotNull( foundOfficeType );
+			try {
+				GovernmentOfficeType foundOfficeType = getDocumentsOfficesDAO().findOfficeType( officeType.getID() );
+				Assert.assertNotNull( foundOfficeType );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created office type is not found");
+			}
+			getDocumentsOfficesDAO().removeOfficeType( officeType );
+			getDocumentsOfficesDAO().findOfficeType( officeTypeID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindOffice()
+	public void testRemoveOffice()
 			throws Exception {
 		GovernmentOffice office;
 		try {
@@ -266,21 +335,32 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Office shouldn't be NULL" );
 		}
 
+		BigInteger officeID = office.getID();
+
 		try {
 			utx.begin();
-			GovernmentOffice foundOffice = getDocumentsOfficesDAO().findOffice( office.getID() );
-			Assert.assertNotNull( foundOffice );
+			try {
+				GovernmentOffice foundOffice = getDocumentsOfficesDAO().findOffice( office.getID() );
+				Assert.assertNotNull( foundOffice );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created office is not found" );
+			}
+			getDocumentsOfficesDAO().removeOffice( office );
+			getDocumentsOfficesDAO().findOfficeType( officeID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindDocumentTemplate()
+	public void testRemoveDocumentTemplate()
 			throws Exception {
 		DocumentTemplate documentTemplate;
 		try {
@@ -295,22 +375,33 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Document template shouldn't be NULL" );
 		}
 
+		BigInteger documentTemplateID = documentTemplate.getID();
+
 		try {
 			utx.begin();
-			DocumentTemplate foundDocumentTemplate =
-					getDocumentsOfficesDAO().findDocumentTemplate( documentTemplate.getID() );
-			Assert.assertNotNull( foundDocumentTemplate );
+			try {
+				DocumentTemplate foundDocumentTemplate =
+						getDocumentsOfficesDAO().findDocumentTemplate( documentTemplate.getID() );
+				Assert.assertNotNull( foundDocumentTemplate );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created document template is not found");
+			}
+			getDocumentsOfficesDAO().removeDocumentTemplate( documentTemplate );
+			getDocumentsOfficesDAO().findDocumentTemplate( documentTemplateID );
 		}
 		finally {
 			utx.commit();
 		}
 	}
 
-	@Test
+	@Test(
+			expected = EntityNotFoundException.class
+	)
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
 	)
-	public void testFindDocument()
+	public void testRemoveDocument()
 			throws Exception {
 		Document document;
 		try {
@@ -355,10 +446,19 @@ public class FindEntityThroughDAOTest
 			Assert.fail( "Document shouldn't be NULL" );
 		}
 
+		BigInteger documentID = document.getID();
+
 		try {
 			utx.begin();
-			Document foundDocument = getDocumentsOfficesDAO().findDocument( document.getID() );
-			Assert.assertNotNull( foundDocument );
+			try {
+				Document foundDocument = getDocumentsOfficesDAO().findDocument( document.getID() );
+				Assert.assertNotNull( foundDocument );
+			}
+			catch( EntityNotFoundException e ) {
+				Assert.fail( "Created document is not found");
+			}
+			getDocumentsOfficesDAO().removeDocument( document );
+			getDocumentsOfficesDAO().findDocument( documentID );
 		}
 		finally {
 			utx.commit();
