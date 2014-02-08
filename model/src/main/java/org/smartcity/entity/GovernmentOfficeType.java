@@ -25,6 +25,7 @@ import org.apache.commons.logging.Log;
 
 /**
  * todo javadoc
+ * todo provide access to children, document template and office through get( index ) method
  */
 @Entity
 @Table(

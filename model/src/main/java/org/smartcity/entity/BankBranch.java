@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * todo javadoc
+ * todo provide access to bank account through get( index ) method
  */
 @Entity
 @Table(
