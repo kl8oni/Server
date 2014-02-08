@@ -2,18 +2,13 @@ package org.smartcity.dao;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
-import org.jboss.arquillian.junit.Arquillian;
 
 import org.jboss.shrinkwrap.api.Archive;
 
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 
 import org.smartcity.UtilTestClass;
-import org.smartcity.entity.Address;
 import org.smartcity.entity.Bank;
 import org.smartcity.entity.BankAccount;
 import org.smartcity.entity.BankBranch;
@@ -22,44 +17,18 @@ import org.smartcity.entity.DocumentTemplate;
 import org.smartcity.entity.Email;
 import org.smartcity.entity.GovernmentOffice;
 import org.smartcity.entity.GovernmentOfficeType;
-import org.smartcity.entity.TelephoneNumber;
 import org.smartcity.entity.User;
 
-import javax.enterprise.context.RequestScoped;
-
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import javax.transaction.UserTransaction;
 import java.util.Date;
 
-@RunWith(
-		value = Arquillian.class
-)
-@Named
-@RequestScoped
-public class CreateEntitiesThroughDAOTest {
+public class CreateEntitiesThroughDAOTest
+		extends AbstractDAOTest {
 
 	@Inject
-	private BankDAO             bankDAO;
-	@Inject
-	private UserDAO             userDAO;
-	@Inject
-	private DocumentsOfficesDAO documentsOfficesDAO;
-	@Inject
-	private UserTransaction     utx;
-
-	public void setBankDAO( BankDAO bankDAO ) {
-		this.bankDAO = bankDAO;
-	}
-
-	public void setDocumentsOfficesDAO( DocumentsOfficesDAO documentsOfficesDAO ) {
-		this.documentsOfficesDAO = documentsOfficesDAO;
-	}
-
-	public void setUserDAO( UserDAO userDAO ) {
-		this.userDAO = userDAO;
-	}
+	private UserTransaction utx;
 
 	@Deployment(
 			name = UtilTestClass.PRODUCTION_DEPLOYMENT
@@ -76,7 +45,7 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			User user = userDAO.createUser( "last", "first", "middle", "nick", "password" );
+			User user = getUserDAO().createUser( "last", "first", "middle", "nick", "password" );
 			Assert.assertNotNull( user );
 		}
 		finally {
@@ -92,8 +61,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			User user = userDAO.createUser( "new last", "new first", "new middle", "new nick", "new password" );
-			Email mainEmail = userDAO.createMainUserEmail( "user", user );
+			User user = getUserDAO().createUser( "new last", "new first", "new middle", "new nick", "new password" );
+			Email mainEmail = getUserDAO().createMainUserEmail( "user", user );
 			Assert.assertNotNull( mainEmail );
 		}
 		finally {
@@ -109,8 +78,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			User user = userDAO.createUser( "last", "first", "middle", "nick", "password" );
-			Email email = userDAO.createUserEmail( "email", user );
+			User user = getUserDAO().createUser( "last", "first", "middle", "nick", "password" );
+			Email email = getUserDAO().createUserEmail( "email", user );
 			Assert.assertNotNull( email );
 		}
 		finally {
@@ -126,7 +95,7 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			Email email = userDAO.createUserEmail(
+			Email email = getUserDAO().createUserEmail(
 					"email-address",
 					"last",
 					"first",
@@ -150,7 +119,7 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			Bank bank = bankDAO.createBank( "bankName", "bankWebSite" );
+			Bank bank = getBankDAO().createBank( "bankName", "bankWebSite" );
 			Assert.assertNotNull( bank );
 		}
 		finally {
@@ -166,8 +135,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			Bank bank = bankDAO.createBank( "otherBankName", "otherBankWebSite" );
-			BankBranch bankBranch = bankDAO.createBankBranch(
+			Bank bank = getBankDAO().createBank( "otherBankName", "otherBankWebSite" );
+			BankBranch bankBranch = getBankDAO().createBankBranch(
 					bank,
 					"branchName",
 					"state",
@@ -193,7 +162,7 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			BankBranch bankBranch = bankDAO.createBankBranch(
+			BankBranch bankBranch = getBankDAO().createBankBranch(
 					"bankName",
 					"bankWebsite",
 					"nameBranch",
@@ -221,8 +190,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			Bank bank = bankDAO.createBank( "otherBankName", "otherBankWebSite" );
-			BankBranch bankBranch = bankDAO.createBankBranch(
+			Bank bank = getBankDAO().createBank( "otherBankName", "otherBankWebSite" );
+			BankBranch bankBranch = getBankDAO().createBankBranch(
 					bank,
 					"branchName",
 					"state",
@@ -233,8 +202,8 @@ public class CreateEntitiesThroughDAOTest {
 					(short) 50,
 					159842,
 					null );
-			User user = userDAO.createUser( "last", "first", "middle", "nick", "password" );
-			BankAccount bankAccount = bankDAO.createBankAccount( 1000L, user, bankBranch, bank );
+			User user = getUserDAO().createUser( "last", "first", "middle", "nick", "password" );
+			BankAccount bankAccount = getBankDAO().createBankAccount( 1000L, user, bankBranch, bank );
 			Assert.assertNotNull( bankAccount );
 		}
 		finally {
@@ -250,9 +219,9 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			User owner = userDAO.createUser( "last", "first", "middle", "nick", "password" );
-			Bank bank = bankDAO.createBank( "bank name", "bank website" );
-			BankAccount bankAccount = bankDAO.createBankAccount(
+			User owner = getUserDAO().createUser( "last", "first", "middle", "nick", "password" );
+			Bank bank = getBankDAO().createBank( "bank name", "bank website" );
+			BankAccount bankAccount = getBankDAO().createBankAccount(
 					200L,
 					owner,
 					"state",
@@ -280,13 +249,13 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			User owner = userDAO.createUser(
+			User owner = getUserDAO().createUser(
 					"user last name",
 					"user first name",
 					"user middle name",
 					"user nick name",
 					"user password" );
-			BankAccount bankAccount = bankDAO.createBankAccount(
+			BankAccount bankAccount = getBankDAO().createBankAccount(
 					2000L,
 					owner,
 					"bank name",
@@ -317,7 +286,7 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			GovernmentOfficeType officeType = documentsOfficesDAO.createRootOfficeType( "officeTypeName" );
+			GovernmentOfficeType officeType = getDocumentsOfficesDAO().createRootOfficeType( "officeTypeName" );
 			Assert.assertNotNull( officeType );
 		}
 		finally {
@@ -333,8 +302,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			GovernmentOfficeType parent = documentsOfficesDAO.createRootOfficeType( "parent" );
-			GovernmentOfficeType child = documentsOfficesDAO.createOfficeType( "child", parent );
+			GovernmentOfficeType parent = getDocumentsOfficesDAO().createRootOfficeType( "parent" );
+			GovernmentOfficeType child = getDocumentsOfficesDAO().createOfficeType( "child", parent );
 			Assert.assertNotNull( child );
 			Assert.assertTrue( child.getParent() != null );
 		}
@@ -351,8 +320,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			GovernmentOfficeType officeType = documentsOfficesDAO.createRootOfficeType( "name" );
-			GovernmentOffice office = documentsOfficesDAO.createOffice(
+			GovernmentOfficeType officeType = getDocumentsOfficesDAO().createRootOfficeType( "name" );
+			GovernmentOffice office = getDocumentsOfficesDAO().createOffice(
 					"name",
 					"state",
 					"city",
@@ -378,7 +347,7 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			DocumentTemplate documentTemplate = documentsOfficesDAO.createDocumentTemplate(
+			DocumentTemplate documentTemplate = getDocumentsOfficesDAO().createDocumentTemplate(
 					"name",
 					"%s",
 					"%d",
@@ -399,7 +368,7 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			DocumentTemplate documentTemplate = documentsOfficesDAO.createDocumentTemplate(
+			DocumentTemplate documentTemplate = getDocumentsOfficesDAO().createDocumentTemplate(
 					"name",
 					"%s",
 					"%d",
@@ -421,8 +390,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			GovernmentOfficeType parent = documentsOfficesDAO.createRootOfficeType( "parent" );
-			DocumentTemplate documentTemplate = documentsOfficesDAO.createDocumentTemplate(
+			GovernmentOfficeType parent = getDocumentsOfficesDAO().createRootOfficeType( "parent" );
+			DocumentTemplate documentTemplate = getDocumentsOfficesDAO().createDocumentTemplate(
 					"name",
 					"%s",
 					"%d",
@@ -443,8 +412,8 @@ public class CreateEntitiesThroughDAOTest {
 			throws Exception {
 		try {
 			utx.begin();
-			GovernmentOfficeType officeType = documentsOfficesDAO.createRootOfficeType( "name" );
-			GovernmentOffice office = documentsOfficesDAO.createOffice(
+			GovernmentOfficeType officeType = getDocumentsOfficesDAO().createRootOfficeType( "name" );
+			GovernmentOffice office = getDocumentsOfficesDAO().createOffice(
 					"name",
 					"state",
 					"city",
@@ -455,18 +424,18 @@ public class CreateEntitiesThroughDAOTest {
 					546123,
 					null,
 					officeType );
-			DocumentTemplate documentTemplate = documentsOfficesDAO.createDocumentTemplate(
+			DocumentTemplate documentTemplate = getDocumentsOfficesDAO().createDocumentTemplate(
 					"name",
 					"%s",
 					"%d",
 					officeType );
-			User owner = userDAO.createUser(
+			User owner = getUserDAO().createUser(
 					"user last name",
 					"user first name",
 					"user middle name",
 					"user nick name",
 					"user password" );
-			Document document = documentsOfficesDAO.createDocument(
+			Document document = getDocumentsOfficesDAO().createDocument(
 					"passport",
 					"MA",
 					128554L,
