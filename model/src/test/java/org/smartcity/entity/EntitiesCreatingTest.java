@@ -1,5 +1,5 @@
 package org.smartcity.entity;
-
+   /*
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,9 +23,9 @@ import java.util.Date;
 
 @RunWith(
 		value = Arquillian.class
-)
+)                                 */
 public class EntitiesCreatingTest {
-
+	          /*
 	@PersistenceContext
 	private EntityManager   em;
 	@Inject
@@ -263,5 +263,5 @@ public class EntitiesCreatingTest {
 		utx.commit();
 		Assert.assertNotNull( document.getID() );
 	}
-
+	     */
 }
