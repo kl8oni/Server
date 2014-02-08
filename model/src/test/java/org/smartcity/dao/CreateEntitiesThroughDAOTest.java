@@ -140,7 +140,7 @@ public class CreateEntitiesThroughDAOTest {
 			utx.commit();
 		}
 	}
-  /*
+
 	@Test
 	@OperateOnDeployment(
 			value = UtilTestClass.PRODUCTION_DEPLOYMENT
@@ -411,5 +411,5 @@ public class CreateEntitiesThroughDAOTest {
 			utx.commit();
 		}
 	}
-  */
+
 }

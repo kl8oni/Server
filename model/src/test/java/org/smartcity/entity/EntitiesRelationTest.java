@@ -1,5 +1,5 @@
 package org.smartcity.entity;
-            /*
+
 import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
@@ -25,9 +25,9 @@ import java.util.Set;
 
 @RunWith(
 		value = Arquillian.class
-)               */
+)
 public class EntitiesRelationTest {
-	       /*
+
 	@PersistenceContext(
 			type = PersistenceContextType.EXTENDED
 	)
@@ -73,9 +73,6 @@ public class EntitiesRelationTest {
 			Bank foundBank = em.find( Bank.class, bank.getID() );
 			Assert.assertEquals( 1, foundBank.getBankAccounts().size() );
 		}
-		catch( Exception e ) {
-			throw e;
-		}
 		finally {
 			utx.commit();
 		}
@@ -110,9 +107,6 @@ public class EntitiesRelationTest {
 			em.joinTransaction();
 			Bank foundBank = em.find( Bank.class, bank.getID() );
 			Assert.assertEquals( 1, foundBank.getBankBranches().size() );
-		}
-		catch( Exception e ) {
-			throw e;
 		}
 		finally {
 			utx.commit();
@@ -248,5 +242,5 @@ public class EntitiesRelationTest {
 			utx.commit();
 		}
 	}
-	    */
+
 }
